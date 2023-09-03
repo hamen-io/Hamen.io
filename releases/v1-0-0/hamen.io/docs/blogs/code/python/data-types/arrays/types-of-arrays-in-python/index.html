@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Types of Arrays in Python</title>
+
+    <link rel="stylesheet" href="../../../../../../../static/styles/index.css">
+    <script type="text/javascript" src="../../../../../../../static/scripts/Components.js" defer></script>
+    <script type="text/javascript" src="../../../../../../../static/scripts/article.js"></script>
+    <script type="text/javascript" src="../../../../../../../static/scripts/index.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div style="margin-left: auto; margin-right: auto; width: 100%;">
+        <article id="doc">
+          <section id="introduction">
+            <h1 class="" id="doc-title" style="color: rgba(0, 0, 0, 0.73);"> Types of Arrays in Python </h1>
+            <p>
+              <span>
+                Published
+                <span style="font-weight: 600;">
+                  2023-08-14
+                </span>
+                , by 
+                <a href="https://www.hamen.io/docs/?author=danielhamen" target="_blank">
+                  Daniel Hamen
+                </a>
+              </span>
+            </p>
+          </section>
+          <hr>
+          <section id="content">
+            <section class="doc-section" id="None">
+  <h2>Introduction</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>When working with data in Python, you'll often come across the need to store and organize information. Arrays are essential data structures that allow you to do just that. In this article, we'll explore four common types of arrays in Python: sets, tuples, lists, and dictionaries. Don't worry if you're new to programming – we'll explain each type in a beginner-friendly way.</p>
+    </div>
+  </div>
+</section><section class="doc-section" id="None">
+  <h2>Sets ( <code class=\"inline-code\">set()</code> )</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>A set is a collection of unique elements, meaning that each item appears only once in the set. You can think of it as a bag that doesn't allow duplicates. To create a set, you can use curly braces <code class=\"inline-code\">{}</code> or the <code class=\"inline-code\">set()</code> function:</p>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_set = {1, 2, 3}
+another_set = set([3, 4, 5])</pre></div></div>
+<p>Sets are great for quickly checking whether an element is present or not, as they offer fast membership testing. Keep in mind that since sets are unordered collections, you can't access elements by indexing.</p>
+    </div>
+  </div>
+</section><section class="doc-section" id="None">
+  <h2>Tuples ( <code class=\"inline-code\">tuple()</code> )</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>Tuples are similar to lists, but they have one key difference – they are immutable, meaning you can't change their elements once they're created. Tuples are often used to represent fixed collections of items. You create a tuple by enclosing elements in parentheses <code class=\"inline-code\">()</code>:</p>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_tuple = (1, 2, 3)
+another_tuple = 4, 5, 6  # Parentheses are optional</pre></div></div>
+<p>Accessing elements in a tuple is done through indexing, just like in lists.</p>
+    </div>
+  </div>
+</section><section class="doc-section" id="None">
+  <h2>Lists ( <code class=\"inline-code\">list()</code> )</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>Lists are perhaps the most versatile and commonly used type of array in Python. They are ordered collections that can hold elements of different types. To create a list, use square brackets <code class=\"inline-code\">[]</code>:</p>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_list = [1, 2, 3]
+another_list = ["apple", "banana", "cherry"]
+mixed_list = [1, "hello", 3.14]</pre></div></div>
+<p>Lists allow you to add, remove, and modify elements. You can access elements using indexing, and you can also slice lists to extract a subset of elements.</p>
+    </div>
+  </div>
+</section><section class="doc-section" id="None">
+  <h2>Dictionaries ( <code class=\"inline-code\">dict()</code> )</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>Dictionaries, often called "dicts," are collections of key-value pairs. Each value is associated with a unique key, which can be used to retrieve the value later. Think of dictionaries as real-life dictionaries where words (keys) have definitions (values). To create a dictionary, use curly braces <code class=\"inline-code\">{}</code> and colons <code class=\"inline-code\">:</code> to define key-value pairs:</p>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_dict = {"name": "Alice", "age": 30, "city": "New York"}
+another_dict = dict(zip(["a", "b", "c"], [1, 2, 3]))</pre></div></div>
+<p>You can access values by using the corresponding keys. Dictionaries are useful for storing and retrieving information based on labels.</p>
+    </div>
+  </div>
+</section><section class="doc-section" id="None">
+  <h2>Conclusion</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>Arrays come in various forms in Python, each designed to serve different purposes. Sets keep unique elements, tuples offer immutability, lists provide flexibility, and dictionaries allow for efficient key-value pairing. Understanding these fundamental array types will help you become more proficient in Python programming, enabling you to organize and manipulate data effectively. As you gain more experience, you'll discover even more ways to leverage these arrays in your projects. Happy coding! 🐍🚀</p>
+    </div>
+  </div>
+</section>
+          </section>
+        </article>
+      </div>
+      <footer></footer>
+    </main>
+  </body>
+</html>

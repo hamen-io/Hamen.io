@@ -1,0 +1,98 @@
+[
+  {
+    "code": [
+      {
+        "title": "Types of Arrays in Python",
+        "titleid": "types-of-arrays-in-python",
+        "description": "In this article, you will learn about the types of array in Python. These include Lists, Tuples, and Sets", "type": "Blog",
+        "tags": [
+          "arrays",
+          "python",
+          "list",
+          "tuple",
+          "set",
+          "sets",
+          "tuples",
+          "lists",
+          "data types",
+          "types"]
+        ,
+        "author": "Daniel Hamen",
+        "authorid": "danielhamen",
+        "date": "2023-08-14",
+        "url": "blogs/code/python/data-types/arrays/types-of-arrays-in-python",
+        "category": [
+          "Code",
+          "Python",
+          "Data Types"]
+        ,
+        "categoryslug": "code,python,data-types"
+      }
+      ,
+      {
+        "title": "Lambda-Functions in Python",
+        "titleid": "lambda-functions-in-python",
+        "description": "In this article, you will learn about lambda functions/expressions in Python, what they are, their history, and how you can use them",
+        "type": "Blog",
+        "tags": [
+          "Python",
+          "Lambda functions",
+          "Serverless",
+          "AWS Lambda",
+          "Function as a Service",
+          "Event-driven programming",
+          "Cloud computing",
+          "Microservices",
+          "Serverless architecture",
+          "Event processing",
+          "Serverless computing",
+          "AWS",
+          "Python programming",
+          "AWS services",
+          "Serverless development",
+          "Event-driven architecture",
+          "Serverless Python",
+          "Event handlers",
+          "Function deployment",
+          "Scalable applications",
+          "Serverless deployment",
+          "Serverless frameworks",
+          "Serverless best practices",
+          "AWS cloud",
+          "AWS Lambda triggers",
+          "AWS Lambda functions",
+          "Python scripting",
+          "AWS Lambda event sources",
+          "Event-driven design",
+          "Serverless patterns",
+          "Serverless security",
+          "AWS serverless architecture",
+          "AWS serverless development",
+          "Serverless advantages",
+          "Serverless challenges",
+          "AWS Lambda use cases",
+          "AWS Lambda tutorial",
+          "Serverless cost optimization",
+          "AWS Lambda scalability",
+          "AWS Lambda performance",
+          "AWS Lambda benefits",
+          "AWS Lambda setup",
+          "AWS Lambda ecosystem",
+          "AWS Lambda automation",
+          "AWS Lambda integration",
+          "AWS Lambda examples"]
+        ,
+        "author": "Daniel Hamen",
+        "authorid": "danielhamen",
+        "date": "2023-08-14",
+        "url": "blogs/code/python/lambda-functions/lambda-functions-in-python",
+        "category": [
+          "Code",
+          "Python",
+          "Lambda Functions"]
+        ,
+        "categoryslug": "code,python,lambda-functions"
+      }
+    ]
+  }
+]
