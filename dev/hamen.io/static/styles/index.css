@@ -955,12 +955,12 @@ code.inline-code {
 .ui\:code-block {
   width: 100%;
   max-width: 100%;
-  background: #1f2021;
+  background: #27292c;
   color: rgba(255, 255, 255, 0.8);
   padding: 0;
   box-sizing: border-box;
   border-radius: 3px;
-  font-size: var(--font-size-sub);
+  font-size: var(--font-size-normal);
   overflow: hidden;
 }
 
@@ -970,8 +970,10 @@ code.inline-code {
 }
 
 .ui\:code-block .header {
+  text-transform: capitalize;
   padding: 16px;
   color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.02);
   font-size: calc(var(--font-size-sub) - 1px);
   font-weight: 500;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -999,4 +1001,20 @@ code.inline-code {
 
 .ui\:code-block ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.6);
+}
+
+#doc .doc-section h3 {
+  margin-top: 2em;
+}
+
+#doc .doc-section h3:first-of-type {
+  margin-top: 1em;
+}
+
+::marker {
+  color: hsl(220, 97%, 73%);
+}
+
+li {
+  padding-left: 4px;
 }
