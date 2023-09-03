@@ -9,4 +9,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
     preElement.innerHTML = highlightedCode;
   });
+
+  // 
+  Array.from(document.querySelectorAll("#doc .doc-section")).forEach(section => {
+    let heading = section.querySelector("h2")
+    if (heading) {
+      let link = document.createElement("a");
+      link.href = `#${section.id}`;
+      link.innerText = `#`;
+      link.style.marginLeft = '8px';
+
+      heading.appendChild(link);
+    }
+  })
 })

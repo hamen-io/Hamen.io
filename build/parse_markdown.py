@@ -18,6 +18,8 @@ def title_to_id(title: str) -> str:
     elif char.isalpha():
       id += char.lower()
 
+  return id
+
 class Elements:
   class P:
     def __init__(self, textContent: str) -> None:
