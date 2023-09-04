@@ -53,17 +53,21 @@ class BuildVersion:
 
     public_dir = os.path.join(self.build_dir, r"hamen.io")
     docs_path = os.path.join(public_dir, r"md\docs")
+    guides_path = os.path.join(public_dir, r"md\guides")
 
-    article_md_files = []
-    articles = dict()
-    for category in os.listdir(docs_path):
+    blog_md_files = []
+    guide_md_files = []
+    blogs = dict()
+    guides = dict()
+    for category in [*os.listdir(docs_path), *os.listdir(guides_path)]:
       if os.path.isdir(os.path.join(docs_path, category)):
-        articles[category] = []
+        blogs[category] = []
+        guides[category] = []
         for root, dirs, files in os.walk(os.path.join(docs_path, category), topdown=False):
           for name in files:
             if name.endswith(".md"):
               md_file = os.path.join(root, name)
-              article_md_files.append(md_file)
+              blog_md_files.append(md_file)
               article_info = dict()
               warnings = 0
               with open(md_file, "r", encoding="utf-8") as md:
@@ -94,18 +98,68 @@ class BuildVersion:
               if warnings > 0:
                 self.error(f"Article: \"{title[1:].strip()}\" not added; fix warnings, then try again")
               else:
-                articles[category].append(article_info)
+                if article_info["type"].lower() == "guide":
+                  guides[category].append(article_info)
+                  blogs[category].append(article_info)
+                elif article_info["type"].lower() == "blog":
+                  blogs[category].append(article_info)
+                else:
+                  self.error(f"Fatal: Unknown blog type: \"{article_info['type']}\"")
+                  return
 
     articles_json = os.path.join(docs_path, "Articles.json")
     with open(articles_json, "w") as Articles:
-      json.dump([articles], Articles)
+      json.dump([blogs], Articles)
 
-    for article_md in article_md_files:
+    guides_json = os.path.join(guides_path, "Guides.json")
+    with open(guides_json, "w") as Guides:
+      json.dump([guides], Guides)
+
+    for guide_md in guide_md_files:
+      guide_contents = None
+      with open(guide_md, "r", encoding="utf-8") as md:
+        guide_contents = md.read()
+
+      guide_html_file = os.path.join(public_dir, "docs", "guides", os.path.dirname(guide_md).split("\\md\\docs\\", 1)[1])
+      os.makedirs(guide_html_file)
+      guide_html_file = os.path.join(guide_html_file, "index.html")
+
+      html_template = None
+      with open(r"hamen.io\build\article_templates.html", "r", encoding="utf-8") as f:
+        html_template = f.read()
+
+      env = dict()
+
+      with open(guide_html_file, "x+", encoding="utf-8") as html:
+        guide_html = ParseMarkdown(guide_contents)
+        for key in guide_html.info:
+          env[key] = guide_html.info[key]
+
+        env["articleHTML"] = guide_html.__str__()
+        env["articleTitle"] = guide_html.title
+        env["staticDirectory"] = (len([x for x in os.path.split(guide_html_file)[0].split("hamen.io", 2)[-1].split("\\") if x.strip() != ""]) * "../") + "static"
+
+        required_keys = ['title', 'titleID', 'description', 'type', 'tags', 'author', 'authorID', 'date', 'url', 'category', 'categorySlug', 'articleHTML', 'articleTitle', 'moduleNumber', 'moduleSlug']
+        missing_keys = [key for key in required_keys if not env.get(key)]
+        assert not missing_keys, f"Missing keys in <doc>: {', '.join(missing_keys)}"
+
+        # with open(os.path.join(guides_path, env["guideURL"]))
+        # env["guideOutline"] = guide_outline
+        exit(os.path.join(guides_path, env["guideURL"]))
+
+        template = html_template
+        for match in re.findall(r"\{\{\s*ENV\[\s*(\"|')(.*)(\1)\s*\]\s*\}\}", template):
+          key = match[1]
+          template = re.sub(r"\{\{\s*ENV\[\s*(\"|')(" + key + r")(\1)\s*\]\s*\}\}", env[key], template)
+
+        html.write(template)
+
+    for blog_md in blog_md_files:
       article_contents = None
-      with open(article_md, "r", encoding="utf-8") as md:
+      with open(blog_md, "r", encoding="utf-8") as md:
         article_contents = md.read()
 
-      article_html_file = os.path.join(public_dir, "docs", "blogs", os.path.dirname(article_md).split("\\md\\docs\\", 1)[1])
+      article_html_file = os.path.join(public_dir, "docs", "blogs", os.path.dirname(blog_md).split("\\md\\docs\\", 1)[1])
       os.makedirs(article_html_file)
       article_html_file = os.path.join(article_html_file, "index.html")
 
