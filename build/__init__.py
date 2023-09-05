@@ -59,15 +59,19 @@ class BuildVersion:
     guide_md_files = []
     blogs = dict()
     guides = dict()
-    for category in [*os.listdir(docs_path), *os.listdir(guides_path)]:
-      if os.path.isdir(os.path.join(docs_path, category)):
+    path_prefix = docs_path
+    for category in [*os.listdir(docs_path), "GUIDES", *os.listdir(guides_path)]:
+      if category == "GUIDES":
+        path_prefix = guides_path
+        continue
+
+      if os.path.isdir(os.path.join(path_prefix, category)):
         blogs[category] = []
         guides[category] = []
-        for root, dirs, files in os.walk(os.path.join(docs_path, category), topdown=False):
+        for root, dirs, files in os.walk(os.path.join(path_prefix, category), topdown=False):
           for name in files:
             if name.endswith(".md"):
               md_file = os.path.join(root, name)
-              blog_md_files.append(md_file)
               article_info = dict()
               warnings = 0
               with open(md_file, "r", encoding="utf-8") as md:
@@ -100,9 +104,10 @@ class BuildVersion:
               else:
                 if article_info["type"].lower() == "guide":
                   guides[category].append(article_info)
-                  blogs[category].append(article_info)
+                  guide_md_files.append(md_file)
                 elif article_info["type"].lower() == "blog":
                   blogs[category].append(article_info)
+                  blog_md_files.append(md_file)
                 else:
                   self.error(f"Fatal: Unknown blog type: \"{article_info['type']}\"")
                   return
@@ -120,13 +125,17 @@ class BuildVersion:
       with open(guide_md, "r", encoding="utf-8") as md:
         guide_contents = md.read()
 
-      guide_html_file = os.path.join(public_dir, "docs", "guides", os.path.dirname(guide_md).split("\\md\\docs\\", 1)[1])
+      guide_html_file = os.path.join(public_dir, "docs", "guides", os.path.dirname(guide_md).split("\\md\\guides\\", 1)[1])
       os.makedirs(guide_html_file)
       guide_html_file = os.path.join(guide_html_file, "index.html")
 
-      html_template = None
+      blog_html_template = None
+      guide_html_template = None
       with open(r"hamen.io\build\article_templates.html", "r", encoding="utf-8") as f:
-        html_template = f.read()
+        blog_html_template = f.read()
+
+      with open(r"hamen.io\build\guide_templates.html", "r", encoding="utf-8") as f:
+        guide_html_template = f.read()
 
       env = dict()
 
@@ -143,11 +152,10 @@ class BuildVersion:
         missing_keys = [key for key in required_keys if not env.get(key)]
         assert not missing_keys, f"Missing keys in <doc>: {', '.join(missing_keys)}"
 
-        # with open(os.path.join(guides_path, env["guideURL"]))
-        # env["guideOutline"] = guide_outline
-        exit(os.path.join(guides_path, env["guideURL"]))
+        with open(os.path.join(guides_path, env["guideURL"].replace("/", "\\").replace("guides\\", ""), "course-outline.json"), "r") as course_outline:
+          env["guideOutline"] = self.remove_whitespace_not_in_string(course_outline.read())
 
-        template = html_template
+        template = guide_html_template
         for match in re.findall(r"\{\{\s*ENV\[\s*(\"|')(.*)(\1)\s*\]\s*\}\}", template):
           key = match[1]
           template = re.sub(r"\{\{\s*ENV\[\s*(\"|')(" + key + r")(\1)\s*\]\s*\}\}", env[key], template)
@@ -163,9 +171,9 @@ class BuildVersion:
       os.makedirs(article_html_file)
       article_html_file = os.path.join(article_html_file, "index.html")
 
-      html_template = None
+      blog_html_template = None
       with open(r"hamen.io\build\article_templates.html", "r", encoding="utf-8") as f:
-        html_template = f.read()
+        blog_html_template = f.read()
 
       env = dict()
 
@@ -182,12 +190,24 @@ class BuildVersion:
         missing_keys = [key for key in required_keys if not env.get(key)]
         assert not missing_keys, f"Missing keys in <doc>: {', '.join(missing_keys)}"
 
-        template = html_template
+        template = blog_html_template
         for match in re.findall(r"\{\{\s*ENV\[\s*(\"|')(.*)(\1)\s*\]\s*\}\}", template):
           key = match[1]
           template = re.sub(r"\{\{\s*ENV\[\s*(\"|')(" + key + r")(\1)\s*\]\s*\}\}", env[key], template)
 
         html.write(template)
+
+  def remove_whitespace_not_in_string(self, code: str) -> str:
+    is_str = False
+    new_str = ""
+    for i,char in enumerate(code):
+      if char == "\"" and code[i-1] != "\\": is_str = not is_str
+      if re.findall(r"\s", char) and not is_str:
+        continue
+
+      new_str += char
+
+    return new_str
 
 if __name__ == "__main__":
   BuildVersion((1, 0, 0))

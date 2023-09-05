@@ -37,9 +37,10 @@ window.addEventListener("DOMContentLoaded", () => {
         moduleTitle.innerText = module.module;
         moduleSection.appendChild(moduleTitle);
 
-        Array.from(module.topics).forEach(topic => {
+        Array.from(Object.keys(module.topics)).forEach(topic => {
           const topicAnchor = document.createElement("a");
-          topicAnchor.href = "#";
+          if (topic.startsWith(ModuleNumber.toString().trim())) topicAnchor.classList.add("active");
+          topicAnchor.href = module.topics[topic];
           topicAnchor.innerText = topic;
 
           moduleSection.appendChild(topicAnchor);
