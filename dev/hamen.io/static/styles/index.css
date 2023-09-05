@@ -242,6 +242,10 @@ body>main {
   flex-grow: 1;
 }
 
+body>main[article-type=guide] {
+  overflow-y: hidden;
+}
+
 ::-webkit-scrollbar {
   background-color: rgba(0, 0, 0, 0.04);
   border-left: 1px solid var(--border-color-400);
@@ -562,7 +566,8 @@ a.button-wrapper:active {
   }
 }
 
-body>main>footer {
+body>main>footer,
+footer.ui\:footer {
   height: 56px;
   padding: 32px;
   box-sizing: border-box;
@@ -650,7 +655,7 @@ body>main.content-page>.content {
 
 @media screen and (max-width:700px) {
   body>main.content-page>.content {
-    width: calc(100% - 4em)
+    width: 100%
   }
 }
 
@@ -700,6 +705,8 @@ hr {
   border-radius: 999px;
   display: flex;
   height: 2px;
+  min-height: 2px;
+  max-height: 2px;
   margin-left: auto;
   margin-right: auto;
   border: 0;
@@ -1017,4 +1024,97 @@ code.inline-code {
 
 li {
   padding-left: 4px;
+}
+
+#doc .doc-section h2 {
+  display: flex;
+  align-items: center;
+}
+
+#doc .doc-section h2>a {
+  visibility: hidden;
+  text-decoration: none;
+}
+
+#doc .doc-section h2>a:hover {
+  text-decoration: underline;
+}
+
+#doc .doc-section h2:hover>a {
+  visibility: visible;
+}
+
+main>#article-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+main[article-type=guide]>#article-wrapper {
+  flex-direction: row;
+}
+
+main[article-type=guide] #tree {
+  flex: 0.3;
+  height: calc(100vh - var(--header-size));
+  max-width: 40em;
+  min-width: 25em;
+  padding: 0;
+  overflow-y: scroll;
+  border-right: 1px solid var(--border-color-400);
+}
+
+main[article-type=guide] #tree section>h3 {
+  position: sticky;
+  top: 0;
+  padding: 1em 1.7em;
+  background-color: var(--background-color-default);
+  margin: 0;
+  border-top: 1px solid var(--border-color-400);
+  border-bottom: 1px solid var(--border-color-400)
+}
+
+main[article-type=guide] #doc {
+  padding: 4em 0;
+  padding-bottom: 0;
+  flex: 0.7;
+  max-height: calc(100vh - var(--header-size));
+  overflow-y: scroll
+}
+
+main[article-type=guide] #doc footer.ui\:footer {
+  margin-top: auto;
+}
+
+main[article-type=guide] #doc>section {
+  padding: 0 3em;
+}
+
+main[article-type=guide] #tree h2 {
+  font-size: 1.15em;
+  padding: 1.5em;
+  margin: 0;
+  margin-top: 1em;
+}
+
+main[article-type=guide] #tree h3 {
+  font-size: 1.1em;
+}
+
+main[article-type=guide] #tree section a {
+  padding: 0.5em 2em;
+  padding-left: 2.5em;
+}
+
+main[article-type=guide] #tree section a:first-of-type {
+  padding-top: 1.5em;
+}
+
+main[article-type=guide] #tree section a:last-of-type {
+  padding-bottom: 1.5em;
+}
+
+main[article-type=guide] #tree section a.active::before {
+  content: '> ';
+  padding-right: 8px;
 }

@@ -16,7 +16,8 @@ window.addEventListener("DOMContentLoaded", () => {
     input.parentElement.replaceChild(inputWrapper, input);
   });
 
-  const footer = document.querySelector("body>main>footer");
+  let footer = document.querySelector("body>main>footer");
+  if (!footer) footer = document.querySelector("body footer#body-footer");
   if (footer) {
     footer.parentElement.replaceChild(Components.UIFooter(), footer);
   }
