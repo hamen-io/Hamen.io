@@ -39,6 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         Array.from(Object.keys(module.topics)).forEach(topic => {
           const topicAnchor = document.createElement("a");
+          topicAnchor.classList.add("title");
           if (topic.startsWith(ModuleNumber.toString().trim())) topicAnchor.classList.add("active");
           topicAnchor.href = module.topics[topic];
           topicAnchor.innerText = topic;
