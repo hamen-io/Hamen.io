@@ -15,66 +15,37 @@
     moduleSlug: Python Course,1.: Python Basics,1.1: What is Python?
 </doc>
 
-# Lambda-Functions in Python
+# 1.1: What is Python
 
 ## Introduction
 
-Lambda functions, also known as anonymous functions, are a powerful and concise way to define small, throwaway functions in Python. These functions can be extremely handy when you need a quick function without the formality of a complete function definition. In this article, we'll dive into what lambda functions are, why they're useful, and how to use them effectively.
+Python is a general-purpose high-level programming language. It was first released in December of 1989, by Guido van Rossum. Since then, its continuous development and advancements have put it at many companies' top choice of a programming language.
 
-## Introduction to Lambda Functions
+As previously mentioned, Python is used by many high-level tech companies such as Google, Meta, and more. It is general-purposed and extremely versatile, meaning it is used from anything ranging from data analytics, to software engineering, to even machine learning and advanced mathematics.
 
-A lambda function is a small, unnamed function in Python that can have any number of arguments but can only have a single expression. It is defined using the lambda keyword, makinglambda arguments: expression it a quick and convenient way to create on-the-fly functions for specific tasks.
+## Comparison of Python against other Languages
 
-## Syntax of Lambda Functions
+Though Python is very popular, not only amongst beginners, but also intermediate programmers, it is actually an extremely slow language. This can be mostly attributed to the fact that it is interpreted as opposed to compiled, which, without explaining the details, basically means that it is usually inefficient when compared to languages like C#, Rust, or other compiled languages.
 
-The basic syntax of a lambda function is as follows:
+In addition to comparing, many languages use braces to define scope. For example, to create a for-loop in JavaScript, you would do:
 
-```python:syntax
-lambda arguments: expression
+```javascript
+for (let i = 0; i < 100; i++) {
+    console.log(i);
+}
 ```
 
-Lambda functions consist of three main components:
-
-* The `lambda` keyword
-* A list of arguments (similar to a function's parameter list)
-* A single expression that gets executed when the lambda function is called
-
-## Using Lambda Functions
-
-### Simple Lambda Functions
-
-Let's start with a simple example. Suppose you want a function to calculate the square of a number. Instead of defining a separate function, you can use a lambda function like this:
+Whereas Python uses ":" and indentation to denote it:
 
 ```python
-square = lambda x: x ** 2
-print(square(5))  # Output: 25
+for i in range(0, 100):
+    print(i)
 ```
 
-### Lambda Functions with Built-in Functions
+Also keep in mind Python's "simpler" and higher-level&mdash;*when referring to English-like-syntax; not memory-management*&mdash;syntax as opposed to JavaScript.
 
-Lambda functions are often used in conjunction with built-in functions like `map()`, `filter()`, and `reduce()`. Here's an example using `map()` to double a list of numbers:
+## Related articles:
 
-```python
-numbers = [1, 2, 3, 4, 5]
-doubled_numbers = list(map(lambda x: x * 2, numbers))
-print(doubled_numbers)  # Output: [2, 4, 6, 8, 10]
-```
+If you enjoyed this blog, we recommend these ones:
 
-### Lambda Functions in Sorting
-
-Lambda functions are handy for sorting lists of complex objects based on specific attributes. Let's say you have a list of tuples representing people's names and ages, and you want to sort them by age:
-
-```python
-people = [('Alice', 30), ('Bob', 25), ('Charlie', 40)]
-people.sort(key=lambda person: person[1])
-print(people)  
-# Output: [('Bob', 25), ('Alice', 30), ('Charlie', 40)]
-```
-
-## Limitations of Lambda Functions
-
-While lambda functions are convenient for simple tasks, they have limitations. They can only contain a single expression, which means complex logic isn't suitable for lambda functions. In such cases, it's better to use regular named functions.
-
-## Conclusion
-
-Lambda functions are a valuable tool in Python's toolbox, providing a concise way to create small, disposable functions. They're particularly useful when you need a quick function for a specific purpose without writing a full function definition. By understanding the syntax and examples provided in this guide, you can start using lambda functions effectively in your Python code.
+* [High-Level vs Low-Level Languages: What's the difference?](https://www.hamen.io/docs/blogs/code/general/level/high-level-vs-low-level-languages)
