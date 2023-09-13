@@ -44,8 +44,8 @@ for i in range(0, 100):
 
 Also keep in mind Python's "simpler" and higher-level&mdash;*when referring to English-like-syntax; not memory-management*&mdash;syntax as opposed to JavaScript.
 
-## Related articles:
+<!-- ## Related articles: -->
 
-If you enjoyed this blog, we recommend these ones:
+<!-- If you enjoyed this blog, we recommend these ones: -->
 
-* [High-Level vs Low-Level Languages: What's the difference?](https://www.hamen.io/docs/blogs/code/general/level/high-level-vs-low-level-languages)
+<!-- * [High-Level vs Low-Level Languages: What's the difference?](https://www.hamen.io/docs/blogs/code/general/level/high-level-vs-low-level-languages) -->

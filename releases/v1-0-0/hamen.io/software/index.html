@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Hamen Docs &bull; Hamen.io</title>
+
+        <link rel="stylesheet" href="./../static/styles/index.css">
+        <script type="text/javascript" src="./../static/scripts/Components.js" defer></script>
+        <script type="text/javascript" src="./../static/scripts/index.js"></script>
+
+        <!-- Favicon: -->
+        <link rel="icon" href="./favicon.ico" />
+
+        <script type="text/javascript">
+          window.addEventListener("DOMContentLoaded", () => {
+            const loadSoftwareAsynchronously = () => {
+              return new Promise(async (resolve, reject) => {
+                // const response = await fetch("https://www.hamen.io/md/docs/Articles.json");
+                // const Articles = await response.json()
+                  // .then((value) => {
+                    // resolve(value);
+                  // })
+                  // .catch((error) => {
+                    // reject(`An error occurred while trying to fetch the articles: ${error}`);
+                  // });
+
+                resolve([{
+                  "javascript-frameworks-libraries": [
+                      {
+                        "title": "Hamen Title API",
+                        "description": "Effortlessly incorporate personalized styles into the `title` attribute within HTML utilizing this straightforward framework. This intuitive solution empowers users to seamlessly infuse customized design elements into the specified attribute, enhancing the aesthetic appeal and visual coherence of web content."
+                      }
+
+                      // title: "Hamen Delta Framework",
+                      // description: <span>Facilitate the development of versatile cross-platform desktop applications by leveraging the prowess of JavaScript through seamless integration with the Hamen Delta Framework. This cutting-edge framework equips developers with a comprehensive array of tools and resources, enabling the seamless creation of desktop applications that transcend traditional operating system boundaries, ensuring a harmonized and immersive user experience across diverse platforms.</span>,
+
+                      // title: "Hamen Lambda Framework",
+                      // description: <span>Realize the creation of intricate multi-page web applications by harnessing the capabilities of JavaScript, facilitated through the adept integration of the Hamen Lambda Framework. This innovative framework empowers developers with the tools and functionalities necessary to architect sophisticated web applications comprised of multiple interconnected pages, further enhancing the dynamic and interactive nature of user experiences.</span>,
+                  ],
+                  "python-apis": [
+                      // title: "Hamen GUI Library",
+                      // description: <span>Forge cross-platform desktop applications with utmost ease by harnessing the power of Python through the utilization of the Hamen GUI Library. This versatile framework offers a comprehensive suite of tools and resources, enabling the seamless development of desktop applications that transcend operating system boundaries and deliver an exceptional user experiencElements.</span>,
+
+                      // title: "HamenIO",
+                      // description: <span>Effortlessly navigate and process prevalent data structures, including but not limited to JSON, XML, and YAML, utilizing the Python programming languagElements. Python&lsquo;s inherent capabilities empower streamlined parsing and manipulation of these fundamental data formats, contributing to a seamless and efficient data processing workflow.</span>,
+
+                      // title: "HamenPi",
+                      // description: <span>The HamenPi Python API serves as an integral Python-based interface, purposefully designed to facilitate the development of applications for controlling Raspberry Pi devices. Notably, this API extends its capabilities to encompass Arduino control functionality through the dedicated <Elements.Inline.Code>HamenPi.Arduino</Elements.Inline.Code> module, thus enabling developers to seamlessly manipulate both Raspberry Pi and Arduino devices within a unified framework.</span>,
+                  ],
+                  "mobile-apps": [
+                      // title: "Hamen Vocabulary",
+                      // description: <span>Hamen Vocabulary stands as the premier application available for both Android and iOS platforms, specifically tailored to foster the enhancement and expansion of English vocabulary proficiency. With its comprehensive features and user-friendly interface, Hamen Vocabulary emerges as an indispensable tool for individuals seeking to elevate their linguistic capabilities.</span>,
+                  ],
+                  "desktop-apps": [
+                      // title: "Hamen qCore",
+                      // description: <span>Hamen qCore stands as a preeminent Audio & Video Cueing Software that finds widespread utilization within theatrical and production contexts. Distinguished for its comprehensive repertoire of capabilities, including robust Video & Audio Editing functionalities, Hamen qCore emerges as the definitive solution of choice for professionals in the field. In addition to its core attributes, this innovative software also boasts seamless integration with lighting control systems and real-time collaboration features, further enhancing its value proposition within the realm of entertainment and production management.</span>,
+
+                      // title: "Hamen Conversions",
+                      // description: <span>Hamen Conversions constitutes a sophisticated desktop application meticulously designed to expedite the seamless conversion of files spanning diverse file formats. This application offers users a rapid and efficient mechanism to effortlessly transform files across various filetypes, thereby enhancing workflow efficiency and promoting versatility in data manipulation.</span>,
+
+                      // title: "Hamen Text-Editor",
+                      // description: <span>The Hamen Text Editor stands as a versatile and all-encompassing text editing tool meticulously crafted to cater to the needs of developers. Bolstered by its compatibility with an array of programming languages including Python, HTML, JavaScript, and others, Hamen TE emerges as the quintessential selection for those seeking a text editor that strikes a harmonious balance between minimalistic design and advanced, customizable features.</span>,
+
+                      // title: "Hamen CLI",
+                      // description: <span>The Hamen CLI (Command-Line Interface) presents itself as a superior alternative to the conventional Native Command Prompt, redefining the user experiencElements. Boasting an aesthetically pleasing graphical user interface (UI), advanced capabilities for batch file operations, and extensive support for extensions, keyboard shortcuts, and vibrant color schemes, the Hamen CLI effectively addresses the persistent challenges posed by the lackluster and vapid nature of the traditional Command Prompt, offering a comprehensive and transformative solution.</span>,
+                  ],
+                  "other": [
+
+                      // title: "Blender Addon: Hamen Quick Focus",
+                      // description: <span>Facilitate the swift adjustment of focus onto objects and meshes within Blender by employing the Hamen Quick Focus Blender Addon. This invaluable tool enhances workflow efficiency and contributes to seamless navigation and manipulation of elements within the software environment.</span>,
+
+                      // title: "HamenScript",
+                      // description: <span>HamenScript stands as a sophisticated high-level programming language meticulously crafted by Hamen. Encompassing essential features such as Interfaces, Classes, Functions, and robust compatibility with external libraries, among other attributes, HamenScript emerges as an exemplar among programming languages.</span>,
+
+                      // title: "Hamen CSS",
+                      // description: <span>Develop CSS utilizing JavaScript-like syntax, incorporating support for diverse elements such as Interfaces, Variables, and additional features through the implementation of the Hamen CSS Preprocessor.</span>,
+
+                      // title: "Hamen Alpha.css",
+                      // description: <span>Cultivate cross-platform HTML applications with utmost ease, liberated from the burden of meticulous styling concerns, by harnessing the transformative capabilities of Hamen&ldquo;s Alpha.css framework. This innovative framework liberates developers from the intricacies of styling intricacies, enabling them to focus on the core functionality and content of their applications while seamlessly ensuring a consistent and visually appealing user experience across diverse platforms.</span>,
+                  ]
+                }]);
+              })
+            };
+
+            const filterOptions = [
+              {
+                title: "JavaScript Frameworks & Libraries",
+                id: "javascript-frameworks-libraries",
+                checked: true
+              }, {
+                title: "Python APIs",
+                id: "python-apis",
+                checked: false
+              // }, {
+              //   title: "Mobile Applications",
+              //   id: "mobile-apps",
+              //   checked: false
+              }, {
+                title: "Desktop Applications",
+                id: "desktop-apps",
+                checked: false
+              }, {
+                title: "Other",
+                id: "other",
+                checked: false
+              }
+            ];
+
+            loadSoftwareAsynchronously()
+              .then((software) => {
+                const CardList = new Components.UICardList(filterOptions, software, "LONG");
+                CardList.appendFilters(document.querySelector(".filters")).then(() => {
+                  CardList.appendCardList(document.querySelector(".card-list"));
+                })
+              })
+              .catch((error) => {
+                console.error(error);
+              })
+          })
+        </script>
+    </head>
+    <body>
+        <header></header>
+        <main class="content-page">
+          <div class="content">
+            <div class="header window">
+              <div class="titles">
+                <div class="titles">
+                  <h1 class="page-title">Hamen Software</h1>
+                  <p>Browse through various high-quality software projects</p>
+                </div>
+                <div class="search">
+                  <input type="text" placeholder="Search for a piece of software!">
+                </div>
+              </div>
+              <div class="filters">
+                <p>
+                  <b>Software Categories:</b>
+                </p>
+              </div>
+            </div>
+            <hr>
+            <div class="body window">
+              <div class="card-list"></div>
+            </div>
+          </div>
+          <footer></footer>
+        </main>
+    </body>
+</html>

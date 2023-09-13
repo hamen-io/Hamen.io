@@ -723,6 +723,56 @@ hr {
   flex-wrap: wrap;
 }
 
+.ui\:long-card {
+  border: 1px solid var(--border-color-300);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  min-width: 20em;
+  overflow: hidden;
+  width: 100%;
+  gap: 1.5em;
+  align-items: center;
+  padding: 1.5em;
+  outline: 0px solid rgb(77, 151, 255);
+  /* background-color: rgba(0, 0, 0, 0.03) */
+}
+
+.ui\:long-card a.expand-more {
+  font-family: 'Raleway', sans-serif
+}
+
+.ui\:long-card:active {
+  outline: 4px solid rgb(77, 151, 255);
+}
+
+.ui\:long-card>.body {
+  flex-direction: column;
+}
+
+.ui\:long-card h4 {
+  margin: 0;
+  font-size: 1.15em
+}
+
+.ui\:long-card .description {
+  margin: 0;
+  margin-top: 8px;
+  font-size: var(--font-size-sub);
+  font-family: 'Raleway', sans-serif
+}
+
+.ui\:long-card>.header {
+  width: 32px;
+  min-width: 32px;
+  max-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  max-height: 32px;
+  border-radius: 999px
+}
+
 .ui\:medium-card {
   border: 1px solid var(--border-color-300);
   border-radius: 3px;

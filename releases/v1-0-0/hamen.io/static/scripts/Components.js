@@ -15,17 +15,19 @@ class UICardList {
           category: ["Code", "Python", "Data Types"]
         }
       ]
-    }]
+    }],
+    itemType = "MEDIUM"
   ) {
     this.filters = filters;
     this.items = items[0];
+    this.itemType = itemType;
     this.activeFilter = filters.filter(filter => filter.checked);
     this.activeFilter = this.activeFilter.length >= 1 ? this.activeFilter[0].id : filters[0].id;
 
     this.filterItems;
   };
 
-  UICard(info) {
+  UICardMedium(info) {
     const card = document.createElement("a");
     card.classList.add("ui:medium-card");
     const url = info["url"];
@@ -46,6 +48,36 @@ class UICardList {
     return card;
   };
 
+  UICardLong(info) {
+    const card = document.createElement("a");
+    card.classList.add("ui:long-card");
+    const url = info["url"];
+    card.href = `https://www.hamen.io/software/${url}`;
+    const charLimit = 256;
+
+    card.innerHTML = `
+      <div class="header" style="background-color: rgb(77, 151, 255);"></div>
+      <div class="body">
+        <h4 class="title">${info.title}</h4>
+        <p class="description"><span class="description-content">${info.description.length > 16 ? info.description.slice(0, charLimit).trim() + "..." : info.description}</span>&nbsp;<a class="expand-more" href="#">Read More...</a></p>
+      </div>
+    `;
+
+    let descriptionContent = card.querySelector(".description-content");
+    let description = card.querySelector(".description");
+    let a = description.querySelector("a.expand-more");
+    a.addEventListener("click", e => {
+      descriptionContent.innerText = a.innerText.trim() === "Read More..." ? info.description : info.description.slice(0, charLimit).trim() + "...";
+      a.innerText = a.innerText.trim() === "Read More..." ? "Read Less..." : "Read More...";
+
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      e.stopPropagation();
+    })
+
+    return card;
+  };
+
   UICardList() {
     const cardList = document.createElement("div");
     cardList.classList.add("ui:card-list");
@@ -54,7 +86,14 @@ class UICardList {
       Array.from(cardList.children).forEach(c => c.remove());
 
       Array.from(items).forEach(item => {
-        cardList.appendChild(this.UICard(item));
+        switch (this.itemType) {
+          case "MEDIUM":
+            cardList.appendChild(this.UICardMedium(item));
+            break;
+          case "LONG":
+            cardList.appendChild(this.UICardLong(item));
+            break;
+        }
       });
     };
 
