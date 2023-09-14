@@ -6,7 +6,8 @@ def parse_text_content(text_content: str) -> str:
     text_content = re.sub(r"\*()(?!\\)([^.]*)\*", r"<i>\2</i>", text_content)
     text_content = re.sub(r"(?<=\S)(\^)([^ ]*)", r"<sup>\2</sup>", text_content)
     text_content = re.sub(r"(?<=\S)(\^)([^ ]*)", r"<sub>\2</sub>", text_content)
-    text_content = re.sub(r"(?<!\\)(`)(.*?)(?<!\\)(`)", r"<code class=\"inline-code\">\2</code>", text_content)
+    text_content = re.sub(r"(?<!\\)(`)(.*?)(?<!\\)(`)", r"""<code class="inline-code">\2</code>""", text_content)
+    text_content = re.sub(r"(?<!\\)\[(.*)\]\(\"(.*)\"\)", r"""<a href="\2">\1</a>""", text_content)
 
     return text_content
 

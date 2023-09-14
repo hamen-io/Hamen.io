@@ -44,7 +44,17 @@ Let's start with a simple example. Suppose you want a function to calculate the 
 
 ```python
 square = lambda x: x ** 2
+
 print(square(5))  # Output: 25
+```
+
+This example is the exact same as doing the following; just in a condensed, and shorter&mdash;lambda&mdash; notation:
+
+```python
+def square(x):
+    return x ** 2
+
+print(square(5)) # Output: 25
 ```
 
 ### Lambda Functions with Built-in Functions
@@ -56,6 +66,37 @@ numbers = [1, 2, 3, 4, 5]
 doubled_numbers = list(map(lambda x: x * 2, numbers))
 print(doubled_numbers)  # Output: [2, 4, 6, 8, 10]
 ```
+
+If you are unfamiliar with the `map`, `filter`, or `reduce` function in Python, check out our other blogs!
+
+- [Tutorial to Python's `map` Function]("https://www.hamen.io/...")
+- [Tutorial to Python's `filter` Function]("https://www.hamen.io/...")
+- [Tutorial to Python's `reduce` Function]("https://www.hamen.io/...")
+
+Nevertheless, the function-equivalent of the lambda-function above is as follows:
+
+```python
+def double_number(x):
+    return x * 2
+
+numbers = [1, 2, 3, 4, 5]
+doubled_numbers = list(map(double_number))
+print(doubled_number)  # Output: [2, 4, 6, 8, 10]
+```
+
+Or to simplify this even further, in case you are not familiar with the `map` function, you can achieve the same results in a for-loop:
+
+```python
+def double_number(x):
+    return x * 2
+
+numbers = [1, 2, 3, 4, 5]
+for i,number in enumerate(numbers):
+    numbers[i] = double_number(number)
+print(numbers)  # Output: [2, 4, 6, 8, 10]
+```
+
+Note that in this example, we modified the original list, instead of creating a new one
 
 ### Lambda Functions in Sorting
 
@@ -75,3 +116,15 @@ While lambda functions are convenient for simple tasks, they have limitations. T
 ## Conclusion
 
 Lambda functions are a valuable tool in Python's toolbox, providing a concise way to create small, disposable functions. They're particularly useful when you need a quick function for a specific purpose without writing a full function definition. By understanding the syntax and examples provided in this guide, you can start using lambda functions effectively in your Python code.
+
+## Related Articles
+
+If you enjoyed this article, here are some other articles similar to this one:
+
+- [Tutorial to Python's `map` Function]("https://www.hamen.io/...")
+- [Tutorial to Python's `filter` Function]("https://www.hamen.io/...")
+- [Tutorial to Python's `reduce` Function]("https://www.hamen.io/...")
+- [Tutorial to Python's `sort` Function]("https://www.hamen.io/...")
+- [Types of Arrays in Python]("https://www.hamen.io/docs/blogs/code/python/data-types/arrays/types-of-arrays-in-python/")
+
+Finally, we recommend checking out our *free* [Python Course]("https://www.hamen.io/...") if you want to learn more about this great language!

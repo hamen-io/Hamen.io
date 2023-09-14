@@ -9,8 +9,10 @@ from parse_markdown import ParseMarkdown
 import ftplib
 
 colorama.init()
-releases_dir = r"hamen.io\releases"
-public_dir = r"hamen.io\dev\hamen.io"
+# global_public_path_prefix = "hamen.io"
+global_public_path_prefix = ""
+releases_dir = os.path.join(global_public_path_prefix, r"releases")
+public_dir = os.path.join(global_public_path_prefix, r"dev\hamen.io")
 
 class BuildVersion:
   def __init__(self, version: tuple, release_notes: str = ""):
@@ -66,8 +68,9 @@ class BuildVersion:
         continue
 
       if os.path.isdir(os.path.join(path_prefix, category)):
-        blogs[category] = []
-        guides[category] = []
+        if not blogs.get(category):blogs[category] = []
+        if not guides.get(category):guides[category] = []
+
         for root, dirs, files in os.walk(os.path.join(path_prefix, category), topdown=False):
           for name in files:
             if name.endswith(".md"):
@@ -131,10 +134,10 @@ class BuildVersion:
 
       blog_html_template = None
       guide_html_template = None
-      with open(r"hamen.io\build\article_templates.html", "r", encoding="utf-8") as f:
+      with open(os.path.join(global_public_path_prefix, r"build\article_templates.html"), "r", encoding="utf-8") as f:
         blog_html_template = f.read()
 
-      with open(r"hamen.io\build\guide_templates.html", "r", encoding="utf-8") as f:
+      with open(os.path.join(global_public_path_prefix, r"build\guide_templates.html"), "r", encoding="utf-8") as f:
         guide_html_template = f.read()
 
       env = dict()
@@ -172,7 +175,7 @@ class BuildVersion:
       article_html_file = os.path.join(article_html_file, "index.html")
 
       blog_html_template = None
-      with open(r"hamen.io\build\article_templates.html", "r", encoding="utf-8") as f:
+      with open(os.path.join(global_public_path_prefix, r"build\article_templates.html"), "r", encoding="utf-8") as f:
         blog_html_template = f.read()
 
       env = dict()
@@ -196,6 +199,21 @@ class BuildVersion:
           template = re.sub(r"\{\{\s*ENV\[\s*(\"|')(" + key + r")(\1)\s*\]\s*\}\}", env[key], template)
 
         html.write(template)
+
+    with open(os.path.join(public_dir, ".htaccess"), "x") as htaccess:
+      htaccess.write("""<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php80___lsphp .php .php8 .phtml
+</IfModule>
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+ErrorDocument 400 /error/index.php?error=400
+ErrorDocument 402 /error/index.php?error=402
+ErrorDocument 401 /error/index.php?error=401
+ErrorDocument 403 /error/index.php?error=403
+ErrorDocument 404 /error/index.php?error=404""")
 
   def remove_whitespace_not_in_string(self, code: str) -> str:
     is_str = False
