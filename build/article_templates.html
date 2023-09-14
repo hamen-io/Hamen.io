@@ -6,6 +6,9 @@
 
     <title>{{ ENV["title"] }}</title>
 
+    <meta name="description" content="{{ ENV['description'] }}">
+    <meta name="keywords" content="{{ ENV['tags'] }}">
+
     <link rel="stylesheet" href="{{ ENV['staticDirectory'] }}/styles/index.css">
     <link rel="stylesheet" href="{{ ENV['staticDirectory'] }}/styles/prism.css">
     <script type="text/javascript" src="{{ ENV['staticDirectory'] }}/scripts/Components.js" defer></script>

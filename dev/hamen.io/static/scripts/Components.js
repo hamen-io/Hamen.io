@@ -238,7 +238,7 @@ const Components = {
     footer.classList.add("ui:footer");
     footer.innerHTML = `
       <p>
-        <span>2023 © <a href="https://www.hamen.io/">Hamen.io</a>. All rights reserved. Developed by <a href="https://www.daniel.hamen.io/">Daniel Hamen</a>
+        <span>2023 © <a href="https://www.hamen.io/">Hamen.io</a>. All rights reserved. Developed by <a href="javascript:void(0);">Daniel Hamen</a>
         </span>
       </p>
     `;

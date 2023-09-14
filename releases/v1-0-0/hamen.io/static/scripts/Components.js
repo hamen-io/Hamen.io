@@ -59,7 +59,7 @@ class UICardList {
       <div class="header" style="background-color: rgb(77, 151, 255);"></div>
       <div class="body">
         <h4 class="title">${info.title}</h4>
-        <p class="description"><span class="description-content">${info.description.length > 16 ? info.description.slice(0, charLimit).trim() + "..." : info.description}</span>&nbsp;<a class="expand-more" href="#">Read More...</a></p>
+        <p class="description"><span class="description-content">${info.description.length > 16 ? info.description.slice(0, charLimit).trim() + "..." : info.description}</span>&nbsp;<br style="display: none;"><a class="expand-more" href="#">Read More...</a></p>
       </div>
     `;
 
@@ -68,7 +68,17 @@ class UICardList {
     let a = description.querySelector("a.expand-more");
     a.addEventListener("click", e => {
       descriptionContent.innerText = a.innerText.trim() === "Read More..." ? info.description : info.description.slice(0, charLimit).trim() + "...";
-      a.innerText = a.innerText.trim() === "Read More..." ? "Read Less..." : "Read More...";
+      a.innerText.trim() === "Read More..." ?
+        // Expand paragraph:
+        (() => {
+          a.innerText = "Read Less..."
+          description.querySelector("br").style.display = "flex";
+        })():
+        // Shorten paragraph:
+        (() => {
+          description.querySelector("br").style.display = "none";
+          a.innerText = "Read More...";
+        })();
 
       e.preventDefault();
       e.stopImmediatePropagation();
@@ -228,7 +238,7 @@ const Components = {
     footer.classList.add("ui:footer");
     footer.innerHTML = `
       <p>
-        <span>2023 © <a href="https://www.hamen.io/">Hamen.io</a>. All rights reserved. Developed by <a href="https://www.daniel.hamen.io/">Daniel Hamen</a>
+        <span>2023 © <a href="https://www.hamen.io/">Hamen.io</a>. All rights reserved. Developed by <a href="javascript:void(0);">Daniel Hamen</a>
         </span>
       </p>
     `;

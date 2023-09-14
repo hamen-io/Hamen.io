@@ -64,5 +64,3 @@ Words are selected from the lexicon and combined following syntactic rules to co
 ## Conclusion
 
 In summary, these four linguistic concepts—Syntax, Semantics, Grammar, and Lexicon—work together to give structure and meaning to language. Syntax deals with sentence structure, semantics deals with meaning, grammar encompasses both, and lexicon is the repository of words and their information. Understanding these components is essential for unraveling the intricate tapestry of human language.
-
-***Remember***, while we've discussed these concepts individually, they are interconnected and mutually influence each other. A thorough study of linguistics involves delving into the intricate relationships among syntax, semantics, grammar, and the lexicon to gain a deeper understanding of how language functions.
