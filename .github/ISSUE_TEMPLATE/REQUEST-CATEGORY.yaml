@@ -16,12 +16,14 @@ body:
   validations:
     required: true
 - type: input
-  label: Category title
   id: category-title
-  placeholder: Category Title
+  attributes:
+    label: Category title
+    placeholder: Category Title
   validations:
     required: true
 - type: textarea
   id: additional-information
-  label: Additional information
-  placeholder: Provide additional information on the category; give examples of possible articles, blogs, guides, or, quizzes that may appear here.
+  attributes:
+    label: Additional information
+    placeholder: Provide additional information on the category; give examples of possible articles, blogs, guides, or, quizzes that may appear here.
