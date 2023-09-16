@@ -5,6 +5,7 @@ labels: enhancement
 body:
   - type: dropdown
     - id: subpage
+    - name: subpage
     - attributes:
       label: Pick a target subpage for your category request
       options:
@@ -18,9 +19,12 @@ body:
   - type: input
     - label: Category title
     - id: category-title
+    - name: category-title
     - placeholder: Category Title
       validations:
         required: true
   - type: textarea
+    - id: additional-information
+    - name: additional-information
     - label: Additional information
   - placeholder: Provide additional information on the category; give examples of possible articles, blogs, guides, or, quizzes that may appear here.
