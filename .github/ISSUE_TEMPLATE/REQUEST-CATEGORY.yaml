@@ -13,8 +13,8 @@ body:
       - Docs/Guides
       - Quizzes
       - Software
-    validations:
-      required: true
+  validations:
+    required: true
 - type: input
   label: Category title
   id: category-title
