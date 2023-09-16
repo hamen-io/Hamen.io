@@ -22,6 +22,6 @@ body:
   validations:
     required: true
 - type: textarea
-    id: additional-information
-    label: Additional information
+  id: additional-information
+  label: Additional information
   placeholder: Provide additional information on the category; give examples of possible articles, blogs, guides, or, quizzes that may appear here.
