@@ -36,6 +36,34 @@ class Elements:
     def __str__(self) -> str:
       return f"""<li>{self.textContent}</li>"""
 
+  class Note:
+    def __init__(self, textContent: list[str], type: str = "INFO"):
+      self.textContent = textContent
+      self.type = type.upper()
+
+    def __str__(self) -> str:
+      body = ""
+      for line in self.textContent:
+        pass
+
+      icon = "info"
+      match self.type:
+        case "INFO":
+          icon = "info"
+        case "WARNING":
+          icon = "warning"
+        case "ERROR":
+          icon = "error"
+
+      return f"""<div class="ui:note" theme="{icon.upper()}">
+  <div class="icon">
+    <span class="material-symbols-outlined">{icon}</span>
+  </div>
+  <div class="body">
+    {body}
+  </div>
+</div>"""
+
   class List:
     def __init__(self, items: list, ordered: bool) -> None:
       self.items = items
@@ -161,13 +189,12 @@ class Section:
   </div>
 </section>"""
 
-class ParseMarkdown:
+class ParseArticle:
   def __init__(self, code: str) -> None:
     self.code = code.strip()
     self.info,self.title,self.body = self.split_content(self.code)
     self.info: dict = self.split_info(self.info)
     self.title: str = self.title.strip()
-    self.body = self.split_body(self.body)
 
   def split_content(self, code: str) -> list[str, str, str]:
     """
@@ -193,6 +220,13 @@ class ParseMarkdown:
         doc_info[key] = value
 
     return doc_info
+
+  def __str__(self) -> str:
+    return str(ParseMarkdown(self.body))
+
+class ParseMarkdown:
+  def __init__(self, code: str) -> None:
+    self.code = self.split_body(code.strip())
   
   def split_body(self, body: str) -> list[Section]:
     sections = []
@@ -246,6 +280,9 @@ class ParseMarkdown:
 
       section = Section(title)
       for line in lines:
+        if line and type(line) is list:
+          line = "\n".join(line)
+
         if line.strip():
           if re.findall(r"^```[\s\S]*```$", line):
             language,code = list(re.findall(r"^```(.*)\n([\s\S]*)\n```$", line)[0])
@@ -265,4 +302,86 @@ class ParseMarkdown:
     return sections
 
   def __str__(self) -> str:
-    return f"""{"".join([x.__str__() for x in self.body])}"""
+    return f"""{"".join([x.__str__() for x in self.code])}"""
+
+def parse_element(element: str):
+  element = element.strip()
+
+  # 
+  if re.findall(r"^#{1,6}", element):
+    return Elements.Heading()
+
+def parse_code(code: str):
+    code = code.strip()
+
+    # Split code:
+    parts = []
+    is_code = False
+    is_note = False
+    for line in code.split("\n"):
+        raw_line = line
+        line = line.strip()
+
+        if is_note and not line.startswith("!!!"):
+          pass
+
+        if line or is_code:
+            if line.startswith("```"):
+                is_code = not is_code
+                if is_code:
+                  parts.append([line])
+                else:
+                  parts[-1].append(line)
+
+            elif line.startswith("!!!"):
+                # Handle notes here if needed
+                parts.append([line])
+
+            elif re.match(r'^#{1,6}', line):
+                # Handle headings here if needed
+                parts.append(line)
+
+            elif re.match(r"^\d\.", line):
+              pass
+
+            elif re.match(r"^-", line):
+              pass
+
+            else:
+                if is_code:
+                  parts[-1].append(raw_line)
+                else:
+                  parts.append(raw_line)
+
+
+
+# parse_code("""
+# ## Introduction
+
+# ```python
+# print("Hello
+           
+           
+#   World!")
+# ```
+
+# Our journey begins with nouns, the building blocks of language. Nouns are words that name people, places, things, or ideas. They help us describe the world.
+
+# Nouns can be divided into:
+
+# - **Common Nouns**: General words like "book," "dog," or "city."
+
+# :- Test
+# :- Test
+# :- Test
+
+# - **Proper Nouns**: Specific and capitalized, such as "Shakespeare" or "New York."
+
+# - **Countable Nouns**: Things you can count, like "two apples" or "five cars."
+
+# - **Uncountable Nouns**: Things you can't count, like "water" or "happiness."
+
+# !!!info
+# Unlike German, in English, the only nouns we capitalize are proper nouns. This construct like originates from Latin and manuscript traditions, eschewing from excessive capitalization to maintain readability and simplicity in its orthographic conventions.
+# !!!
+# """)

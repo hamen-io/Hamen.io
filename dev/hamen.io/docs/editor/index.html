@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editor &bull; Hamen Docs</title>
+    <link rel="stylesheet" href="./static/index.css">
+    <link rel="stylesheet" href="https://www.hamen.io/static/styles/index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  </head>
+  <body>
+    <main style="width: 100%;height: 100%;display: flex;flex-direction: column;align-items: center;justify-content: center;">
+      <form method="POST" action="https://www.api.hamen.io/docs-editor/index.php">
+        <label for="username">
+          <span>Username:</span>
+          <input type="text" name="username" id="username">
+        </label>
+        <label for="password">
+          <span>Password:</span>
+          <input type="password" name="password" id="password">
+        </label>
+        <button type="submit">Access Editor</button>
+        <style>
+          #warning[toggled=false] #writer-agreement {
+            display: none;
+          }
+
+          #warning[toggled=true] #writer-agreement {
+            display: flex;
+          }
+
+          #warning[toggled=false] #toggle-icon {
+            transform: rotate(180deg) !important;
+            transition: 0.1s;
+          }
+
+          #warning[toggled=true] #toggle-icon {
+            transform: rotate(90deg) !important;
+          }
+        </style>
+        <div id="warning" toggled="false">
+          <p id="toggle-warning" style="display: flex;user-select: none;cursor: pointer;align-items: center;justify-content: space-between;">
+            <span>
+              By accessing our editor, you agree to our <a id="writer-agreement-link" target="_blank" href="https://www.api.hamen.io/docs-editor/writer-agreement.php">Writer Agreement</a>
+            </span>
+            <span class="material-symbols-outlined" id="toggle-icon" style="transform: rotate(90deg);font-size: 18px !important;padding: 8px;cursor: pointer;">chevron_right</span>
+          </p>
+          <div style="padding: 8px;background-color: rgba(0, 0, 0, 0.03);border: 1px solid rgba(0, 0, 0, 0.05);border-radius: 8px;max-height: 100px;overflow-y: scroll" id="writer-agreement">
+            <p style="margin: 0;text-align: justify;">
+              By accessing and utilizing our proprietary editorial platform (hereinafter referred to as the "Editor"), you hereby irrevocably waive and relinquish all rights, claims, and interests related to any intellectual property associated with any content, article, or submission made through the Editor. It is expressly understood and agreed that any content submitted through the Editor shall be deemed to be the exclusive intellectual property of Hamen.io, hereinafter referred to as the "Owner."
+              <br>
+              <br>
+              With utmost clarity, it is emphasized that any content, including but not limited to articles, essays, or any written material, submitted through the Editor cannot be asserted, claimed, or construed as the intellectual property of the submitter. The exclusive intellectual ownership of such content is hereby vested in Hamen.io.
+              <br>
+              <br>
+              Notwithstanding the aforementioned intellectual property relinquishment, Hamen.io acknowledges the importance of attributing authorship where applicable. Consequently, unless Hamen.io has removed the submitted content for a reason specifically communicated to the original author, the submitter shall retain the right to have their username or pseudonym attributed to the content as the author thereof. This attribution shall be implemented in accordance with Hamen.io's policies and procedures, provided that such policies and procedures are adhered to by the submitter.
+              <br>
+              <br>
+              It is incumbent upon all users of the Editor to familiarize themselves with Hamen.io's policies and guidelines concerning content submissions, intellectual property rights, and authorship attribution, and to adhere to them diligently. By accessing the Editor and submitting content, users explicitly acknowledge and consent to the terms set forth herein.
+            </p>
+          </div>
+          <script type="text/javascript">
+            let title = document.querySelector("#toggle-warning");
+            let body = document.querySelector("#writer-agreement");
+            let writerAgreement = document.querySelector("#writer-agreement-link");
+            title?.addEventListener("click", e => {
+              if (e.target !== writerAgreement) {
+                document.querySelector("#warning").setAttribute("toggled", document.querySelector("#warning").getAttribute("toggled") === 'true' ? 'false' : 'true');
+              }
+            })
+          </script>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

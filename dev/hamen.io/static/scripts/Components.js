@@ -237,7 +237,7 @@ const Components = {
     const footer = document.createElement("footer");
     footer.classList.add("ui:footer");
     footer.innerHTML = `
-      <p>
+      <p class="fancy sub">
         <span>2023 © <a href="https://www.hamen.io/">Hamen.io</a>. All rights reserved. Developed by <a href="javascript:void(0);">Daniel Hamen</a>
         </span>
       </p>
@@ -266,28 +266,32 @@ const Components = {
     header.innerHTML = `
     <ul>
         <li style="margin-right: auto;" list-id="title">
-            <a class="title" href="https://www.hamen.io/">Hamen.io</a>
+            <a class="title fancy" href="https://www.hamen.io/">Hamen.io</a>
         </li>
         <li list-id="docs">
-            <a class="title" href="https://www.hamen.io/docs">Docs</a>
+            <a class="title fancy fs-sub" href="https://www.hamen.io/docs">Docs</a>
         </li>
+        <!--
         <li list-id="quizzes">
-            <a class="title" href="https://www.hamen.io/quizzes">Quizzes</a>
+            <a class="title fancy fs-sub" href="https://www.hamen.io/quizzes">Quizzes</a>
         </li>
+        -->
         <li list-id="software">
-            <a class="title" href="https://www.hamen.io/software">Software</a>
+            <a class="title fancy fs-sub" href="https://www.hamen.io/software">Software</a>
         </li>
         <li list-id="hamburger"></li>
         <li list-id="background"></li>
         <ul list-id="mobile-menu">
           <li list-id="docs">
-              <a class="title" href="https://www.hamen.io/docs">Docs</a>
+              <a class="title fancy fs-sub" href="https://www.hamen.io/docs">Docs</a>
           </li>
+          <!--
           <li list-id="quizzes">
-              <a class="title" href="https://www.hamen.io/quizzes">Quizzes</a>
+              <a class="title fancy fs-sub" href="https://www.hamen.io/quizzes">Quizzes</a>
           </li>
+          -->
           <li list-id="software">
-              <a class="title" href="https://www.hamen.io/software">Software</a>
+              <a class="title fancy fs-sub" href="https://www.hamen.io/software">Software</a>
           </li>
         </ul>
     </ul>`;
