@@ -5,7 +5,7 @@ import colorama
 import json
 global warnings
 import shutil
-from parse_markdown import ParseMarkdown
+from parse_markdown import ParseArticle
 import ftplib
 
 colorama.init()
@@ -143,7 +143,7 @@ class BuildVersion:
       env = dict()
 
       with open(guide_html_file, "x+", encoding="utf-8") as html:
-        guide_html = ParseMarkdown(guide_contents)
+        guide_html = ParseArticle(guide_contents)
         for key in guide_html.info:
           env[key] = guide_html.info[key]
 
@@ -181,7 +181,7 @@ class BuildVersion:
       env = dict()
 
       with open(article_html_file, "x+", encoding="utf-8") as html:
-        article_html = ParseMarkdown(article_contents)
+        article_html = ParseArticle(article_contents)
         for key in article_html.info:
           env[key] = article_html.info[key]
 

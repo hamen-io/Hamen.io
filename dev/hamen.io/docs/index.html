@@ -28,32 +28,16 @@
               })
             };
 
-            const filterOptions = [
-              {
-                id: "code",
-                title: "Code",
-                checked: true
-              }, {
-                id: "_3d",
-                title: "3D",
-                checked: false
-              }, {
-              //   id: "english",
-              //   title: "English",
-              //   checked: false
-              // }, {
-                id: "psychology",
-                title: "Psychology",
-                checked: false
-              }, {
-                id: "linguistics",
-                title: "Linguistics",
-                checked: false
-              }
-            ];
-
             loadArticlesAsynchronously()
               .then((articles) => {
+                const filterOptions = Object.keys(articles[0]).map((key, i) => {
+                  return {
+                    id: key.toLowerCase(),
+                    title: key,
+                    checked: i === 0
+                  }
+                });
+
                 const CardList = new Components.UICardList(filterOptions, articles);
                 CardList.appendFilters(document.querySelector(".filters")).then(() => {
                   CardList.appendCardList(document.querySelector(".card-list"));

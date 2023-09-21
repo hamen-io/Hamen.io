@@ -44,16 +44,16 @@
         <article id="tree"></article>
         <article id="doc">
           <section id="introduction">
-            <h1 class="" id="doc-title" style="color: rgba(0, 0, 0, 0.73);"> 1.1: What is Python? </h1>
+            <h1 class="" id="doc-title" style="color: rgba(0, 0, 0, 0.73);"> {{ ENV["articleTitle"] }} </h1>
             <p>
               <span>
                 Published
                 <span style="font-weight: 600;">
-                  2023-09-03
+                  {{ ENV["date"] }}
                 </span>
                 , by 
-                <a href="https://www.hamen.io/docs/?author={{ ENV["authorID"] }}" target="_blank">
-                  Daniel Hamen
+                <a href="https://www.hamen.io/docs/?author={{ ENV["authorID"] }}" class="fancy" target="_blank">
+                  {{ ENV["author"] }}
                 </a>
               </span>
             </p>

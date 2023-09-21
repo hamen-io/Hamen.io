@@ -21,8 +21,8 @@
 
   --header-size: calc(72px);
 
-  --font-size-normal: 13px;
-  --font-size-sub: 12px;
+  --font-size-normal: 14px;
+  --font-size-sub: calc(var(--font-size-normal) - 1px);
 
   --background-color-primary: hsl(0, 0%, 98%);
   --background-color-default: hsl(0, 0%, 96%);
@@ -49,10 +49,9 @@
   --text-color-900: rgba(0, 0, 0, 0.98)
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:1100px) {
   :root {
-    --font-size-normal: 12px;
-    --font-size-sub: 11px;
+    --font-size-normal: 13px;
   }
 }
 
@@ -87,6 +86,14 @@ h4,
 h5,
 h6 {
   font-family: 'Poppins', sans-serif
+}
+
+.fs-sub {
+  font-size: var(--font-size-sub) !important
+}
+
+.fs-normal {
+  font-size: var(--font-size-normal) !important
 }
 
 h1,
@@ -124,6 +131,16 @@ input,
 textarea {
   font-size: var(--font-size-normal);
   font-family: 'Raleway', sans-serif
+}
+
+.fancy {
+  font-family: 'MuseoModerno', cursive !important;
+}
+
+p a,
+td a,
+li a {
+  font-family: inherit !important
 }
 
 div,
@@ -275,7 +292,7 @@ body>main.homepage>section#introduction {
 }
 
 body>main.homepage>section#introduction h1 {
-  font-size: 48px;
+  font-size: 40px;
 }
 
 h1.page-title {
@@ -349,6 +366,7 @@ button {
   margin-top: 1em;
   margin-bottom: 1em;
   font-weight: 600;
+  font-family: 'MuseoModerno', cursive
 }
 
 button .material-symbols-outlined {
@@ -804,7 +822,7 @@ hr {
 .ui\:medium-card>.body>.category {
   font-family: 'Noto Sans', sans-serif;
   font-weight: 800;
-  font-size: var(--font-size-sub);
+  font-size: calc(var(--font-size-sub) - 1px);
   text-transform: uppercase;
   color: var(--text-color-100)
 }
@@ -869,12 +887,13 @@ hr {
   justify-content: center;
   padding: .5em 1em;
   text-align: center;
+  text-transform: capitalize;
   user-select: none;
   border: 0px solid transparent;
 }
 
 .ui\:card-list-filters>.filter.active {
-  font-size: 12px;
+  font-size: var(--font-size-sub);
   color: rgba(0, 0, 0, 0.64);
   border: 1px solid var(--border-color-300);
   background-color: rgb(252, 252, 252);
@@ -918,7 +937,11 @@ hr {
 }
 
 h2 {
-  font-size: 17px;
+  font-size: 16px;
+}
+
+h3 {
+  font-size: 15px;
 }
 
 #doc .doc-section {
@@ -1017,7 +1040,7 @@ code.inline-code {
   padding: 0;
   box-sizing: border-box;
   border-radius: 3px;
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-sub);
   overflow: hidden;
 }
 
