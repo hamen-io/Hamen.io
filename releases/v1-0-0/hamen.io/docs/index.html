@@ -10,6 +10,8 @@
         <script type="text/javascript" src="./../static/scripts/Components.js" defer></script>
         <script type="text/javascript" src="./../static/scripts/index.js"></script>
 
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin="anonymous"></script>
+
         <!-- Favicon: -->
         <link rel="icon" href="./favicon.ico" />
 
@@ -17,14 +19,19 @@
           window.addEventListener("DOMContentLoaded", () => {
             const loadArticlesAsynchronously = () => {
               return new Promise(async (resolve, reject) => {
-                const response = await fetch("https://www.hamen.io/md/docs/Articles.json");
-                const Articles = await response.json()
-                  .then((value) => {
-                    resolve(value);
+                const response = await fetch("https://www.hamen.io/md/docs/Articles.json")
+                  .then(async (response) => {
+                    const Articles = await response.json()
+                      .then((value) => {
+                        resolve(value);
+                      })
+                      .catch((error) => {
+                        reject(`An error occurred while trying to fetch the articles: ${error}`);
+                      });
                   })
-                  .catch((error) => {
-                    reject(`An error occurred while trying to fetch the articles: ${error}`);
-                  });
+                  .catch(error => {
+                    reject(error);
+                  })
               })
             };
 
@@ -46,6 +53,54 @@
               .catch((error) => {
                 console.error(error);
               })
+              .finally(() => {
+                let searchInput = document.querySelector("#search-input");
+                searchInput.parentElement.replaceChild(Components.UIInput({
+                  placeholder: "Search for an article, guide, or reference!",
+                  id: "search-input",
+                  icons: {
+                    prefix: "search",
+                    suffix: "clear"
+                  },
+                  onInput: value => {
+                    let allHidden = true;
+                    let cards = Array.from(document.querySelectorAll(".body.window .ui\\:card-list a.ui\\:medium-card"));
+                    cards.forEach(card => {
+                      let tags = Array.from(new Set(
+                        card.innerText.split(/[\n \/\-]+/g)
+                          .map(tag => tag.trim().toLowerCase())
+                      ));
+
+                      let query = value.trim().split(" ").map(term => term.trim().toLowerCase());
+                      let hide = true;
+                      if (value.trim() === "") {
+                        hide = false;
+                        allHidden = false;
+                      } else {
+                        query.forEach(term => {
+                          tags.forEach(tag => {
+                            if (tag.includes(term)) hide = false;
+                          })
+                        });
+                      }
+
+                      if (hide) {
+                        card.style.display = 'none';
+                      } else {
+                        card.style.display = 'flex';
+                        allHidden = false;
+                      }
+                    });
+
+                    let noResults = document.querySelector("#no-results");
+                    if (allHidden) {
+                      noResults.style.display = "flex";
+                    } else {
+                      noResults.style.display = "none";
+                    }
+                  }
+                }), searchInput);
+              });
           })
         </script>
     </head>
@@ -60,7 +115,7 @@
                   <p>Learn about various topics through high-quality blogs</p>
                 </div>
                 <div class="search">
-                  <input type="text" placeholder="Search for an article, guide, or reference!">
+                  <input type="text" placeholder="Search for an article, guide, or reference!" id="search-input" render="false">
                 </div>
               </div>
               <div class="filters">
@@ -72,6 +127,17 @@
             <hr>
             <div class="body window">
               <div class="card-list"></div>
+              <style>
+                #no-results {
+                  padding: 1em;
+                  align-items: center;
+                  text-align: center
+                }
+              </style>
+              <div id="no-results" style="display: none;">
+                <h3 style="font-size: 18px;margin-bottom: 0">No Results.</h3>
+                <p>Try refining your search, or check for spelling errors!</p>
+              </div>
             </div>
           </div>
           <footer></footer>

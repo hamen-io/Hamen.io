@@ -1020,7 +1020,7 @@ p {
 }
 
 b {
-  color: var(--text-color-700)
+  color: var(--text-color-600)
 }
 
 code,
@@ -1190,4 +1190,36 @@ main[article-type=guide] #tree section a:last-of-type {
 
 main[article-type=guide] #tree section a.active {
   color: hsl(220, 97%, 62%) !important;
+}
+
+.ui\:note {
+  --gap-size: 1.5em;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-size);
+  padding: var(--gap-size);
+  width: 100%;
+  border: 1px solid var(--border-color-400);
+  border-radius: 4px;
+  background: var(--background-color-secondary);
+}
+
+.ui\:note>.body {
+  text-align: justify;
+}
+
+.ui\:note>.body>:first-child {
+  margin-top: 0;
+}
+
+.ui\:note>.body>:last-child {
+  margin-bottom: 0;
+}
+
+.ui\:note .material-symbols-outlined {
+  font-size: 20px !important
+}
+
+.ui\:note,.ui\:code-block {
+  margin: 1em 0
 }

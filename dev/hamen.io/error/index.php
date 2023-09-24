@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin="anonymous"></script>
+
         <title>Error <?php echo $_GET["error"] ?? "404" ?> &bull; Hamen.io</title>
 
         <link rel="stylesheet" href="https://www.hamen.io/static/styles/index.css">

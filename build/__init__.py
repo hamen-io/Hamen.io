@@ -117,6 +117,7 @@ class BuildVersion:
 
     articles_json = os.path.join(docs_path, "Articles.json")
     with open(articles_json, "w") as Articles:
+      del blogs["@private"]
       json.dump([blogs], Articles)
 
     guides_json = os.path.join(guides_path, "Guides.json")
