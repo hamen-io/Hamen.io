@@ -24,7 +24,7 @@
         let suffix = window.location.href.split("/docs/blogs/", 2)[1].replace(".html", ".md");
         if (!suffix.endsWith("index.md")) suffix += "index.md";
 
-        if (e.key === "U" && e.ctrlKey && e.shiftKey) {
+        if (e.key === "U" && e.ctrlKey && e.shiftKey && !e.altKey) {
           e.preventDefault();
           e.stopPropagation();
           e.stopImmediatePropagation();
