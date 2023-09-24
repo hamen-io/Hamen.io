@@ -1,19 +1,24 @@
 window.addEventListener("DOMContentLoaded", () => {
   Array.from(document.querySelectorAll("input")).forEach(input => {
-    let inputWrapper = Components.UIInput({
-      class: input.classList.values(),
-      placeholder: input.getAttribute("placeholder"),
-      id: input.getAttribute("id"),
-      type: input.getAttribute("type"),
-      icons: {
-        prefix: input.getAttribute("prefix-icon") || "search",
-        suffix: input.getAttribute("suffix-icon") || "clear"
-      },
-      containerStyles: input.getAttribute("contentContainerStyles") || {},
-      inputStyles: input.getAttribute("inputStyles") || {},
-    });
-
-    input.parentElement.replaceChild(inputWrapper, input);
+    if (input.getAttribute("render") !== "false") {
+      let defaultOnClick = value => {};
+  
+      let inputWrapper = Components.UIInput({
+        class: input.classList.values(),
+        placeholder: input.getAttribute("placeholder"),
+        id: input.getAttribute("id"),
+        type: input.getAttribute("type"),
+        icons: {
+          prefix: input.getAttribute("prefix-icon") || "search",
+          suffix: input.getAttribute("suffix-icon") || "clear"
+        },
+        containerStyles: input.getAttribute("contentContainerStyles") || {},
+        inputStyles: input.getAttribute("inputStyles") || {},
+        onInput: input?.UIComponent?.eventListeners?.input || defaultOnClick
+      });
+  
+      input.parentElement.replaceChild(inputWrapper, input);
+    }
   });
 
   let footer = document.querySelector("body>main>footer");

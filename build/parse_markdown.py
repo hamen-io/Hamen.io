@@ -1,61 +1,72 @@
 import re
+import json
 
 def parse_text_content(text_content: str) -> str:
-    text_content = re.sub(r"\*\*\*()(?!\\)([^.]*)\*\*\*", r"<b><i>\2</i></b>", text_content)
+    text_content = re.sub(
+        r"\*\*\*()(?!\\)([^.]*)\*\*\*", r"<b><i>\2</i></b>", text_content
+    )
     text_content = re.sub(r"\*\*()(?!\\)([^.]*)\*\*", r"<b>\2</b>", text_content)
     text_content = re.sub(r"\*()(?!\\)([^.]*)\*", r"<i>\2</i>", text_content)
+    text_content = re.sub(r"\~\~()(?!\\)([^.]*)\~\~", r"<s>\2</s>", text_content)
+    text_content = re.sub(r"\:()(?!\\)([^.]*)\:", r"<u>\2</u>", text_content)
     text_content = re.sub(r"(?<=\S)(\^)([^ ]*)", r"<sup>\2</sup>", text_content)
     text_content = re.sub(r"(?<=\S)(\^)([^ ]*)", r"<sub>\2</sub>", text_content)
-    text_content = re.sub(r"(?<!\\)(`)(.*?)(?<!\\)(`)", r"""<code class="inline-code">\2</code>""", text_content)
-    text_content = re.sub(r"(?<!\\)\[(.*)\]\(\"(.*)\"\)", r"""<a href="\2">\1</a>""", text_content)
+    text_content = re.sub(
+        r"(?<!\\)(`)(.*?)(?<!\\)(`)",
+        r"""<code class="inline-code">\2</code>""",
+        text_content,
+    )
+    text_content = re.sub(
+        r"(?<!\\)\[(.*)\]\(\"(.*)\"\)", r"""<a href="\2">\1</a>""", text_content
+    )
 
     return text_content
 
-def title_to_id(title: str) -> str:
-  id = ""
-  for char in title:
-    if char == " ":
-      id += "-"
-    elif char.isalpha():
-      id += char.lower()
 
-  return id
+def title_to_id(title: str) -> str:
+    id = ""
+    for char in title:
+        if char == " ":
+            id += "-"
+        elif char.isalpha():
+            id += char.lower()
+
+    return id
+
 
 class Elements:
-  class P:
-    def __init__(self, textContent: str) -> None:
-      self.textContent = parse_text_content(textContent)
+    class P:
+        def __init__(self, textContent: str) -> None:
+            self.textContent = parse_text_content(textContent)
 
-    def __str__(self) -> str:
-      return f"""<p>{self.textContent}</p>"""
+        def __str__(self) -> str:
+            return f"""<p>{self.textContent}</p>"""
 
-  class ListItem:
-    def __init__(self, textContent: str) -> None:
-      self.textContent = parse_text_content(textContent)
+    class ListItem:
+        def __init__(self, textContent: str) -> None:
+            self.textContent = parse_text_content(textContent)
 
-    def __str__(self) -> str:
-      return f"""<li>{self.textContent}</li>"""
+        def __str__(self) -> str:
+            return f"""<li>{self.textContent}</li>"""
 
-  class Note:
-    def __init__(self, textContent: list[str], type: str = "INFO"):
-      self.textContent = textContent
-      self.type = type.upper()
+    class Note:
+        def __init__(self, textContent: list[str], type: str = "INFO"):
+            self.textContent = "\n\n".join(textContent)
+            self.type = type.upper()
 
-    def __str__(self) -> str:
-      body = ""
-      for line in self.textContent:
-        pass
+        def __str__(self) -> str:
+            body = parse_code(self.textContent, asString = True)
 
-      icon = "info"
-      match self.type:
-        case "INFO":
-          icon = "info"
-        case "WARNING":
-          icon = "warning"
-        case "ERROR":
-          icon = "error"
+            icon = "info"
+            match self.type:
+                case "INFO":
+                    icon = "info"
+                case "WARNING":
+                    icon = "warning"
+                case "ERROR":
+                    icon = "error"
 
-      return f"""<div class="ui:note" theme="{icon.upper()}">
+            return f"""<div class="ui:note" theme="{icon.upper()}">
   <div class="icon">
     <span class="material-symbols-outlined">{icon}</span>
   </div>
@@ -64,122 +75,126 @@ class Elements:
   </div>
 </div>"""
 
-  class List:
-    def __init__(self, items: list, ordered: bool) -> None:
-      self.items = items
-      self.ordered = ordered
+    class List:
+        def __init__(self, items: list, ordered: bool) -> None:
+            self.items = items
+            self.ordered = ordered
 
-    def __str__(self) -> str:
-      tag = "ol" if self.ordered else "ul"
-      return f"""<{tag}>{"".join([x.__str__() for x in self.items])}</{tag}>"""
+        def __str__(self) -> str:
+            tag = "ol" if self.ordered else "ul"
+            return f"""<{tag}>{"".join([x.__str__() for x in self.items])}</{tag}>"""
 
-  class Heading:
-    def __init__(self, textContent: str, level: int = 2) -> None:
-      self.textContent = parse_text_content(textContent)
-      self.level = level
+    class Heading:
+        def __init__(self, textContent: str, level: int = 2) -> None:
+            self.textContent = parse_text_content(textContent)
+            self.level = level
+            self.ID = title_to_id(textContent)
 
-      assert 1 < level <= 6, f"Headings must be between 2 and 6 (inclusively)"
+            assert 1 < level <= 6, f"Headings must be between 2 and 6 (inclusively)"
 
-    def __str__(self) -> str:
-      return f"""<h{self.level}>{self.textContent}</h{self.level}>"""
-  
-  class InlineElement:
-    class Code:
-      def __init__(self, textContent: str) -> None:
-        """
-        Creates inline code
+        def __str__(self) -> str:
+            return f"""<h{self.level}>{self.textContent}</h{self.level}>"""
 
-        Syntax: `\`My Underlined Text\``
-        """
+    class InlineElement:
+        class Code:
+            def __init__(self, textContent: str) -> None:
+                """
+                Creates inline code
 
-        self.textContent = parse_text_content(textContent)
+                Syntax: `\`My Underlined Text\``
+                """
 
-      def __str__(self) -> str:
-        return f"""<code class="inline-code">{self.textContent}</code>"""
+                self.textContent = parse_text_content(textContent)
 
-    class Bold:
-      def __init__(self, textContent: str) -> None:
-        """
-        Creates bold text
+            def __str__(self) -> str:
+                return f"""<code class="inline-code">{self.textContent}</code>"""
 
-        Syntax: `**My Bold Text**`
-        """
+        class Bold:
+            def __init__(self, textContent: str) -> None:
+                """
+                Creates bold text
 
-        self.textContent = parse_text_content(textContent)
+                Syntax: `**My Bold Text**`
+                """
 
-      def __str__(self) -> str:
-        return f"""<b>{self.textContent}</b>"""
+                self.textContent = parse_text_content(textContent)
 
-    class Italic:
-      def __init__(self, textContent: str) -> None:
-        """
-        Creates strikethrough text
+            def __str__(self) -> str:
+                return f"""<b>{self.textContent}</b>"""
 
-        Syntax: `*My Italicized Text*`
-        """
+        class Italic:
+            def __init__(self, textContent: str) -> None:
+                """
+                Creates strikethrough text
 
-        self.textContent = parse_text_content(textContent)
+                Syntax: `*My Italicized Text*`
+                """
 
-      def __str__(self) -> str:
-        return f"""<i>{self.textContent}</i>"""
+                self.textContent = parse_text_content(textContent)
 
-    class Strikethrough:
-      def __init__(self, textContent: str) -> None:
-        """
-        Creates strikethrough text
+            def __str__(self) -> str:
+                return f"""<i>{self.textContent}</i>"""
 
-        Syntax: `~~My Strikethoughed Text~~`
-        """
+        class Strikethrough:
+            def __init__(self, textContent: str) -> None:
+                """
+                Creates strikethrough text
 
-        self.textContent = parse_text_content(textContent)
+                Syntax: `~~My Strikethoughed Text~~`
+                """
 
-      def __str__(self) -> str:
-        return f"""<s>{self.textContent}</s>"""
+                self.textContent = parse_text_content(textContent)
 
-    class Underline:
-      def __init__(self, textContent: str) -> None:
-        """
-        Creates underline text
+            def __str__(self) -> str:
+                return f"""<s>{self.textContent}</s>"""
 
-        Syntax: `:My Underlined Text:`
-        """
+        class Underline:
+            def __init__(self, textContent: str) -> None:
+                """
+                Creates underline text
 
-        self.textContent = parse_text_content(textContent)
+                Syntax: `:My Underlined Text:`
+                """
 
-      def __str__(self) -> str:
-        return f"""<u>{self.textContent}</u>"""
-  
-  class CodeBlock:
-    def __init__(self, code: str, language: str = "python") -> None:
-      self.code = code
-      self.language = language
-      self.metadata = language.split(":")[-1]
-      if self.language == self.metadata:
-        self.metadata = "code-block"
-      self.metadata = self.metadata.lower()
-    
-    def __str__(self) -> str:
-      if self.metadata == "syntax":
-        return f"""<div class="ui:code-block"><div class="body"><pre style="text-align: center;">{self.code}</pre></div></div>"""
-      else:
-        return f"""<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">{self.language}</span></div><div class="body"><pre>{self.code}</pre></div></div>"""
+                self.textContent = parse_text_content(textContent)
+
+            def __str__(self) -> str:
+                return f"""<u>{self.textContent}</u>"""
+
+    class CodeBlock:
+        def __init__(self, code: str, language: str = "python") -> None:
+            if type(code) is list:
+                code = "<br>".join(code)
+            self.code = code
+            self.language = language
+            self.metadata = language.split(":")[-1]
+            if self.language == self.metadata:
+                self.metadata = "code-block"
+            self.metadata = self.metadata.lower()
+
+        def __str__(self) -> str:
+            if self.metadata == "syntax":
+                return f"""<div class="ui:code-block"><div class="body"><pre style="text-align: center;">{self.code}</pre></div></div>"""
+            else:
+                return f"""<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">{self.language}</span></div><div class="body"><pre>{self.code}</pre></div></div>"""
+
 
 class Section:
-  def __init__(self, title: str, id: str = None):
-    self.title = title
-    self.id = id
-    self.children = []
+    def __init__(self, title: str, id: str = None):
+        self.title = title
+        self.id = id
+        self.children = []
 
-    if not self.id:
-      self.id = title_to_id(self.title)
+        if not self.id:
+            self.id = title_to_id(self.title)
 
-  def appendChild(self, child) -> None:
-    self.children.append(child)
+    def appendChild(self, child) -> None:
+        self.children.append(child)
 
-  def __str__(self) -> str:
-    children = "\n".join([x.__str__() for x in self.children])
+    def __str__(self) -> str:
+        children = "\n".join([x.__str__() for x in self.children])
 
-    return f"""<section class="doc-section" id="{self.id}">
+        return f"""<section class="doc-section" id="{self.id}">
   <h2>{self.title}</h2>
   <div class="content">
     <div class="border"></div>
@@ -189,199 +204,205 @@ class Section:
   </div>
 </section>"""
 
-class ParseArticle:
-  def __init__(self, code: str) -> None:
-    self.code = code.strip()
-    self.info,self.title,self.body = self.split_content(self.code)
-    self.info: dict = self.split_info(self.info)
-    self.title: str = self.title.strip()
 
-  def split_content(self, code: str) -> list[str, str, str]:
-    """
-    Splits `code` into:
-    1. The blog info
-    2. The blog title
-    3. The blog body
-    """
+def parse_token(element: str | list, UIComponents: dict = dict()) -> Elements.__base__:
+    if type(element) is str:
+        element = element.strip()
+        if re.findall(r"^#{1,6}", element):
+            level,content = list(re.findall(r"(^#{1,6})(.*)", element)[0])
 
-    pattern = r"<doc.*>([\s\S]*)<\/doc>\s+#\s+(.*)\s+([\s\S]+)"
-    assert re.findall(pattern, code), "Doc info missing!"
+            return Elements.Heading(content, len(level))
 
-    return list(re.findall(pattern, code)[0])
+        elif element.lower().startswith("@uicomponent"):
+            terms = re.match(r"^@uicomponent\.([a-z_][a-z0-9_]*)(\([\s\S]*\))", element, re.I)
+            if len(terms.groups()) != 2:
+                raise SyntaxError(f"Invalid syntax for @UIComponent: \"{element}\"")
+            component,params = list(terms.groups())
+            if component not in UIComponents:
+                raise SyntaxError(f"Unknown component: \"{component}\"")
+            params = f"[{params[1:-1]}]"
+            params = json.loads(params)[0]
+            return UIComponents[component](**params)
 
-  def split_info(self, info: str) -> dict:
-    info = [x.strip() for x in info.split("\n")]
-    doc_info = dict()
-    for line in info:
-      if line:
-        assert ":" in line, f"Invalid `doc` property syntax; missing \":\": \"{line}\""
-        key,value = [x.strip() for x in line.split(":", 1)]
-
-        doc_info[key] = value
-
-    return doc_info
-
-  def __str__(self) -> str:
-    return str(ParseMarkdown(self.body))
-
-class ParseMarkdown:
-  def __init__(self, code: str) -> None:
-    self.code = self.split_body(code.strip())
-  
-  def split_body(self, body: str) -> list[Section]:
-    sections = []
-    body = body.strip().split("\n")
-    is_code_block = False
-    is_list = False
-    for line in body:
-      if re.findall(r"^\`\`\`", line):
-        # Create new code block:
-        if not is_code_block:
-          sections[-1].append([line])
-
-        # Closing a code-block:
         else:
-          sections[-1][-1].append(line)
-          sections[-1][-1] = "\n".join(sections[-1][-1])
+            return Elements.P(element)
 
-        is_code_block = not is_code_block
-        continue
+    else:
+        if element[0].startswith("```") and element[-1].startswith("```"):
+            language = element[0][3:].strip()
+            if not language:
+                raise SyntaxError("Language not specified.")
 
-      # Currently inside a code block:
-      if is_code_block:
-        sections[-1][-1].append(line)
-        continue
+            return Elements.CodeBlock(element[1:-1], language)
 
-      if is_list:
-        if line.strip().startswith(is_list):
-          sections[-1][-1].append(line)
-          continue
-        else:
-          sections[-1][-1] = "\n".join(sections[-1][-1])
-          is_list = False
-      else:
-        if line.startswith(("* ", "- ")):
-          sections[-1].append([line])
-          is_list = line.split(" ", 1)[0].strip()
-          if is_list.endswith("."):
-            is_list = is_list[:-1]
-          continue
+        elif element[0].startswith("!!!") and element[-1].startswith("!!!"):
+            return Elements.Note(element[1:-1], element[0][3:])
 
-      if re.findall(r"^##\s+.*", line):
-        sections.append([])
+        elif element[0].startswith("-"):
+            def parse_list(_code: list) -> Elements.List:
+                items = []
+                for li in _code:
+                    if type(li) is str:
+                        items.append(Elements.ListItem(li.split(" ", 1)[-1]))
+                    elif type(li) is list:
+                        items.append(parse_list(li))
 
-      sections[-1].append(line)
+                return Elements.List(items, False)
 
-    for i,lines in enumerate(sections):
-      assert len(lines) > 1, "Blank section"
-      title = re.findall(r"##\s+(.*)", lines[0])[0]
-      title = parse_text_content(title)
-      lines = lines[1:]
+            return parse_list(element)
 
-      section = Section(title)
-      for line in lines:
-        if line and type(line) is list:
-          line = "\n".join(line)
+    raise ValueError("Unknown value: " + str(element))
 
-        if line.strip():
-          if re.findall(r"^```[\s\S]*```$", line):
-            language,code = list(re.findall(r"^```(.*)\n([\s\S]*)\n```$", line)[0])
-            section.appendChild(Elements.CodeBlock(code, language))
-          elif line.startswith(("* ", "- ")):
-            section.appendChild(Elements.List([Elements.ListItem(x.strip()[1:].strip()) for x in line.split("\n") if x.strip() != ""], False))
-          elif re.findall(r"^#{3,6}\s+", line):
-            level,content = line.split(" ", 1)
-            level = len(level)
-            content = content.strip()
-            section.appendChild(Elements.Heading(content, level))
-          else:
-            section.appendChild(Elements.P(line))
 
-      sections[i] = section
-
-    return sections
-
-  def __str__(self) -> str:
-    return f"""{"".join([x.__str__() for x in self.code])}"""
-
-def parse_element(element: str):
-  element = element.strip()
-
-  # 
-  if re.findall(r"^#{1,6}", element):
-    return Elements.Heading()
-
-def parse_code(code: str):
+def parse_code(code: str, *, UIComponents: dict = dict(), asString: bool = False):
     code = code.strip()
 
     # Split code:
     parts = []
     is_code = False
     is_note = False
+    is_ui_component = { "defined": False, "brace": 0, "square": 0, "bracket": 0, "size": lambda properties : properties["brace"] + properties["square"] + properties["bracket"] }
     for line in code.split("\n"):
         raw_line = line
-        line = line.strip()
+        line = line.lstrip()
+
+        if is_ui_component["defined"] or (line.lower().startswith("@uicomponent") and not is_code):
+            if line.lower().startswith("@uicomponent"):
+                parts.append(line)
+                is_ui_component["defined"] = True
+            else:
+                parts[-1] += line.replace("\n", "")
+
+            is_str = False
+            for i,char in enumerate(line):
+                if char == "\"" and line[i-1] != "\\":
+                    is_str = not is_str
+
+                if char == "{": is_ui_component["brace"] += 1
+                if char == "}": is_ui_component["brace"] -= 1
+                if char == "(": is_ui_component["bracket"] += 1
+                if char == ")": is_ui_component["bracket"] -= 1
+                if char == "[": is_ui_component["square"] += 1
+                if char == "]": is_ui_component["square"] -= 1
+
+            if is_ui_component["size"](is_ui_component) == 0:
+                is_ui_component["defined"] = False
+
+            continue
 
         if is_note and not line.startswith("!!!"):
-          pass
+            parts[-1].append(line)
+            continue
 
-        if line or is_code:
+        if is_code:
+            parts[-1].append(raw_line)
+            if line.startswith("```"):
+                is_code = False
+
+            continue
+
+        if line:
             if line.startswith("```"):
                 is_code = not is_code
                 if is_code:
-                  parts.append([line])
+                    parts.append([line])
                 else:
-                  parts[-1].append(line)
+                    parts[-1].append(line)
 
             elif line.startswith("!!!"):
-                # Handle notes here if needed
-                parts.append([line])
+                is_note = not is_note
+                if is_note:
+                    parts.append([line])
+                else:
+                    parts[-1].append(line)
 
-            elif re.match(r'^#{1,6}', line):
-                # Handle headings here if needed
+            elif re.match(r"^#{1,6}", line):
                 parts.append(line)
 
-            elif re.match(r"^\d\.", line):
-              pass
+            elif re.match(r"^-\s+", line):
+                if parts[-1] and parts[-1][0] and parts[-1][0].startswith("-"):
+                    parts[-1].append(line)
+                else:
+                    parts.append([line])
 
-            elif re.match(r"^-", line):
-              pass
+            elif re.match(r"^:-\s+", line):
+                if parts[-1] and type(parts[-1][-1]) is list:
+                    parts[-1][-1].append(line)
+                else:
+                    parts[-1].append([line])
+
+            elif re.match(r"^-", line) or re.match(r"^:-", line):
+                raise SyntaxError(f"List items must include whitespace after the marker declaration: \"{line}\"")
 
             else:
                 if is_code:
-                  parts[-1].append(raw_line)
+                    parts[-1].append(raw_line)
                 else:
-                  parts.append(raw_line)
+                    parts.append(raw_line)
+
+    tokens = []
+    for part in parts:
+        tokens.append(parse_token(part, UIComponents = UIComponents))
+
+    if asString:
+        return "".join([x.__str__() for x in tokens]).replace("\n", "")
+
+    return tokens
 
 
+class ParseArticle:
+    def __init__(self, code: str) -> None:
+        self.code = code.strip()
+        self.info, self.title, self.body = self.split_content(self.code)
+        self.info: dict = self.split_info(self.info)
+        self.title: str = self.title.strip()
 
-# parse_code("""
-# ## Introduction
+    def split_content(self, code: str) -> list[str, str, str]:
+        """
+        Splits `code` into:
+        1. The blog info
+        2. The blog title
+        3. The blog body
+        """
 
-# ```python
-# print("Hello
-           
-           
-#   World!")
-# ```
+        pattern = r"<doc.*>([\s\S]*)<\/doc>\s+#\s+(.*)\s+([\s\S]+)"
+        assert re.findall(pattern, code), "Doc info missing!"
 
-# Our journey begins with nouns, the building blocks of language. Nouns are words that name people, places, things, or ideas. They help us describe the world.
+        return list(re.findall(pattern, code)[0])
 
-# Nouns can be divided into:
+    def split_info(self, info: str) -> dict:
+        info = [x.strip() for x in info.split("\n")]
+        doc_info = dict()
+        for line in info:
+            if line:
+                assert (
+                    ":" in line
+                ), f'Invalid `doc` property syntax; missing ":": "{line}"'
+                key, value = [x.strip() for x in line.split(":", 1)]
 
-# - **Common Nouns**: General words like "book," "dog," or "city."
+                doc_info[key] = value
 
-# :- Test
-# :- Test
-# :- Test
+        return doc_info
 
-# - **Proper Nouns**: Specific and capitalized, such as "Shakespeare" or "New York."
+    def __str__(self) -> str:
+        code = parse_code(self.body)
+        sections = [[]]
+        for element in code:
+            if type(element) is Elements.Heading:
+                if element.level == 2:
+                    sections.append([element])
+            else:
+                sections[-1].append(element)
 
-# - **Countable Nouns**: Things you can count, like "two apples" or "five cars."
+        sectionList = []
+        for i,sectionContent in enumerate(sections):
+            if sectionContent:
+                heading = sectionContent[0]
+                heading: Elements.Heading
 
-# - **Uncountable Nouns**: Things you can't count, like "water" or "happiness."
+                section = Section(heading.textContent, heading.ID)
+                section.children = sectionContent[1:]
 
-# !!!info
-# Unlike German, in English, the only nouns we capitalize are proper nouns. This construct like originates from Latin and manuscript traditions, eschewing from excessive capitalization to maintain readability and simplicity in its orthographic conventions.
-# !!!
-# """)
+                sectionList.append(section)
+
+        return "\n".join([x.__str__() for x in sectionList])

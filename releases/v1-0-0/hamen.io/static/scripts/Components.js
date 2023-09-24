@@ -176,7 +176,7 @@ class UICardList {
 }
 
 const Components = {
-  UIInput(options = { onClear, placeholder: null, id: null, class: null, type: null, icons: { prefix: "search", suffix: "clear" }}) {
+  UIInput(options = { onClear, onInput: value => {}, placeholder: "", id: "", class: "", type: "text", icons: { prefix: "search", suffix: "clear" }}) {
     const inputWrapper = document.createElement("div");
     inputWrapper.classList.add("input-wrapper");
 
@@ -224,8 +224,13 @@ const Components = {
       
       suffixIcon.addEventListener("click", () => {
         options.onClear(input);
+        options.onInput(input.value);
       });
     };
+
+    input.addEventListener("input", () => {
+      options.onInput(input.value);
+    });
 
     const border = document.createElement("span");
     border.classList.add("border");

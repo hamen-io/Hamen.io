@@ -33,7 +33,7 @@ Nouns can be divided into:
 - **Uncountable Nouns**: Things you can't count, like "water" or "happiness."
 
 !!!info
-Unlike German, in English, the only nouns we capitalize are proper nouns. This construct like originates from Latin and manuscript traditions, eschewing from excessive capitalization to maintain readability and simplicity in its orthographic conventions.
+Unlike German, in English, the only nouns we capitalize are proper nouns. This construct likely originates from Latin and manuscript traditions, eschewing from excessive capitalization to maintain readability and simplicity in its orthographic conventions.
 !!!
 
 ## Verbs: The Action Words

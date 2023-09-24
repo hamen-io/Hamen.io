@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hamen Docs Style Guide &bull; Hamen Docs</title>
+
+    <meta name="description" content="...">
+    <meta name="keywords" content="...">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin="anonymous"></script>
+
+    <meta name="icon" href="https://www.hamen.io/static/media/favicon/favicon.ico">
+
+    <link rel="stylesheet" href="../../../../static/styles/index.css">
+    <link rel="stylesheet" href="../../../../static/styles/prism.css">
+    <script type="text/javascript" src="../../../../static/scripts/Components.js" defer></script>
+    <script type="text/javascript" src="../../../../static/scripts/article.js"></script>
+    <script type="text/javascript" src="../../../../static/scripts/index.js"></script>
+
+    <script type="text/javascript">
+      window.addEventListener("keydown", e => {
+        let suffix = window.location.href.split("/docs/blogs/", 2)[1].replace(".html", ".md");
+        if (!suffix.endsWith("index.md")) suffix += "index.md";
+
+        if (e.key === "U" && e.ctrlKey && e.shiftKey) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          window.open(`https://github.com/hamen-io/Hamen.io/tree/main/dev/hamen.io/md/docs/${suffix}`);
+        } else if (e.key === "U" && e.ctrlKey && e.shiftKey && e.altKey) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          window.open(`https://www.hamen.io/md/docs/${suffix}`);
+        };
+
+        console.log(e.key);
+      })
+    </script>
+
+    <!-- Import Prism.js -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-latex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-git.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-batch.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-shell.min.js"></script> -->
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div style="margin-left: auto; margin-right: auto; width: 100%;">
+        <article id="doc">
+          <section id="introduction">
+            <h1 class="" id="doc-title" style="color: rgba(0, 0, 0, 0.73);"> Hamen Docs Style Guide </h1>
+            <p>
+              <span>
+                Published
+                <span style="font-weight: 600;">
+                  2023-08-14
+                </span>
+                , by 
+                <a href="https://www.hamen.io/docs/?author=danielhamen" class="fancy" target="_blank">
+                  Daniel Hamen
+                </a>
+              </span>
+            </p>
+          </section>
+          <hr>
+          <section id="content" style="flex-direction: row">
+            <div id="article-html" style="width: 100%">
+              <section class="doc-section" id="-introduction">
+  <h2> Introduction</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>This article provides a comprehensive overview of the various components and elements supported within the Docs documentation platform.</p>
+    </div>
+  </div>
+</section>
+<section class="doc-section" id="-paragraphs">
+  <h2> Paragraphs</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>Paragraphs consist of plain text and are defined by simply typing out the content. For instance:</p>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">markdown</span></div><div class="body"><pre>Lorem ipsum; this is a paragraph</pre></div></div>
+    </div>
+  </div>
+</section>
+<section class="doc-section" id="-lists">
+  <h2> Lists</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>Lists, both ordered and unordered, offer an effective means of organizing content. Here are examples of both types:</p>
+<ul><li>This is an unordered list</li><li>This is another item in the unordered list</li></ul>
+<p>Additionally, nested lists are supported:</p>
+<ul><li>Non-nested list item</li><ul><li>Nested list item</li></ul></ul>
+<p>The syntax for creating lists is as follows:</p>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">markdown</span></div><div class="body"><pre>&#45; List item 1<br>&#45; List item 2<br>&colon;- Sub-list item 1<br>&colon;- Sub-list item 2<br>&#45; List item 3</pre></div></div>
+    </div>
+  </div>
+</section>
+<section class="doc-section" id="-headings">
+  <h2> Headings</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>Headings are used to define titles and delineate sections and subsections within a document. They are indicated using the <code class="inline-code">#</code> symbol, with <code class="inline-code">#</code> representing the largest heading (Heading 1, typically used for titles) and <code class="inline-code">######</code> representing the smallest (Heading 6).</p>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">markdown</span></div><div class="body"><pre>&num; Heading 1<br>&num;# Heading 2<br>&num;## Heading 3<br>&num;### Heading 4<br>&num;#### Heading 5<br>&num;##### Heading 6</pre></div></div>
+    </div>
+  </div>
+</section>
+<section class="doc-section" id="-code-blocks">
+  <h2> Code Blocks</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>Code blocks for various programming languages are supported, including Python, JavaScript, Markdown, XML, and a default option with no specific formatting.</p>
+<p>If you require a language not listed here, you can request it using the "@UIHeader" decorator:</p>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">markdown</span></div><div class="body"><pre>&commat;UIHeader({ "requestLanguage": "C++" })</pre></div></div>
+<p>Moreover, code blocks are defined by:</p>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">markdown</span></div><div class="body"><pre>&grave;``&lt;LANGUAGE&gt;<br>...<br>&grave;``</pre></div></div>
+<p>Language names should be in lowercase and contain only alphanumeric characters; specifying a language is mandatory.</p>
+<p>Finally, you can use the <code class="inline-code">language&colon;syntax</code> metadata specification to create a syntax-code-block:</p>
+<div class="ui:code-block"><div class="body"><pre style="text-align: center;">str.split(separator: str, max_split: int) -> list[str]</pre></div></div>
+    </div>
+  </div>
+</section>
+<section class="doc-section" id="-note">
+  <h2> Note</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>Notes are used to emphasize specific content within a document and come in three types: <i>INFO*, *WARNING*, and *ERROR</i>. Each type serves a distinct purpose. To create a note, use the following format:</p>
+<ul><li><i>INFO</i></li><li><i>WARNING</i></li><li><i>ERROR</i></li></ul>
+<p>Use each type accordingly. For example:</p>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">markdown</span></div><div class="body"><pre>&excl;!!INFO/WARNING/ERROR<br>This text will be emphasized<br>&excl;!!</pre></div></div>
+<p>This code creates the following:</p>
+<div class="ui:note" theme="INFO">
+  <div class="icon">
+    <span class="material-symbols-outlined">info</span>
+  </div>
+  <div class="body">
+    <p>This is a note!</p>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+<section class="doc-section" id="-inline-styles">
+  <h2> Inline styles</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>Various inline text styles are supported, including <b>bold</b>, <i>italic</i>, <u>underline</u>, <s>strikethrough</s>, and <code class="inline-code">inline code</code>. Here's how to apply each style:</p>
+<ul><li><b>Bold</b>: <code class="inline-code">&ast;&ast;bold&ast;&ast;</code></li><li><i>Italic</i>: <code class="inline-code">&ast;Italic&ast;</code></li><li><u>Underline:</u> <code class="inline-code">&colon;Underline&colon;</code></li><li><s>Strikethrough</s>: <code class="inline-code">&#126;&#126;Strikethrough&#126;&#126;</code></li><li><code class="inline-code">Inline Code</code>: <code class="inline-code">&grave;Inline Code&grave;</code></li></ul>
+    </div>
+  </div>
+</section>
+<section class="doc-section" id="-hyperlinks">
+  <h2> Hyperlinks</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>Hyperlinks can be added with the following syntax</p>
+<div class="ui:code-block"><div class="body"><pre style="text-align: center;">(Text Content)&#x5b;"url"&#x5d;</pre></div></div>
+<div class="ui:note" theme="INFO">
+  <div class="icon">
+    <span class="material-symbols-outlined">info</span>
+  </div>
+  <div class="body">
+    <p>It is imperative to use quotations wrapping your URL; furthermore, ensure to write the whole URL including the protocol (e.g. "https://"), subdomain (e.g. "www."), domain & top-level-domain (e.g. "hamen.io"), and any additional required parameters such as GET or naming anchor parameters</p>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+<section class="doc-section" id="-demo-article">
+  <h2> Demo Article</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>If you would like to see the code of any article we offer, simply press <code class="inline-code">Ctrl+Shift+U</code> while on a <code class="inline-code">docs/blogs/</code> page, to open the GitHub source. Additionally, press <code class="inline-code">Ctrl+Shift+Alt+U</code> to open the actual markdown code file hosted on hamen.io.</p>
+    </div>
+  </div>
+</section>
+            </div>
+            <style>
+              #ads {
+                min-width: 250px;
+                height: 100%;
+                margin-left: 2em;
+              }
+
+              #ads>.ad {
+                width: 100%;
+                height: 30em;
+                position: sticky;
+                top: 2em;
+                min-height: calc(100vh - 4em - var(--header-size));
+              }
+
+              @media screen and (min-width:1000px) {
+                #ads {
+                  min-width: 300px
+                }
+              }
+
+              @media screen and (min-width:800px) {
+                #ads {
+                  min-width: 200px
+                }
+              }
+
+              @media screen and (max-width:800px) {
+                #ads {
+                  display: none;
+                }
+              }
+            </style>
+            <div id="ads">
+              <div class="ad"></div>
+            </div>
+          </section>
+        </article>
+      </div>
+      <footer></footer>
+    </main>
+  </body>
+</html>

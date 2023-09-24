@@ -32,9 +32,9 @@ lambda arguments: expression
 
 Lambda functions consist of three main components:
 
-* The `lambda` keyword
-* A list of arguments (similar to a function's parameter list)
-* A single expression that gets executed when the lambda function is called
+- The `lambda` keyword
+- A list of arguments (similar to a function's parameter list)
+- A single expression that gets executed when the lambda function is called
 
 ## Using Lambda Functions
 

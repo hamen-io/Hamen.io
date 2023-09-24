@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Syntax vs. Semantics vs. Grammar vs. Lexicon</title>
+    <title>Syntax vs. Semantics vs. Grammar vs. Lexicon &bull; Hamen Docs</title>
 
     <meta name="description" content="Explore the fundamental components of language—Syntax, Semantics, Grammar, and Lexicon. Understand how these linguistic concepts work together to structure and convey meaning in human communication">
     <meta name="keywords" content="Syntax, Semantics, Grammar, Lexicon, linguistics, language structure, meaning in language, linguistic concepts, sentence structure, vocabulary, word meaning, linguistic analysis">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin="anonymous"></script>
+
+    <meta name="icon" href="https://www.hamen.io/static/media/favicon/favicon.ico">
 
     <link rel="stylesheet" href="../../../../../../static/styles/index.css">
     <link rel="stylesheet" href="../../../../../../static/styles/prism.css">
@@ -15,20 +19,41 @@
     <script type="text/javascript" src="../../../../../../static/scripts/article.js"></script>
     <script type="text/javascript" src="../../../../../../static/scripts/index.js"></script>
 
+    <script type="text/javascript">
+      window.addEventListener("keydown", e => {
+        let suffix = window.location.href.split("/docs/blogs/", 2)[1].replace(".html", ".md");
+        if (!suffix.endsWith("index.md")) suffix += "index.md";
+
+        if (e.key === "U" && e.ctrlKey && e.shiftKey) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          window.open(`https://github.com/hamen-io/Hamen.io/tree/main/dev/hamen.io/md/docs/${suffix}`);
+        } else if (e.key === "U" && e.ctrlKey && e.shiftKey && e.altKey) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          window.open(`https://www.hamen.io/md/docs/${suffix}`);
+        };
+
+        console.log(e.key);
+      })
+    </script>
+
     <!-- Import Prism.js -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css"> -->
     <script src="https://cdn.jsdelivr.net/npm/prismjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markup.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-latex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-git.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-batch.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-shell.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-shell.min.js"></script> -->
   </head>
   <body>
     <header></header>
@@ -51,9 +76,10 @@
             </p>
           </section>
           <hr>
-          <section id="content">
-            <section class="doc-section" id="introduction">
-  <h2>Introduction</h2>
+          <section id="content" style="flex-direction: row">
+            <div id="article-html" style="width: 100%">
+              <section class="doc-section" id="-introduction">
+  <h2> Introduction</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
@@ -62,8 +88,9 @@
 <p>These components are fundamental to linguistics and provide the building blocks for our comprehension and production of language.</p>
     </div>
   </div>
-</section><section class="doc-section" id="syntax">
-  <h2>Syntax</h2>
+</section>
+<section class="doc-section" id="-syntax">
+  <h2> Syntax</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
@@ -74,8 +101,9 @@
 <ul><li><i>Cat</i>: subject</li><li><i>Ate</i>: verb</li><li><i>Food</i>: object</li></ul>
     </div>
   </div>
-</section><section class="doc-section" id="semantics">
-  <h2>Semantics</h2>
+</section>
+<section class="doc-section" id="-semantics">
+  <h2> Semantics</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
@@ -84,8 +112,9 @@
 <p>For example, in the sentence "The cat chased the mouse," semantics deals with understanding that the cat is the agent of the action and the mouse is the target.</p>
     </div>
   </div>
-</section><section class="doc-section" id="grammar">
-  <h2>Grammar</h2>
+</section>
+<section class="doc-section" id="-grammar">
+  <h2> Grammar</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
@@ -93,8 +122,9 @@
 <p>Grammar includes both the structural aspects of syntax and the meaning-related aspects of semantics. A complete grammar of a language accounts for how sentences are formed (syntax) and how they convey meaning (semantics).</p>
     </div>
   </div>
-</section><section class="doc-section" id="lexicon">
-  <h2>Lexicon</h2>
+</section>
+<section class="doc-section" id="-lexicon">
+  <h2> Lexicon</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
@@ -103,8 +133,9 @@
 <p>Words are selected from the lexicon and combined following syntactic rules to convey specific semantic meanings.</p>
     </div>
   </div>
-</section><section class="doc-section" id="conclusion">
-  <h2>Conclusion</h2>
+</section>
+<section class="doc-section" id="-conclusion">
+  <h2> Conclusion</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
@@ -112,6 +143,43 @@
     </div>
   </div>
 </section>
+            </div>
+            <style>
+              #ads {
+                min-width: 250px;
+                height: 100%;
+                margin-left: 2em;
+              }
+
+              #ads>.ad {
+                width: 100%;
+                height: 30em;
+                position: sticky;
+                top: 2em;
+                min-height: calc(100vh - 4em - var(--header-size));
+              }
+
+              @media screen and (min-width:1000px) {
+                #ads {
+                  min-width: 300px
+                }
+              }
+
+              @media screen and (min-width:800px) {
+                #ads {
+                  min-width: 200px
+                }
+              }
+
+              @media screen and (max-width:800px) {
+                #ads {
+                  display: none;
+                }
+              }
+            </style>
+            <div id="ads">
+              <div class="ad"></div>
+            </div>
           </section>
         </article>
       </div>

@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Types of Arrays in Python</title>
+    <title>Types of Arrays in Python &bull; Hamen Docs</title>
 
     <meta name="description" content="In this article, you will learn about the types of array in Python. These include Lists, Tuples, and Sets">
     <meta name="keywords" content="arrays,python,list,tuple,set,sets,tuples,lists,data types,types">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin="anonymous"></script>
+
+    <meta name="icon" href="https://www.hamen.io/static/media/favicon/favicon.ico">
 
     <link rel="stylesheet" href="../../../../../../../static/styles/index.css">
     <link rel="stylesheet" href="../../../../../../../static/styles/prism.css">
@@ -15,20 +19,41 @@
     <script type="text/javascript" src="../../../../../../../static/scripts/article.js"></script>
     <script type="text/javascript" src="../../../../../../../static/scripts/index.js"></script>
 
+    <script type="text/javascript">
+      window.addEventListener("keydown", e => {
+        let suffix = window.location.href.split("/docs/blogs/", 2)[1].replace(".html", ".md");
+        if (!suffix.endsWith("index.md")) suffix += "index.md";
+
+        if (e.key === "U" && e.ctrlKey && e.shiftKey) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          window.open(`https://github.com/hamen-io/Hamen.io/tree/main/dev/hamen.io/md/docs/${suffix}`);
+        } else if (e.key === "U" && e.ctrlKey && e.shiftKey && e.altKey) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          window.open(`https://www.hamen.io/md/docs/${suffix}`);
+        };
+
+        console.log(e.key);
+      })
+    </script>
+
     <!-- Import Prism.js -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css"> -->
     <script src="https://cdn.jsdelivr.net/npm/prismjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markup.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-latex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-git.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-batch.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-shell.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-shell.min.js"></script> -->
   </head>
   <body>
     <header></header>
@@ -51,70 +76,72 @@
             </p>
           </section>
           <hr>
-          <section id="content">
-            <section class="doc-section" id="introduction">
-  <h2>Introduction</h2>
+          <section id="content" style="flex-direction: row">
+            <div id="article-html" style="width: 100%">
+              <section class="doc-section" id="-introduction">
+  <h2> Introduction</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
       <p>When working with data in Python, you'll often come across the need to store and organize information. Arrays are essential data structures that allow you to do just that. In this article, we'll explore four common types of arrays in Python: sets, tuples, lists, and dictionaries. Don't worry if you're new to programming – we'll explain each type in a beginner-friendly way.</p>
     </div>
   </div>
-</section><section class="doc-section" id="sets--code-classinlinecodesetcode-">
-  <h2>Sets ( <code class="inline-code">set()</code> )</h2>
+</section>
+<section class="doc-section" id="-sets--set-">
+  <h2> Sets ( <code class="inline-code">set()</code> )</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
       <p>A set is a collection of unique elements, meaning that each item appears only once in the set. You can think of it as a bag that doesn't allow duplicates. To create a set, you can use curly braces <code class="inline-code">{}</code> or the <code class="inline-code">set()</code> function:</p>
-<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_set = {1, 2, 3}
-another_set = set([3, 4, 5])</pre></div></div>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_set = {1, 2, 3}<br>another_set = set([3, 4, 5])</pre></div></div>
 <p>Sets are great for quickly checking whether an element is present or not, as they offer fast membership testing. Keep in mind that since sets are unordered collections, you can't access elements by indexing.</p>
     </div>
   </div>
-</section><section class="doc-section" id="tuples--code-classinlinecodetuplecode-">
-  <h2>Tuples ( <code class="inline-code">tuple()</code> )</h2>
+</section>
+<section class="doc-section" id="-tuples--tuple-">
+  <h2> Tuples ( <code class="inline-code">tuple()</code> )</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
       <p>Tuples are similar to lists, but they have one key difference – they are immutable, meaning you can't change their elements once they're created. Tuples are often used to represent fixed collections of items. You create a tuple by enclosing elements in parentheses <code class="inline-code">()</code>:</p>
-<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_tuple = (1, 2, 3)
-another_tuple = 4, 5, 6  # Parentheses are optional</pre></div></div>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_tuple = (1, 2, 3)<br>another_tuple = 4, 5, 6  # Parentheses are optional</pre></div></div>
 <p>Accessing elements in a tuple is done through indexing, just like in lists.</p>
     </div>
   </div>
-</section><section class="doc-section" id="lists--code-classinlinecodelistcode-">
-  <h2>Lists ( <code class="inline-code">list()</code> )</h2>
+</section>
+<section class="doc-section" id="-lists--list-">
+  <h2> Lists ( <code class="inline-code">list()</code> )</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
       <p>Lists are perhaps the most versatile and commonly used type of array in Python. They are ordered collections that can hold elements of different types. To create a list, use square brackets <code class="inline-code">[]</code>:</p>
-<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_list = [1, 2, 3]
-another_list = ["apple", "banana", "cherry"]
-mixed_list = [1, "hello", 3.14]</pre></div></div>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_list = [1, 2, 3]<br>another_list = ["apple", "banana", "cherry"]<br>mixed_list = [1, "hello", 3.14]</pre></div></div>
 <p>Lists allow you to add, remove, and modify elements. You can access elements using indexing, and you can also slice lists to extract a subset of elements.</p>
     </div>
   </div>
-</section><section class="doc-section" id="dictionaries--code-classinlinecodedictcode-">
-  <h2>Dictionaries ( <code class="inline-code">dict()</code> )</h2>
+</section>
+<section class="doc-section" id="-dictionaries--dict-">
+  <h2> Dictionaries ( <code class="inline-code">dict()</code> )</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
-      <p>Dictionaries, often called "dicts," are collections of key-value pairs. Each value is associated with a unique key, which can be used to retrieve the value later. Think of dictionaries as real-life dictionaries where words (keys) have definitions (values). To create a dictionary, use curly braces <code class="inline-code">{}</code> and colons <code class="inline-code">:</code> to define key-value pairs:</p>
-<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_dict = {"name": "Alice", "age": 30, "city": "New York"}
-another_dict = dict(zip(["a", "b", "c"], [1, 2, 3]))</pre></div></div>
+      <p>Dictionaries, often called "dicts," are collections of key-value pairs. Each value is associated with a unique key, which can be used to retrieve the value later. Think of dictionaries as real-life dictionaries where words (keys) have definitions (values). To create a dictionary, use curly braces <code class="inline-code">{}</code> and colons <code class="inline-code"><u></code> to define key-value pairs</u></p>
+<div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">python</span></div><div class="body"><pre>my_dict = {"name": "Alice", "age": 30, "city": "New York"}<br>another_dict = dict(zip(["a", "b", "c"], [1, 2, 3]))</pre></div></div>
 <p>You can access values by using the corresponding keys. Dictionaries are useful for storing and retrieving information based on labels.</p>
     </div>
   </div>
-</section><section class="doc-section" id="conclusion">
-  <h2>Conclusion</h2>
+</section>
+<section class="doc-section" id="-conclusion">
+  <h2> Conclusion</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
       <p>Arrays come in various forms in Python, each designed to serve different purposes. Sets keep unique elements, tuples offer immutability, lists provide flexibility, and dictionaries allow for efficient key-value pairing. Understanding these fundamental array types will help you become more proficient in Python programming, enabling you to organize and manipulate data effectively. As you gain more experience, you'll discover even more ways to leverage these arrays in your projects. Happy coding! 🐍🚀</p>
     </div>
   </div>
-</section><section class="doc-section" id="related-articles">
-  <h2>Related Articles</h2>
+</section>
+<section class="doc-section" id="-related-articles">
+  <h2> Related Articles</h2>
   <div class="content">
     <div class="border"></div>
     <div class="body">
@@ -124,6 +151,43 @@ another_dict = dict(zip(["a", "b", "c"], [1, 2, 3]))</pre></div></div>
     </div>
   </div>
 </section>
+            </div>
+            <style>
+              #ads {
+                min-width: 250px;
+                height: 100%;
+                margin-left: 2em;
+              }
+
+              #ads>.ad {
+                width: 100%;
+                height: 30em;
+                position: sticky;
+                top: 2em;
+                min-height: calc(100vh - 4em - var(--header-size));
+              }
+
+              @media screen and (min-width:1000px) {
+                #ads {
+                  min-width: 300px
+                }
+              }
+
+              @media screen and (min-width:800px) {
+                #ads {
+                  min-width: 200px
+                }
+              }
+
+              @media screen and (max-width:800px) {
+                #ads {
+                  display: none;
+                }
+              }
+            </style>
+            <div id="ads">
+              <div class="ad"></div>
+            </div>
           </section>
         </article>
       </div>
