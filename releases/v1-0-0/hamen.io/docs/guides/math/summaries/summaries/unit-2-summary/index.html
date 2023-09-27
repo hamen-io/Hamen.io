@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>2.0: Unit 2 Summary &bull; Hamen Docs</title>
+
+    <script type="text/javascript">
+      const Guide = {"course":"Grade 12 University-Level Functions Summaries","modules":[{"module":"Module 0: Prerequisite Modules","topics":{"0.0: Completing the Square":"#"}},{"module":"Module 1: Summaries","topics":{"1.0: Unit 1 Summary":"#","2.0: Unit 2 Summary":"#"}}]};
+      const ModuleNumber = 2.0;
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <link rel="stylesheet" href="../../../../../../static/styles/index.css">
+    <!-- <link rel="stylesheet" href="./../dev/hamen.io/static/styles/index.css"> -->
+    <link rel="stylesheet" href="../../../../../../static/styles/prism.css">
+    <!-- <link rel="stylesheet" href="./../dev/hamen.io/static/styles/prism.css"> -->
+    <script type="text/javascript" src="../../../../../../static/scripts/Components.js" defer></script>
+    <!-- <script type="text/javascript" src="./../dev/hamen.io/static/scripts/Components.js" defer></script> -->
+    <script type="text/javascript" src="../../../../../../static/scripts/article.js"></script>
+    <!-- <script type="text/javascript" src="./../dev/hamen.io/static/scripts/article.js"></script> -->
+    <script type="text/javascript" src="../../../../../../static/scripts/index.js"></script>
+    <!-- <script type="text/javascript" src="./../dev/hamen.io/static/scripts/index.js"></script> -->
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <!-- Import Prism.js -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-latex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-git.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-batch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-shell.min.js"></script> -->
+  </head>
+  <body>
+    <header></header>
+    <main article-type="guide">
+      <div id="article-wrapper">
+        <article id="tree"></article>
+        <article id="doc">
+          <section id="introduction">
+            <h1 class="" id="doc-title" style="color: rgba(0, 0, 0, 0.73);"> 2.0: Unit 2 Summary: <i>Functions: Understanding Rates of Change</i> </h1>
+            <p>
+              <span>
+                Published
+                <span style="font-weight: 600;">
+                  2023-09-25
+                </span>
+                , by 
+                <a href="https://www.hamen.io/docs/?author=danielhamen" class="fancy" target="_blank">
+                  Daniel Hamen
+                </a>
+              </span>
+            </p>
+          </section>
+          <hr>
+          <section id="content">
+            <section class="doc-section" id="-introduction">
+  <h2> Introduction</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>In this summary, we'll discuss the content of Unit 2 in the MHF-4U1, <i>Grade 12 University-Level Functions</i>. This summary is split into five parts:</p>
+<ul><li><a href="">2.1&colon; Determining Average Rate of Change</a></li><li><a href="">2.2&colon; Estimating Instantaneous Rates of Change: Intervals</a></li><li><a href="">2.3&colon; Estimating Instantaneous Rates of Change: Algebraic Method</a></li><li><a href="">2.4&colon; Using Rates of Change to Create a Graphical Model</a></li><li><a href="">2.5&colon; Solving Problems Involving Rates of Change</a></li></ul>
+<p>This summary utilizes various concepts defined in past summaries, and the <i>Prerequisite Modules</i> section so ensure you have a fully-developed understanding of everything there</p>
+    </div>
+  </div>
+</section>
+<section class="doc-section" id="-colon-determining-average-rate-of-change">
+  <h2> 2.1&colon; Determining Average Rate of Change</h2>
+  <div class="content">
+    <div class="border"></div>
+    <div class="body">
+      <p>The average rate of change&mdash;abbreviated to, <latex style="text-align: left;">$$AROC$$</latex>&mdash;, is the average speed whereat a function changes over a specified interval of time or other independent variable.</p>
+<p>Determining the average rate of change can be done by calculating the slope of a secant line&mdash;a secant line is simply a linear line drawn between point <latex style="text-align: left;">$$(0,0)$$</latex>, and point <latex style="text-align: left;">$$(0, 0)$$</latex>&mdash;</p>
+<div class="ui:note" theme="INFO">
+  <div class="icon">
+    <span class="material-symbols-outlined">info</span>
+  </div>
+  <div class="body">
+    <p>Though the <i>average rate of change</i> (<i>AROC</i>) may seem slightly similar to the <i>slope</i>, it's not; <i>AROC</i> measures overall change over an interval, while slope describes the steepness of a line.</p>
+  </div>
+</div>
+<p>For example, given the function <latex style="text-align: left;">$$f(x)=6x^2-3x+5$$</latex> (which is graphed below), if you wanted to find the average rate of change, you could do so</p>
+
+<div style="margin-bottom: 1em;margin-top: 1em;border: 1px solid var(--border-color-400);width: 100%;background: var(--background-color-box);border-radius: 3px" id="secant-example-i">
+    <div style="border-bottom: 1px solid var(--border-color-300);">
+        <p style="padding: 8px;text-align: center;">
+            <b style="padding: 16px;text-align: center;justify-content: center;">For example <a href="javascript:void(0);" id="toggle-example">[ <i>Show Example</i> ]</a>:</b>
+            <script type="text/javascript">
+                const eg = document.querySelector("#secant-example-i");
+                let toggleExample = eg.querySelector("#toggle-example");
+                let isShown = true;
+                let updateHidable = () => {
+                    isShown = !isShown;
+                    toggleExample.querySelector("i").innerText = isShown ? "Hide Example" : "Show Example";
+                    eg.querySelectorAll(".hidable").forEach(elem => {
+                        elem.style.display = isShown ? "flex" : "none";
+                    })
+                };
+
+                toggleExample.addEventListener("click", updateHidable);
+                document.addEventListener("DOMContentLoaded", updateHidable);
+            </script>
+            <br class="hidable" style="user-select: none">
+            <span class="hidable" style="width: 100%;text-align: center;align-items: center;margin-top: 1em;;gap: 4px;display: flex">
+                Find the average rate of change&mdash;<i>by determining the slope of the secant line</i>&mdash; for the function: $$f(x)=6x^2-3x+5$$, between $$x=-5$$ and $$x=-1$$
+            </span>
+        </p>
+    </div>
+    <div class="hidable" style="width: 100%;padding: 8px;border-bottom: 1px solid var(--border-color-300);">
+        <div style="display: flex;flex-direction: row;">
+            <div class="ui:chart" style="justify-content: center;flex: 0.65;min-width: 400px;max-width: 600px" chart-id="secant-example-i">
+                <canvas class="chart" width="100%">
+            </div>
+            <div style="flex: 0.35;min-width: 300px;margin-left: 1em;border-left: 1px solid var(--border-color-400);padding-left: 1em;" class="smaller-paragraphs">
+                <style>
+                    .smaller-paragraphs p { font-size: var(--font-size-sub) !important }
+                </style>
+                <p>We can find the slope of the secant by:</p>
+                <ol>
+                    <li>
+                        Finding point $$a$$, and $$b$$, of the secant line; in our case, the two points are $$(-5, 3)$$, and $$(-1, -5)$$
+                    </li>
+                    <li>
+                        With these points, we can now input them into our original formula to find $$m_{sec}$$:
+                        <div style="gap: 12px;margin-top: 8px;margin-bottom: 8px;width: fit-content;text-align: right;">
+                            <span>$$m_{sec}=\frac{f(x_2)-f(x_1)}{x_2-x_1}$$</span>
+                            <span>$$=\frac{f(-5)-f(3)}{(-5)-3}$$</span>
+                            <span>$$=\frac{120}{-8}$$</span>
+                            <span>$$=15$$</span>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <p class="hidable" style="gap: 4px;display: flex;align-items: center;width: 100%;justify-content: center;text-align: center;">&#8756; the average rate of change is $$15 \frac{m}{s}$$</p>
+</div>
+
+    </div>
+  </div>
+</section>
+          </section>
+          <footer id="body-footer"></footer>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>

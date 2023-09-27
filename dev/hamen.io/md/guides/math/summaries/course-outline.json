@@ -1,0 +1,17 @@
+{
+    "course": "Grade 12 University-Level Functions Summaries",
+    "modules": [
+        {
+            "module": "Module 0: Prerequisite Modules",
+            "topics": {
+                "0.0: Completing the Square": "#"
+            }
+        }, {
+            "module": "Module 1: Summaries",
+            "topics": {
+                "1.0: Unit 1 Summary": "#",
+                "2.0: Unit 2 Summary": "#"
+            }
+        }
+    ]
+}

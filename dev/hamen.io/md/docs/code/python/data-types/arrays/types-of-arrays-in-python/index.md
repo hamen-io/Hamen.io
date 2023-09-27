@@ -71,7 +71,7 @@ Arrays come in various forms in Python, each designed to serve different purpose
 
 If you enjoyed reading this article, here are some related articles we recommend checking out:
 
-- [`zip()` Function in Python]("https://www.hamen.io/...")
+- [`zip()` Function in Python]("https://www.hamen.io/docs/blogs/code/python/built-ins/functions/zip/exploring-the-zip-function-in-python/")
 - [`set()` Methods in Python]("https://www.hamen.io/...")
 - [`list()` Methods in Python]("https://www.hamen.io/...")
 - [`dict()` Methods in Python]("https://www.hamen.io/...")

@@ -1,18 +1,44 @@
 import re
 import json
 
+UIComponents = lambda : {
+    "LaTeX": Elements.UIComponent.LaTeX,
+    "Chart": Elements.UIComponent.Chart
+}
+
+def parse_ui_component(match: str, as_string: bool = True) -> str:
+    terms = re.match(r"^@uicomponent\.([a-z_][a-z0-9_]*)(\([\s\S]*\));$", match, re.I)
+    if len(terms.groups()) != 2:
+        raise SyntaxError(f"Invalid syntax for @UIComponent: \"{match}\"")
+    component,params = list(terms.groups())
+    if component not in UIComponents():
+        raise SyntaxError(f"Unknown component: \"{component}\"")
+    params = f"[{params[1:-1]}]"
+    params = json.loads(params)[0]
+    comp = UIComponents()[component](**params)
+    if as_string:
+        return comp.__str__()
+    return comp
+
 def parse_text_content(text_content: str) -> str:
+    text_content = re.sub(r"@uicomponent\.[a-zA-Z_][a-z0-9_]*\([^@]+\);", lambda match : parse_ui_component(match.group(0)), text_content, flags = re.I)
+
     text_content = re.sub(
         r"\*\*\*()(?!\\)([^.]*)\*\*\*", r"<b><i>\2</i></b>", text_content
     )
-    text_content = re.sub(r"\*\*()(?!\\)([^.]*)\*\*", r"<b>\2</b>", text_content)
-    text_content = re.sub(r"\*()(?!\\)([^.]*)\*", r"<i>\2</i>", text_content)
-    text_content = re.sub(r"\~\~()(?!\\)([^.]*)\~\~", r"<s>\2</s>", text_content)
-    text_content = re.sub(r"\:()(?!\\)([^.]*)\:", r"<u>\2</u>", text_content)
-    text_content = re.sub(r"(?<=\S)(\^)([^ ]*)", r"<sup>\2</sup>", text_content)
-    text_content = re.sub(r"(?<=\S)(\^)([^ ]*)", r"<sub>\2</sub>", text_content)
+
+    inline_symbol = lambda symbol : symbol + r"()(?![\\\s])([^" + symbol + r"]*)(?<![\\\s])" + symbol
+
+    text_content = re.sub(inline_symbol(r"\*\*\*"), r"<b><i>\2</i></b>", text_content)
+    text_content = re.sub(inline_symbol(r"\*\*"), r"<b>\2</b>", text_content)
+    text_content = re.sub(inline_symbol(r"\*"), r"<i>\2</i>", text_content)
+    text_content = re.sub(inline_symbol(r"\~\~\~"), r"<s>\2</s>", text_content)
+    text_content = re.sub(inline_symbol(r"\_\_\_"), r"<u>\2</u>", text_content)
+    text_content = re.sub(inline_symbol(r"\$\$\$"), lambda match : Elements.UIComponent.LaTeX(code = match.group(2)).__str__(), text_content)
+    text_content = re.sub(r"(?<![\s\\])(\^\^\^)(?=[\S])(\S+)", r"<sup>\2</sup>", text_content)
+    text_content = re.sub(r"(?<![\s\\])(\_\_\_\_\_)(?=[\S])(\S+)", r"<sub>\2</sub>", text_content)
     text_content = re.sub(
-        r"(?<!\\)(`)(.*?)(?<!\\)(`)",
+        inline_symbol(r"\`"),
         r"""<code class="inline-code">\2</code>""",
         text_content,
     )
@@ -33,8 +59,82 @@ def title_to_id(title: str) -> str:
 
     return id
 
-
 class Elements:
+    class UIComponent:
+        class LaTeX:
+            def __init__(self, code: str = "", *args, **kwargs) -> None:
+                self.code = code
+                self.textAlign = kwargs.get("textAlign") or "left"
+                assert self.textAlign in ["left", "center", "right", "justify"], "Invalid `textAlign` option"
+
+            def __str__(self) -> str:
+                return f"<latex style=\"text-align: {self.textAlign};{'width: 100%' if self.textAlign != 'left' else ''}\">$${self.code}$$</latex>"
+
+        class Chart:
+            def __init__(self, **kwargs) -> None:
+                self.chartID = (kwargs.get("chartID") or "").strip()
+
+            def __str__(self) -> str:
+                if self.chartID == "secant-example-i":
+                    return f"""
+<div style="margin-bottom: 1em;margin-top: 1em;border: 1px solid var(--border-color-400);width: 100%;background: var(--background-color-box);border-radius: 3px" id="secant-example-i">
+    <div style="border-bottom: 1px solid var(--border-color-300);">
+        <p style="padding: 8px;text-align: center;">
+            <b style="padding: 16px;text-align: center;justify-content: center;">For example <a href="javascript:void(0);" id="toggle-example">[ <i>Show Example</i> ]</a>:</b>
+            <script type="text/javascript">
+                const eg = document.querySelector("#secant-example-i");
+                let toggleExample = eg.querySelector("#toggle-example");
+                let isShown = true;
+                let updateHidable = () => {{
+                    isShown = !isShown;
+                    toggleExample.querySelector("i").innerText = isShown ? "Hide Example" : "Show Example";
+                    eg.querySelectorAll(".hidable").forEach(elem => {{
+                        elem.style.display = isShown ? "flex" : "none";
+                    }})
+                }};
+
+                toggleExample.addEventListener("click", updateHidable);
+                document.addEventListener("DOMContentLoaded", updateHidable);
+            </script>
+            <br class="hidable" style="user-select: none">
+            <span class="hidable" style="width: 100%;text-align: center;align-items: center;margin-top: 1em;;gap: 4px;display: flex">
+                Find the average rate of change&mdash;<i>by determining the slope of the secant line</i>&mdash; for the function: $$f(x)=6x^2-3x+5$$, between $$x=-5$$ and $$x=-1$$
+            </span>
+        </p>
+    </div>
+    <div class="hidable" style="width: 100%;padding: 8px;border-bottom: 1px solid var(--border-color-300);">
+        <div style="display: flex;flex-direction: row;">
+            <div class="ui:chart" style="justify-content: center;flex: 0.65;min-width: 400px;max-width: 600px" chart-id="{self.chartID}">
+                <canvas class="chart" width="100%">
+            </div>
+            <div style="flex: 0.35;min-width: 300px;margin-left: 1em;border-left: 1px solid var(--border-color-400);padding-left: 1em;" class="smaller-paragraphs">
+                <style>
+                    .smaller-paragraphs p {{ font-size: var(--font-size-sub) !important }}
+                </style>
+                <p>We can find the slope of the secant by:</p>
+                <ol>
+                    <li>
+                        Finding point $$a$$, and $$b$$, of the secant line; in our case, the two points are $$(-5, 3)$$, and $$(-1, -5)$$
+                    </li>
+                    <li>
+                        With these points, we can now input them into our original formula to find $$m_{{sec}}$$:
+                        <div style="gap: 12px;margin-top: 8px;margin-bottom: 8px;width: fit-content;text-align: right;">
+                            <span>$$m_{{sec}}=\\\\frac{{f(x_2)-f(x_1)}}{{x_2-x_1}}$$</span>
+                            <span>$$=\\\\frac{{f(-5)-f(3)}}{{(-5)-3}}$$</span>
+                            <span>$$=\\\\frac{{120}}{{-8}}$$</span>
+                            <span>$$=15$$</span>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <p class="hidable" style="gap: 4px;display: flex;align-items: center;width: 100%;justify-content: center;text-align: center;">&#8756; the average rate of change is $$15 \\\\frac{{m}}{{s}}$$</p>
+</div>
+"""
+
+                return f"""<div class="ui:chart" chart-id="{self.chartID}"><canvas class="chart"></div>"""
+
     class P:
         def __init__(self, textContent: str) -> None:
             self.textContent = parse_text_content(textContent)
@@ -214,15 +314,19 @@ def parse_token(element: str | list, UIComponents: dict = dict()) -> Elements.__
             return Elements.Heading(content, len(level))
 
         elif element.lower().startswith("@uicomponent"):
-            terms = re.match(r"^@uicomponent\.([a-z_][a-z0-9_]*)(\([\s\S]*\))", element, re.I)
-            if len(terms.groups()) != 2:
-                raise SyntaxError(f"Invalid syntax for @UIComponent: \"{element}\"")
-            component,params = list(terms.groups())
-            if component not in UIComponents:
-                raise SyntaxError(f"Unknown component: \"{component}\"")
-            params = f"[{params[1:-1]}]"
-            params = json.loads(params)[0]
-            return UIComponents[component](**params)
+            match = re.match(r"^\@UIComponent\.[a-zA-Z_][a-zA-Z0-9_]*\([^@]+\)", element, flags = re.I)
+            if match:
+                return parse_ui_component(match.group(0) + ";", False)
+
+            # terms = re.match(r"^@uicomponent\.([a-z_][a-z0-9_]*)(\([\s\S]*\))", element, re.I)
+            # if len(terms.groups()) != 2:
+            #     raise SyntaxError(f"Invalid syntax for @UIComponent: \"{element}\"")
+            # component,params = list(terms.groups())
+            # if component not in UIComponents:
+            #     raise SyntaxError(f"Unknown component: \"{component}\"")
+            # params = f"[{params[1:-1]}]"
+            # params = json.loads(params)[0]
+            # return UIComponents[component](**params)
 
         else:
             return Elements.P(element)

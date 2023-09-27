@@ -6,12 +6,14 @@
 
     <title>Hamen Docs Style Guide &bull; Hamen Docs</title>
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin="anonymous"></script>
+
     <meta name="description" content="...">
     <meta name="keywords" content="...">
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin="anonymous"></script>
-
     <meta name="icon" href="https://www.hamen.io/static/media/favicon/favicon.ico">
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
     <link rel="stylesheet" href="../../../../static/styles/index.css">
     <link rel="stylesheet" href="../../../../static/styles/prism.css">
@@ -52,6 +54,19 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-git.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-batch.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-shell.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script type="text/javascript">
+      const hideAds = true;
+      window.addEventListener("DOMContentLoaded", () => {
+        if (hideAds) {
+          const ads = document.querySelector("#ads");
+          ads.style.width = '0'
+          ads.style.minWidth = '0'
+          ads.style.maxWidth = '0'
+          ads.style.display = 'none'
+        }
+      })
+    </script>
   </head>
   <body>
     <header></header>
@@ -140,7 +155,7 @@
   <div class="content">
     <div class="border"></div>
     <div class="body">
-      <p>Notes are used to emphasize specific content within a document and come in three types: <i>INFO*, *WARNING*, and *ERROR</i>. Each type serves a distinct purpose. To create a note, use the following format:</p>
+      <p>Notes are used to emphasize specific content within a document and come in three types: <i>INFO</i>, <i>WARNING</i>, and <i>ERROR</i>. Each type serves a distinct purpose. To create a note, use the following format:</p>
 <ul><li><i>INFO</i></li><li><i>WARNING</i></li><li><i>ERROR</i></li></ul>
 <p>Use each type accordingly. For example:</p>
 <div class="ui:code-block"><div class="header"><span style="color: rgba(255, 255, 255, 0.7)">markdown</span></div><div class="body"><pre>&excl;!!INFO/WARNING/ERROR<br>This text will be emphasized<br>&excl;!!</pre></div></div>
@@ -161,8 +176,8 @@
   <div class="content">
     <div class="border"></div>
     <div class="body">
-      <p>Various inline text styles are supported, including <b>bold</b>, <i>italic</i>, <u>underline</u>, <s>strikethrough</s>, and <code class="inline-code">inline code</code>. Here's how to apply each style:</p>
-<ul><li><b>Bold</b>: <code class="inline-code">&ast;&ast;bold&ast;&ast;</code></li><li><i>Italic</i>: <code class="inline-code">&ast;Italic&ast;</code></li><li><u>Underline:</u> <code class="inline-code">&colon;Underline&colon;</code></li><li><s>Strikethrough</s>: <code class="inline-code">&#126;&#126;Strikethrough&#126;&#126;</code></li><li><code class="inline-code">Inline Code</code>: <code class="inline-code">&grave;Inline Code&grave;</code></li></ul>
+      <p>Various inline text styles are supported, including <b>bold</b>, <i>italic</i>, :underline:, ~~strikethrough~~, and <code class="inline-code">inline code</code>. Here's how to apply each style:</p>
+<ul><li><b>Bold</b>: <code class="inline-code">&ast;&ast;bold&ast;&ast;</code></li><li><i>Italic</i>: <code class="inline-code">&ast;Italic&ast;</code></li><li>:Underline:: <code class="inline-code">&colon;Underline&colon;</code></li><li>~~Strikethrough~~: <code class="inline-code">&#126;&#126;Strikethrough&#126;&#126;</code></li><li><code class="inline-code">Inline Code</code>: <code class="inline-code">&grave;Inline Code&grave;</code></li></ul>
     </div>
   </div>
 </section>
@@ -199,11 +214,13 @@
                 min-width: 250px;
                 height: 100%;
                 margin-left: 2em;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
               }
 
               #ads>.ad {
                 width: 100%;
-                height: 30em;
                 position: sticky;
                 top: 2em;
                 min-height: calc(100vh - 4em - var(--header-size));
@@ -228,7 +245,33 @@
               }
             </style>
             <div id="ads">
-              <div class="ad"></div>
+              <div class="ad">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360"
+                crossorigin="anonymous"></script>
+                <!-- Docs Ad -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-1664530166161360"
+                    data-ad-slot="4372855317"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <script type="text/javascript">
+                  window.addEventListener("DOMContentLoaded", () => {
+                    setInterval(() => {
+                      try {
+                        if (!adsbygoogle) {
+                          throw "Error";
+                        }
+                      } catch {
+                        console.warn("Ads not working...");
+                      }
+                    }, 500)
+                  })
+                </script>
+              </div>
             </div>
           </section>
         </article>

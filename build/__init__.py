@@ -5,8 +5,28 @@ import colorama
 import json
 global warnings
 import shutil
-from parse_markdown import ParseArticle
+from parse_markdown import ParseArticle,parse_text_content
 import ftplib
+
+htaccess_contents = """<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php80___lsphp .php .php8 .phtml
+</IfModule>
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+ErrorDocument 400 /error/index.php?error=400
+ErrorDocument 402 /error/index.php?error=402
+ErrorDocument 401 /error/index.php?error=401
+ErrorDocument 403 /error/index.php?error=403
+ErrorDocument 404 /error/index.php?error=404
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>"""
 
 colorama.init()
 # global_public_path_prefix = "hamen.io"
@@ -150,6 +170,7 @@ class BuildVersion:
 
         env["articleHTML"] = guide_html.__str__()
         env["articleTitle"] = guide_html.title
+        env["articleRenderedTitle"] = parse_text_content(guide_html.title)
         env["staticDirectory"] = (len([x for x in os.path.split(guide_html_file)[0].split("hamen.io", 2)[-1].split("\\") if x.strip() != ""]) * "../") + "static"
 
         required_keys = ['title', 'titleID', 'description', 'type', 'tags', 'author', 'authorID', 'date', 'url', 'category', 'categorySlug', 'articleHTML', 'articleTitle', 'moduleNumber', 'moduleSlug']
@@ -188,6 +209,7 @@ class BuildVersion:
 
         env["articleHTML"] = article_html.__str__()
         env["articleTitle"] = article_html.title
+        env["articleRenderedTitle"] = parse_text_content(article_html.title)
         env["staticDirectory"] = (len([x for x in os.path.split(article_html_file)[0].split("hamen.io", 2)[-1].split("\\") if x.strip() != ""]) * "../") + "static"
 
         required_keys = ['title', 'titleID', 'description', 'type', 'tags', 'author', 'authorID', 'date', 'url', 'category', 'categorySlug', 'articleHTML', 'articleTitle']
@@ -202,19 +224,7 @@ class BuildVersion:
         html.write(template)
 
     with open(os.path.join(public_dir, ".htaccess"), "x") as htaccess:
-      htaccess.write("""<IfModule mime_module>
-  AddHandler application/x-httpd-ea-php80___lsphp .php .php8 .phtml
-</IfModule>
-
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-ErrorDocument 400 /error/index.php?error=400
-ErrorDocument 402 /error/index.php?error=402
-ErrorDocument 401 /error/index.php?error=401
-ErrorDocument 403 /error/index.php?error=403
-ErrorDocument 404 /error/index.php?error=404""")
+      htaccess.write(htaccess_contents)
 
   def remove_whitespace_not_in_string(self, code: str) -> str:
     is_str = False

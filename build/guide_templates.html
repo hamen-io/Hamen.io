@@ -11,6 +11,7 @@
       const ModuleNumber = {{ ENV["moduleNumber"] }};
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <link rel="stylesheet" href="{{ ENV['staticDirectory'] }}/styles/index.css">
     <!-- <link rel="stylesheet" href="./../dev/hamen.io/static/styles/index.css"> -->
     <link rel="stylesheet" href="{{ ENV['staticDirectory'] }}/styles/prism.css">
@@ -21,6 +22,8 @@
     <!-- <script type="text/javascript" src="./../dev/hamen.io/static/scripts/article.js"></script> -->
     <script type="text/javascript" src="{{ ENV['staticDirectory'] }}/scripts/index.js"></script>
     <!-- <script type="text/javascript" src="./../dev/hamen.io/static/scripts/index.js"></script> -->
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
     <!-- Import Prism.js -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css"> -->
@@ -44,7 +47,7 @@
         <article id="tree"></article>
         <article id="doc">
           <section id="introduction">
-            <h1 class="" id="doc-title" style="color: rgba(0, 0, 0, 0.73);"> {{ ENV["articleTitle"] }} </h1>
+            <h1 class="" id="doc-title" style="color: rgba(0, 0, 0, 0.73);"> {{ ENV["articleRenderedTitle"] }} </h1>
             <p>
               <span>
                 Published
