@@ -359,13 +359,13 @@ main[article-type=guide] #doc>section:last-of-type {
 }
 
 button {
-  background: rgb(39 142 230);
+  background: hsl(220, 100%, 59.5%);
   border-radius: 8em;
   border-width: 0;
   box-sizing: border-box;
   color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  font-family: 'Raleway', sans-serif;
+  /* font-family: 'Raleway', sans-serif; */
   margin: 0;
   max-width: 100%;
   outline: none;
@@ -383,6 +383,7 @@ button {
   font-weight: 500;
   font-family: 'MuseoModerno', cursive;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: 0px solid transparent;
 }
 
 button .material-symbols-outlined {
@@ -400,6 +401,7 @@ button:hover {
 button:active {
   background: hsl(220, 66%, 50%);
   color: rgba(255, 255, 255, 0.4);
+  outline: 4px solid hsl(220, 90%, 74%);
   text-decoration: none !important
 }
 
@@ -1010,7 +1012,7 @@ h3 {
 
 #doc ul,
 #doc ol {
-  margin: 0;
+  margin: 1em 0;
   line-height: 1.8
 }
 

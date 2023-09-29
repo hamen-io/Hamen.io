@@ -30,7 +30,18 @@
                 <p>Unleashing the Potential of Academic Excellence through Code</p>
                 <form method="GET" action="https://www.hamen.io/search" style="width: 100%;max-width:600px;align-items: center;">
                     <input type="text" id="search-input" placeholder="Search for something on our site!">
-                    <button type="submit" style="width: fit-content;">
+                    <style>
+                        #search-bttn {
+                            width: fit-content;
+                        }
+
+                        @media screen and (max-width:400px) {
+                            #search-bttn {
+                                width: 100%;
+                            }
+                        }
+                    </style>
+                    <button type="submit" id="search-bttn">
                         Search
                         <span class="material-symbols-outlined">search</span>
                     </button>
