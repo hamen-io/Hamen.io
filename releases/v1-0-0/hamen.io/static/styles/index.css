@@ -135,6 +135,7 @@ textarea {
 
 .fancy {
   font-family: 'MuseoModerno', cursive !important;
+  font-size: var(--font-size-sub)
 }
 
 p a,
