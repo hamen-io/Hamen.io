@@ -1,0 +1,10 @@
+<UI>
+    <!-- Section of the document -->
+    <Section></Section>
+
+    <!-- Heading of a section; do not use `H2` for a section -->
+    <H1></H1>
+
+    <!-- Sub-heading within a section; not the main haeding -->
+    <H2></H2>
+</UI>

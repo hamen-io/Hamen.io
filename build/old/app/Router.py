@@ -16,6 +16,8 @@ class Index(Hamen.Types.Blog):
     def draw(self) -> None:
         layout = self.layout
 
+        self.createDependency("IMAGE", "")
+
         introduction = layout.createSection("Test")
         introduction.addElement.UIText([
             "Bold Text:",
@@ -34,7 +36,7 @@ class DocRouter(Router):
     def __init__(self) -> None:
         super().__init__()
 
-    @Hamen.Types.Router.defineCategory("Linguistics", type = "BLOG")
+    @Hamen.Types.Router.defineCategory("linguistics", type = "BLOG")
     def XLinguistics(self):
         return { Index() }
 

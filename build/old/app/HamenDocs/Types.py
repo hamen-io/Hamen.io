@@ -1,3 +1,4 @@
+import json
 import shutil
 import os
 import re
@@ -144,12 +145,35 @@ class DrawingError(Exception):
 class Blog:
     def __init__(self) -> None:
         self._blogTitle: str
+        self._blogID: str
         self._blogAuthor: str
         self._blogAuthorID: str
         self._blogDescription: str
         self._blogDate: str
         self._blogTags: list[str]
         self.layout = Layout()
+        self._head = []
+
+    def createDependency(self, dependency: Literal["IMAGE", "JAVASCRIPT", "STYLESHEET"], source: str) -> None:
+        pass
+
+    def renderMetadata(self) -> dict:
+        return {
+            "blogTitle": self.blogTitle,
+            "blogID": self.blogID,
+            "blogAuthor": self.blogAuthor,
+            "blogAuthorID": self.blogAuthorID,
+            "blogDescription": self.blogDescription,
+            "blogDate": self.blogDate,
+            "blogTags": self.blogTags
+        }
+
+    def renderMetadataJSON(self) -> dict:
+        return json.dumps(self.renderMetadata())
+
+    @property
+    def blogID(self) -> str:
+        return self._blogID
 
     @property
     def blogTitle(self) -> str:
@@ -159,6 +183,7 @@ class Blog:
     def blogTitle(self, value: str) -> None:
         assert type(value) is str, f"Invalid blog name"
         self._blogTitle = value
+        self._blogID = re.sub(r"[^a-zA-Z0-9 ]", "", value).replace(" ", "-").lower()
 
     @property
     def blogDate(self) -> str:
@@ -203,9 +228,22 @@ class Blog:
 
         return re.sub(r"(?<!\\)\s", "", """
 <!DOCTYPE\ HTML>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>{TITLE}\ &bull;\ Hamen\ Docs</title>
+
+        <!-- Add Favicon: -->
+        <link rel="icon" src="https://www.hamen.io/favicon.ico">
+
+        <!-- Import Hamen.io JavaScript: -->
+        <script type="text/javascript" defer src="https://www.hamen.io/static/scripts/index.js"></script>
+
+        <!-- Import Hamen.io StyleSheets: -->
+        <link rel="stylesheet" href="https://www.hamen.io/static/styles/importFonts.css">
+        <link rel="stylesheet" href="https://www.hamen.io/static/styles/index.css">
     </head>
     <body>
         <header></header>
@@ -279,6 +317,28 @@ class Router:
 
         if os.listdir(directory):
             shutil.rmtree(directory)
+            os.makedirs(directory)
 
-        # 
+        # Create "blogs" and "guides" directories:
         [os.makedirs(x) for x in (docsDirectory, guidesDirectory, blogsDirectory)]
+
+        # Create blogs:
+        blogList = dict()
+        for category in self._blogs:
+            categoryDirectory = os.path.join(blogsDirectory, category)
+            os.makedirs(categoryDirectory)
+
+            blogList[category] = dict()
+
+            for blog in self._blogs[category]:
+                blog: Blog
+                blogDirectory = os.path.join(categoryDirectory, blog.blogID)
+                os.makedirs(blogDirectory)
+
+                with open(os.path.join(blogDirectory, "index.html"), "x", encoding="utf-8") as file:
+                    file.write(blog.renderHTML())
+
+                blogList[category][blog.blogID] = blog.renderMetadata()
+
+        with open(os.path.join(blogsDirectory, "blogList.json"), "x") as file:
+            json.dump(blogList, file)
