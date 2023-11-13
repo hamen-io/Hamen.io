@@ -50,8 +50,11 @@ class Element:
 
     @property
     def attributes(self) -> dict:
-        return self._attributes
-    
+        attributes = self._attributes
+        attributes["class"] = " ".join(self.classList.classes)
+
+        return attributes
+ 
     @attributes.setter
     def attributes(self, value: dict) -> None:
         raise Exceptions.ReadOnlyError("Attributes are read-only; modify with `setAttribute` or `removeAttribute`")
@@ -110,31 +113,38 @@ class UI:
     class H1(Element):
         def __init__(self):
             super().__init__(tagName = "UI:H1", renderAs="h2")
+            self.classList.add("ui:h1")
 
     class H2(Element):
         def __init__(self):
             super().__init__(tagName = "UI:H2", renderAs="h3")
+            self.classList.add("ui:h2")
 
     class Section(Element):
         def __init__(self):
             super().__init__(tagName = "UI:Section", renderAs="section")
+            self.classList.add("ui:section")
 
     class Text(Element):
         def __init__(self):
             super().__init__(tagName = "UI:Text", renderAs="p")
+            self.classList.add("ui:text")
 
     class Panel(Element):
         def __init__(self):
             super().__init__(tagName = "UI:Panel", renderAs="div")
             self.appendAttribute("type", ["TIP", "NOTE", "ALERT"])
+            self.classList.add("ui:panel")
 
     class Break(Element):
         def __init__(self):
             super().__init__(tagName = "UI:Break", renderAs="br", selfClosing=True)
+            self.classList.add("ui:break")
 
     class HRule(Element):
         def __init__(self):
             super().__init__(tagName = "UI:HRule", renderAs="hr", selfClosing=True)
+            self.classList.add("ui:hr")
 
     class List(Element):
         def __init__(self):
@@ -143,43 +153,54 @@ class UI:
             if self.getAttribute("type") == "ORDERED":
                 self._renderAs = "ol"
 
+            self.classList.add("ui:list")
+
     class Item(Element):
         def __init__(self):
             super().__init__(tagName = "UI:Item", renderAs="li")
+            self.classList.add("ui:list-item")
 
 class Format:
     class b(Element):
         def __init__(self):
             super().__init__(tagName = "b", renderAs="b")
+            self.classList.add("ui:inline-bold")
 
     class u(Element):
         def __init__(self):
             super().__init__(tagName = "u", renderAs="u")
+            self.classList.add("ui:inline-underline")
 
     class i(Element):
         def __init__(self):
             super().__init__(tagName = "i", renderAs="i")
+            self.classList.add("ui:inline-italic")
 
     class em(Element):
         def __init__(self):
             super().__init__(tagName = "em", renderAs="em")
+            self.classList.add("ui:inline-emphasis")
 
     class mark(Element):
         def __init__(self):
             super().__init__(tagName = "mark", renderAs="mark")
+            self.classList.add("ui:inline-mark")
 
 class Doc(Element):
     def __init__(self):
         super().__init__(tagName = "Doc")
         self.appendAttribute("docType", ["BLOG", "GUIDE"])
+        self.classList.add("article:doc")
 
 class Properties(Element):
     def __init__(self):
         super().__init__(tagName = "Properties")
+        self.classList.add("article:properties")
 
 class Document(Element):
     def __init__(self):
         super().__init__(tagName = "Document", renderAs="article")
+        self.classList.add("article:document", "ui:engine")
 
 class Entry(Element):
     def __init__(self, key: str = None, value: str = None):

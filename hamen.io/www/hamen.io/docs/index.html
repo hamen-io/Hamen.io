@@ -1,163 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang=en> <head><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><title>Hamen Docs &bull; Hamen.io</title><link rel=stylesheet href=../static/css/importFonts.css><link rel=stylesheet href=../static/css/importIcons.css><link rel=stylesheet href=../static/css/index.css><link rel=stylesheet href=../static/css/webTheme.css><link rel=stylesheet href=./lib/index.css><script type=text/javascript src=../static/js/index.js></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin=anonymous></script><link rel=icon href=./favicon.ico><script type=text/javascript>
+        // window.addEventListener("DOMContentLoaded", () => {
+        //   const loadArticlesAsynchronously = () => {
+        //     return new Promise(async (resolve, reject) => {
+        //       const response = await fetch("https://www.hamen.io/md/docs/Articles.json")
+        //         .then(async (response) => {
+        //           const Articles = await response.json()
+        //             .then((value) => {
+        //               resolve(value);
+        //             })
+        //             .catch((error) => {
+        //               reject(`An error occurred while trying to fetch the articles: ${error}`);
+        //             });
+        //         })
+        //         .catch(error => {
+        //           reject(error);
+        //         })
+        //     })
+        //   };
 
-        <title>Hamen Docs &bull; Hamen.io</title>
+        //   loadArticlesAsynchronously()
+        //     .then((articles) => {
+        //       const filterOptions = Object.keys(articles[0]).map((key, i) => {
+        //         return {
+        //           id: key.toLowerCase(),
+        //           title: key,
+        //           checked: i === 0
+        //         }
+        //       });
 
-        <link rel="stylesheet" href="./../static/styles/index.css">
-        <script type="text/javascript" src="./../static/scripts/Components.js" defer></script>
-        <script type="text/javascript" src="./../static/scripts/index.js"></script>
+        //       const CardList = new Components.UICardList(filterOptions, articles);
+        //       CardList.appendFilters(document.querySelector(".filters")).then(() => {
+        //         CardList.appendCardList(document.querySelector(".card-list"));
+        //       })
+        //     })
+        //     .catch((error) => {
+        //       console.error(error);
+        //     })
+        //     .finally(() => {
+        //       let searchInput = document.querySelector("#search-input");
+        //       let searchAuthor = new URL(window.location.href).searchParams.get("author");
+        //       searchInput.parentElement.replaceChild(Components.UIInput({
+        //         placeholder: "Search for an article, guide, or reference!",
+        //         id: "search-input",
+        //         icons: {
+        //           prefix: "search",
+        //           suffix: "clear"
+        //         },
+        //         value: searchAuthor ? `author:${searchAuthor}` : "",
+        //         onInput: value => {
+        //           let allHidden = true;
+        //           let cards = Array.from(document.querySelectorAll(".body.window .ui\\:card-list a.ui\\:medium-card"));
+        //           for (card in cards) {
+        //             card = cards[card];
+        //             let tags = Array.from(new Set(
+        //               card.innerText.split(/[\n \/\-]+/g)
+        //                 .map(tag => tag.trim().toLowerCase())
+        //             ));
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin="anonymous"></script>
+        //             let hideCard = true;
 
-        <!-- Favicon: -->
-        <link rel="icon" href="./favicon.ico" />
+        //             let query = value.trim();
+        //             if (query.toLowerCase().includes("author:")) {
+        //               let authorSelector = query.slice(query.indexOf("author:")).split("author:")[1].split(" ")[0]
+        //               let cardAuthor = card.getAttribute("data:authorID");
+        //               if (cardAuthor.toLowerCase() === authorSelector.toLowerCase()) {
+        //                 hideCard = false;
+        //               } else {
+        //                 hideCard = true;
+        //                 card.style.display = 'none';
+        //                 continue;
+        //               }
+        //             }
 
-        <script type="text/javascript">
-          window.addEventListener("DOMContentLoaded", () => {
-            const loadArticlesAsynchronously = () => {
-              return new Promise(async (resolve, reject) => {
-                const response = await fetch("https://www.hamen.io/md/docs/Articles.json")
-                  .then(async (response) => {
-                    const Articles = await response.json()
-                      .then((value) => {
-                        resolve(value);
-                      })
-                      .catch((error) => {
-                        reject(`An error occurred while trying to fetch the articles: ${error}`);
-                      });
-                  })
-                  .catch(error => {
-                    reject(error);
-                  })
-              })
-            };
+        //             query = query.split(" ").map(term => term.trim().toLowerCase());
+        //             if (value.trim() === "") {
+        //               hideCard = false;
+        //               allHidden = false;
+        //             } else {
+        //               query.forEach(term => {
+        //                 tags.forEach(tag => {
+        //                   if (tag.includes(term)) hideCard = false;
+        //                 })
+        //               });
+        //             }
 
-            loadArticlesAsynchronously()
-              .then((articles) => {
-                const filterOptions = Object.keys(articles[0]).map((key, i) => {
-                  return {
-                    id: key.toLowerCase(),
-                    title: key,
-                    checked: i === 0
-                  }
-                });
+        //             if (hideCard) {
+        //               card.style.display = 'none';
+        //             } else {
+        //               card.style.display = 'flex';
+        //               allHidden = false;
+        //             }
+        //           };
 
-                const CardList = new Components.UICardList(filterOptions, articles);
-                CardList.appendFilters(document.querySelector(".filters")).then(() => {
-                  CardList.appendCardList(document.querySelector(".card-list"));
-                })
-              })
-              .catch((error) => {
-                console.error(error);
-              })
-              .finally(() => {
-                let searchInput = document.querySelector("#search-input");
-                let searchAuthor = new URL(window.location.href).searchParams.get("author");
-                searchInput.parentElement.replaceChild(Components.UIInput({
-                  placeholder: "Search for an article, guide, or reference!",
-                  id: "search-input",
-                  icons: {
-                    prefix: "search",
-                    suffix: "clear"
-                  },
-                  value: searchAuthor ? `author:${searchAuthor}` : "",
-                  onInput: value => {
-                    let allHidden = true;
-                    let cards = Array.from(document.querySelectorAll(".body.window .ui\\:card-list a.ui\\:medium-card"));
-                    for (card in cards) {
-                      card = cards[card];
-                      let tags = Array.from(new Set(
-                        card.innerText.split(/[\n \/\-]+/g)
-                          .map(tag => tag.trim().toLowerCase())
-                      ));
+        //           let noResults = document.querySelector("#no-results");
+        //           if (allHidden) {
+        //             noResults.style.display = "flex";
+        //           } else {
+        //             noResults.style.display = "none";
+        //           }
+        //         }
+        //       }), searchInput);
+        //     });
+        // })
+        </script></head> <body> <header></header> <main> <div class=content> <div class=header> <div class=titles> <h1>Hamen Docs</h1> <p>Learn about a variety of topics through high-quality written-content!</p> </div> <div class=search> <input type=text id=search-docs placeholder="Search for a blog, guide, or reference!"> </div> <hr> <div style="margin-top: 12px;margin-bottom: -12px;gap: 8px" class=filters> <style>
+                            .expanded-content {
+                                display: none;
+                            }
 
-                      let hideCard = true;
+                            .expanded-content.visible {
+                                display: flex;
+                                padding: 8px;
+                                border: 1px solid var(--hmn-borderColor-black-default);
+                                background-color: var(--hmn-backgroundColor-box-default);
+                            }
 
-                      let query = value.trim();
-                      if (query.toLowerCase().includes("author:")) {
-                        let authorSelector = query.slice(query.indexOf("author:")).split("author:")[1].split(" ")[0]
-                        let cardAuthor = card.getAttribute("data:authorID");
-                        if (cardAuthor.toLowerCase() === authorSelector.toLowerCase()) {
-                          hideCard = false;
-                        } else {
-                          hideCard = true;
-                          card.style.display = 'none';
-                          continue;
-                        }
-                      }
+                            ul.expanded-items {
+                                list-style: none;
+                                padding: 0;
+                                display: flex;
+                                flex-direction: row;
+                                gap: 8px;
+                                margin: 0
+                            }
 
-                      query = query.split(" ").map(term => term.trim().toLowerCase());
-                      if (value.trim() === "") {
-                        hideCard = false;
-                        allHidden = false;
-                      } else {
-                        query.forEach(term => {
-                          tags.forEach(tag => {
-                            if (tag.includes(term)) hideCard = false;
-                          })
-                        });
-                      }
+                            ul.expanded-items>li {
+                                padding: 6px 12px;
+                                width: 100%;
+                                text-align: center;
+                                cursor: pointer;
+                                border-radius: 3px;
+                                border: 1px solid var(--hmn-borderColor-black-secondary);
+                                user-select: none;
+                                background-color: var(--hmn-backgroundColor-box-default);
+                                transition: 0.1s;
+                            }
 
-                      if (hideCard) {
-                        card.style.display = 'none';
-                      } else {
-                        card.style.display = 'flex';
-                        allHidden = false;
-                      }
-                    };
+                            ul.expanded-items>li.selected {
+                                font-weight: 700;
+                            }
+                        </style> <ul class=expanded-items> <li content-target=category>Category</li> <li content-target=subcategory>Subcategory</li> <li content-target=doc-type>Doc Type</li> </ul> <div content-id=category class=expanded-content> <label> <input type=radio name=category> Code </label> <label> <input type=radio name=category> Linguistics </label> <button type=button style="padding: 5px 20px">Apply!</button> </div> <div content-id=subcategory class=expanded-content></div> <div content-id=doc-type class=expanded-content> <label> <input type=checkbox name=doc-type> Article/Blog </label> <label> <input type=checkbox name=doc-type> Guide </label> <button type=button style="padding: 5px 20px">Apply!</button> </div> <script>
+                            Array.from(document.querySelectorAll(".expanded-items")).forEach(expandedItem => {
+                                let expandedItems = Array.from(expandedItem.querySelectorAll("li"));
+                                let categories = Array.from(expandedItem.parentElement.querySelectorAll(".expanded-content"));
 
-                    let noResults = document.querySelector("#no-results");
-                    if (allHidden) {
-                      noResults.style.display = "flex";
-                    } else {
-                      noResults.style.display = "none";
-                    }
-                  }
-                }), searchInput);
-              });
-          })
-        </script>
-    </head>
-    <body>
-        <header></header>
-        <main class="content-page">
-          <div class="content">
-            <div class="header window">
-              <div class="titles">
-                <div class="titles">
-                  <h1 class="page-title">Hamen Docs</h1>
-                  <p>Learn about various topics through high-quality blogs</p>
-                </div>
-                <div class="search">
-                  <input type="text" placeholder="Search for an article, guide, or reference!" id="search-input" render="false">
-                </div>
-              </div>
-              <div class="filters">
-                <p>
-                  <b>Docs Categories:</b>
-                </p>
-              </div>
-            </div>
-            <hr>
-            <div class="body window">
-              <div class="card-list"></div>
-              <style>
-                #no-results {
-                  padding: 1em;
-                  align-items: center;
-                  text-align: center
-                }
-              </style>
-              <div id="no-results" style="display: none;">
-                <h3 style="font-size: 18px;margin-bottom: 0">No Results.</h3>
-                <p>Try refining your search, or check for spelling errors!</p>
-              </div>
-            </div>
-          </div>
-          <footer></footer>
-        </main>
-    </body>
-</html>
+                                expandedItems.forEach(item => {
+                                    item.addEventListener("click", () => {
+                                        console.assert(item.getAttribute("content-target"), "Missing content target.");
+
+                                        // De-select all items:
+                                        expandedItems.forEach(_item => _item.classList.remove("selected"))
+
+                                        // Hide all expanded content:
+                                        categories.forEach(category => {
+                                            if (category.getAttribute("content-id") === item.getAttribute("content-target")) {
+                                                if (!category.classList.contains("visible")) {
+                                                    category.classList.add("visible");
+                                                    item.classList.add("selected");
+                                                } else {
+                                                    category.classList.remove("visible");
+                                                    item.classList.remove("selected");
+                                                }
+                                            } else {
+                                                category.classList.remove("visible");
+                                            }
+                                        });
+                                    })
+                                })
+                            })
+                        </script> </div> </div> <hr> <div class=body> <div class=filters></div> <div class=results></div> </div> </div> </main> <footer></footer> </body> </html>

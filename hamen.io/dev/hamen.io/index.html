@@ -15,42 +15,85 @@
 
         <title>Hamen.io</title>
 
-        <link rel="stylesheet" href="./static/styles/index.css">
+        <!-- <link rel="stylesheet" href="./static/styles/index.css">
         <script type="text/javascript" src="./static/scripts/Components.js"></script>
-        <script type="text/javascript" src="./static/scripts/index.js"></script>
+        <script type="text/javascript" src="./static/scripts/index.js"></script> -->
+        <link rel="stylesheet" href="./static/css/importFonts.css">
+        <link rel="stylesheet" href="./static/css/importIcons.css">
+        <link rel="stylesheet" href="./static/css/index.css">
+        <link rel="stylesheet" href="./static/css/webTheme.css">
+
+        <script type="text/javascript" src="./static/js/index.js"></script>
 
         <!-- Favicon: -->
         <link rel="icon" href="./favicon.ico" />
     </head>
     <body>
         <header></header>
-        <main class="homepage">
+        <main class="homepage alt-sec">
+            <style>
+                .homepage>section#introduction {
+                    min-height: calc(100vh - var(--hmn-headerSize));
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                @media screen and (max-width:700px) {
+                    .homepage #search-input,.homepage #search-bttn {
+                        width: 100%;
+                        max-width: 100%;
+                    }
+                }
+            </style>
             <section id="introduction">
-                <h1 class="page-title">Hamen.io</h1>
+                <h1 class="title">Hamen.io</h1>
                 <p>Unleashing the Potential of Academic Excellence through Code</p>
                 <form method="GET" action="https://www.hamen.io/search" style="width: 100%;max-width:600px;align-items: center;">
                     <input type="text" id="search-input" placeholder="Search for something on our site!">
-                    <style>
-                        #search-bttn {
-                            width: fit-content;
-                        }
-
-                        @media screen and (max-width:400px) {
-                            #search-bttn {
-                                width: 100%;
-                            }
-                        }
-                    </style>
                     <button type="submit" id="search-bttn">
                         Search
                         <span class="material-symbols-outlined">search</span>
                     </button>
                 </form>
             </section>
+            <style>
+                .homepage>section:not(:first-of-type) {
+                    width: 100%;
+                    align-items: center;
+                }
+
+                .homepage>section:not(:first-of-type) .body {
+                    max-width: 800px;
+                    flex-direction: row;
+                    justify-content: center;
+                    gap: 3em;
+                }
+
+                .homepage>section:not(:first-of-type) a.button {
+                    margin-top: 1em;
+                }
+
+                .homepage>section:not(:first-of-type) .icon {
+                    justify-content: center;
+                }
+
+                .homepage>section:not(:first-of-type) .icon>span {
+                    font-size: 96px
+                }
+
+                .homepage>section:not(:first-of-type) {
+                    border-top: 1px solid var(--hmn-borderColor-black-default);
+                    padding: 5em 4em
+                }
+
+                .homepage>section:last-of-type {
+                    border-bottom: 1px solid var(--hmn-borderColor-black-default)
+                }
+            </style>
             <section id="docs">
                 <div class="body">
                     <div class="details">
-                        <h1 class="h1 title">Hamen Docs</h1>
+                        <h2 class="title">Hamen Docs</h2>
                         <p>Explore a diverse array of blog posts encompassing a multitude of subjects, enabling you to acquire profound insights and knowledge. Delve into the rich tapestry of articles and enhance your understanding through this comprehensive resource.</p>
                         <a class="button" href="https://www.hamen.io/docs">
                             <button type="button">
@@ -115,7 +158,7 @@
                     </div>
                 </div>
             </section> -->
-            <footer></footer>
         </main>
+        <footer></footer>
     </body>
 </html>

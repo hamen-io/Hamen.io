@@ -1,0 +1,38 @@
+/*
+
+Styles for the UI namespace in Docs
+
+*/
+
+.ui\:engine .ui\:inline-emphasis { font-style: italic; }
+
+.ui\:engine .ui\:inline-mark { font-weight: 600; }
+
+.ui\:engine .ui\:inline-italic { font-style: italic; }
+
+.ui\:engine .ui\:inline-underline { text-decoration: underline; }
+
+.ui\:engine .ui\:inline-bold { font-weight: 700; }
+
+.ui\:engine .ui\:list[type=UNORDERED] {  }
+
+.ui\:engine .ui\:list[type=ORDERED] {  }
+
+.ui\:engine .ui\:list-item {  }
+
+.ui\:engine .ui\:text {  }
+
+.ui\:engine .ui\:h1 {  }
+
+.ui\:engine .ui\:h2 {  }
+
+.ui\:engine .ui\:hrule {
+    width: calc(100% - 8em);
+    min-width: 8em;
+    height: 2px;
+    border-radius: 1em;
+}
+
+.ui\:engine .ui\:panel {  }
+
+.ui\:engine .ui\:section {  }
