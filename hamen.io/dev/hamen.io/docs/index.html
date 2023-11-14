@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="../static/css/webTheme.css">
 
         <link rel="stylesheet" href="./lib/index.css">
+        <script type="text/javascript" src="./lib/index.js"></script>
 
         <script type="text/javascript" src="../static/js/index.js"></script>
 
@@ -138,108 +139,40 @@
                     <div class="search">
                         <input type="text" id="search-docs" placeholder="Search for a blog, guide, or reference!">
                     </div>
-                    <hr>
-                    <div style="margin-top: 12px;margin-bottom: -12px;gap: 8px" class="filters">
-                        <style>
-                            .expanded-content {
-                                display: none;
-                            }
-
-                            .expanded-content.visible {
-                                display: flex;
-                                padding: 8px;
-                                border: 1px solid var(--hmn-borderColor-black-default);
-                                background-color: var(--hmn-backgroundColor-box-default);
-                            }
-
-                            ul.expanded-items {
-                                list-style: none;
-                                padding: 0;
-                                display: flex;
-                                flex-direction: row;
-                                gap: 8px;
-                                margin: 0
-                            }
-
-                            ul.expanded-items>li {
-                                padding: 6px 12px;
-                                width: 100%;
-                                text-align: center;
-                                cursor: pointer;
-                                border-radius: 3px;
-                                border: 1px solid var(--hmn-borderColor-black-secondary);
-                                user-select: none;
-                                background-color: var(--hmn-backgroundColor-box-default);
-                                transition: 0.1s;
-                            }
-
-                            ul.expanded-items>li.selected {
-                                font-weight: 700;
-                            }
-                        </style>
-                        <ul class="expanded-items">
-                            <li content-target="category">Category</li>
-                            <li content-target="subcategory">Subcategory</li>
-                            <li content-target="doc-type">Doc Type</li>
-                        </ul>
-                        <div content-id="category" class="expanded-content">
-                            <label>
-                                <input type="radio" name="category">
-                                Code
-                            </label>
-                            <label>
-                                <input type="radio" name="category">
-                                Linguistics
-                            </label>
-                            <button type="button" style="padding: 5px 20px">Apply!</button>
-                        </div>
-                        <div content-id="subcategory" class="expanded-content"></div>
-                        <div content-id="doc-type" class="expanded-content">
-                            <label>
-                                <input type="checkbox" name="doc-type">
-                                Article/Blog
-                            </label>
-                            <label>
-                                <input type="checkbox" name="doc-type">
-                                Guide
-                            </label>
-                            <button type="button" style="padding: 5px 20px">Apply!</button>
-                        </div>
-                        <script>
-                            Array.from(document.querySelectorAll(".expanded-items")).forEach(expandedItem => {
-                                let expandedItems = Array.from(expandedItem.querySelectorAll("li"));
-                                let categories = Array.from(expandedItem.parentElement.querySelectorAll(".expanded-content"));
-
-                                expandedItems.forEach(item => {
-                                    item.addEventListener("click", () => {
-                                        console.assert(item.getAttribute("content-target"), "Missing content target.");
-
-                                        // De-select all items:
-                                        expandedItems.forEach(_item => _item.classList.remove("selected"))
-
-                                        // Hide all expanded content:
-                                        categories.forEach(category => {
-                                            if (category.getAttribute("content-id") === item.getAttribute("content-target")) {
-                                                if (!category.classList.contains("visible")) {
-                                                    category.classList.add("visible");
-                                                    item.classList.add("selected");
-                                                } else {
-                                                    category.classList.remove("visible");
-                                                    item.classList.remove("selected");
-                                                }
-                                            } else {
-                                                category.classList.remove("visible");
-                                            }
-                                        });
-                                    })
-                                })
-                            })
-                        </script>
+                </div>
+                <hr>
+                <div style="margin: 8px 0;gap: 8px" class="filters">
+                    <ul class="expanded-items">
+                        <li content-target="category">Category</li>
+                        <li content-target="subcategory">Subcategory</li>
+                        <li content-target="doc-type">Doc Type</li>
+                    </ul>
+                    <div content-id="category" class="expanded-content">
+                        <label>
+                            <input type="radio" name="category">
+                            Code
+                        </label>
+                        <label>
+                            <input type="radio" name="category">
+                            Linguistics
+                        </label>
+                        <button type="button" style="padding: 5px 20px">Apply!</button>
+                    </div>
+                    <div content-id="subcategory" class="expanded-content"></div>
+                    <div content-id="doc-type" class="expanded-content">
+                        <label>
+                            <input type="checkbox" name="doc-type">
+                            Article/Blog
+                        </label>
+                        <label>
+                            <input type="checkbox" name="doc-type">
+                            Guide
+                        </label>
+                        <button type="button" style="padding: 5px 20px">Apply!</button>
                     </div>
                 </div>
                 <hr>
                 <div class="body">
-                    <div class="filters"></div>
                     <div class="results"></div>
                 </div>
             </div>

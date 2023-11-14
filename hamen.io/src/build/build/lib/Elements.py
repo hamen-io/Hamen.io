@@ -1,3 +1,4 @@
+import re
 from typing import Type
 
 import lib.Exceptions as Exceptions
@@ -136,6 +137,46 @@ class UI:
             self.appendAttribute("type", ["TIP", "NOTE", "ALERT"])
             self.classList.add("ui:panel")
 
+    class Code(Element):
+        def __init__(self):
+            super().__init__(tagName = "UI:Code", renderAs="div", selfClosing=False)
+            self.appendAttribute("language", ["LESS", "SASS", "PYTHON", "JAVA", "XML", "HTML", "CSS"])
+            self.appendAttribute("tabsize", str)
+            self.classList.add("ui:code")
+
+        def __str__(self, renderTags: bool = False) -> str:
+            attrs = Common.renderInlineAttributes(self.attributes)
+            attrs = (" " if attrs else "") + attrs
+
+            tag = self.tagName.lower()
+            if renderTags and self._renderAs:
+                tag = self._renderAs.lower()
+            text = self.innerText
+            children = "".join([x.__str__(renderTags) for x in self.children])
+
+            tabSize = self.getAttribute("tabsize") or "4"
+            try:
+                tabSize = int(tabSize)
+            except:
+                raise TypeError("`tabSize` attribute should be an integer")
+
+            lines = text.split("\n")
+            for lineIndex,line in enumerate(lines):
+                for i,char in enumerate(line):
+                    if i >= tabSize * 4 or char != " ":
+                        line = line[i:]
+                        line = re.split(r"^( *)(.*)$", line)[1:-1]
+                        line = "".join([" " for x in list(line[0])]) + "".join(line[1])
+                        lines[lineIndex] = line
+                        break
+
+            text = f"""<pre>{"<br>".join(lines)}</pre>"""
+
+            if self.selfClosing:
+                return f"<{tag}{attrs} />"
+
+            return f"<{tag}{attrs}>{text}{children}</{tag}>"
+
     class Break(Element):
         def __init__(self):
             super().__init__(tagName = "UI:Break", renderAs="br", selfClosing=True)
@@ -185,6 +226,11 @@ class Format:
         def __init__(self):
             super().__init__(tagName = "mark", renderAs="mark")
             self.classList.add("ui:inline-mark")
+
+    class code(Element):
+        def __init__(self):
+            super().__init__(tagName = "code", renderAs="code")
+            self.classList.add("ui:inline-code")
 
 class Doc(Element):
     def __init__(self):

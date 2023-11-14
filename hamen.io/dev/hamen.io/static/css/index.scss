@@ -44,6 +44,7 @@ body {
     }
 
     >header {
+        border-bottom: 1px solid var(--hmn-borderColor-black-default);
         position: fixed;
         top: 0;
         z-index: 1000;
@@ -56,6 +57,7 @@ body {
     }
 
     >footer {
+        border-top: 1px solid var(--hmn-borderColor-black-default);
         padding: 14px;
         background-color: var(--hmn-backgroundColor-white-secondary);
     }
@@ -128,7 +130,7 @@ textarea,input,button {
     outline: 0;
     border-radius: 6px;
     outline: 0px solid transparent;
-    border: 1px solid var(--hmn-borderColor-black-default);
+    border: 1px solid var(--hmn-borderColor-black-primary);
     transition: 0.1s;
 }
 
@@ -151,10 +153,6 @@ textarea {
 body>header,body>header>.header-content {
     flex-direction: row;
     width: 100%;
-}
-
-body>header>.header-content {
-    max-width: var(--hmn-maxPageWidth);
 }
 
 body>header>.header-content>a:first-of-type {

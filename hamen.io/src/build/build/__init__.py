@@ -242,7 +242,6 @@ class Hooks:
                 os.mkdir(manifestFolder)
 
                 articlePathname = file.fullFilePath.split("xml")[-1].replace("\\", "/")[:-4] + "html"
-                print(articlePathname)
 
                 with open(os.path.join(manifestFolder, "manifest.json"), "x", encoding="utf-8") as manifestJson:
                     manifest = {
@@ -256,7 +255,9 @@ class Hooks:
                             "published": hdoc.propertyEntries.get("date:published"),
                             "modified": hdoc.propertyEntries.get("date:modified")
                         },
-                        "articlePathURL": f"https://www.hamen.io/docs/doc{articlePathname}"
+                        "articlePathURL": f"https://www.hamen.io/docs/doc{articlePathname}",
+                        "articleCategory": hdoc.propertyEntries.get("category"),
+                        "articleSubCategory": hdoc.propertyEntries.get("subcategory"),
                     }
 
                     manifestList.append(manifest)
@@ -274,8 +275,8 @@ class Hooks:
         def _handleHDOC(self, hdoc: str) -> Article:
             with open(hdoc, "r", encoding = "utf-8") as file:
                 code = file.read()
-                code = re.sub(r"<!--[\s\S]*?-->", "", code)
-                code = re.sub(r"""(\w+)={\s*(("|')?((.|\n)*?)(\3)?)\s*}""", r'\1="\4"', code)
+                # code = re.sub(r"<!--[\s\S]*?-->", "", code)
+                # code = re.sub(r"""(\w+)={\s*(("|')?((.|\n)*?)(\3)?)\s*}""", r'\1="\4"', code)
 
                 root = etree.fromstring(code)
                 root: etree._Element
@@ -307,6 +308,7 @@ class Hooks:
                             case "ui:section": element = Elements.UI.Section()
                             case "ui:text": element = Elements.UI.Text()
                             case "ui:list": element = Elements.UI.List()
+                            case "ui:code": element = Elements.UI.Code()
                             case "ui:item": element = Elements.UI.Item()
                             case "ui:break": element = Elements.UI.Break()
                             case "ui:hrule": element = Elements.UI.HRule()
@@ -315,6 +317,7 @@ class Hooks:
                             case "b": element = Elements.Format.b()
                             case "u": element = Elements.Format.u()
                             case "mark": element = Elements.Format.mark()
+                            case "code": element = Elements.Format.code()
                             case _: raise SyntaxError(f"Unknown tag: '{tag}'")
 
                         element = attachChildren(child, element)
