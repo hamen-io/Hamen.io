@@ -72,16 +72,16 @@ class BuildSite:
         assert importType in ["JAVASCRIPT", "STYLESHEET"]
         return list(self._jsImports) if importType == "JAVASCRIPT" else list(self._cssImports)
 
-    def createHook(self, hook: Type['Hook']) -> None:
+    def registerHook(self, hook: Type['Hook']) -> None:
         """
-        
+        Registers a hook
         """
         if hook not in self.hooks:
             self.hooks.append(hook)
 
     def executeHooks(self) -> None:
         """
-        
+        Execute all callback hooks in the hook list (`self.hooks`)
         """
         for hook in self.hooks:
             hook: Type['Hook']
@@ -185,7 +185,10 @@ class BuildSite:
 
     def createSubdomainRedirect(self, subdomain: str, redirect: str) -> None:
         """
-        
+        Creates a redirect so when the user accesses "{subdomain}", it goes to "{redirect}"
+
+        Subdomains should include "hamen.io"; for example: "docs.hamen.io", "create.docs.hamen.io", etc
+        Redirects should include "hamen.io"; for example: "hamen.io/docs", "hamen.io/docs/create-docs", etc
         """
         # Validate subdomain:
         assert re.findall(r"^((\w+((?<=\w)\.\w*)?)+)(\.hamen\.io)$", subdomain), f"Invalid subdomain: '{subdomain}'"
@@ -390,8 +393,8 @@ class Hooks:
 <!-- Mobile App Meta Tags -->
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="application-name" content="Your Blog">
-<meta name="apple-mobile-web-app-title" content="Your Blog">
+<meta name="application-name" content="{title}">
+<meta name="apple-mobile-web-app-title" content="{title}">
 """
                     
                     headMetadata = headMetadata.strip().split("\n")
@@ -479,7 +482,7 @@ if __name__ == "__main__":
     release.createSubdomainRedirect(r"software.hamen.io", "hamen.io/software")
 
     # Handle hooks:
-    release.createHook(Hooks.BuildDoc)
-    release.createHook(Hooks.Sass)
-    release.createHook(Hooks.Minify)
+    release.registerHook(Hooks.BuildDoc)
+    release.registerHook(Hooks.Sass)
+    release.registerHook(Hooks.Minify)
     release.executeHooks()

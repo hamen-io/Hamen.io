@@ -25,7 +25,7 @@
 
     --hmn-selectionColor: #c2dbff;
 
-    --hmn-maxPageWidth: 1400px;
+    --hmn-maxPageWidth: 100vw;
 
     --hmn-backgroundColor-blue-primary: hsla(217, 81%, 45%, 0.859);
     --hmn-backgroundColor-blue-default: hsla(217, 85%, 51%, 0.859);
