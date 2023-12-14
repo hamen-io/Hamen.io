@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ ENV["title"] }} &bull; Hamen Docs</title>
+
+    <script type="text/javascript">
+      const Guide = {{ ENV["guideOutline"] }};
+      const ModuleNumber = {{ ENV["moduleNumber"] }};
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <link rel="stylesheet" href="{{ ENV['staticDirectory'] }}/styles/index.css">
+    <!-- <link rel="stylesheet" href="./../dev/hamen.io/static/styles/index.css"> -->
+    <link rel="stylesheet" href="{{ ENV['staticDirectory'] }}/styles/prism.css">
+    <!-- <link rel="stylesheet" href="./../dev/hamen.io/static/styles/prism.css"> -->
+    <script type="text/javascript" src="{{ ENV['staticDirectory'] }}/scripts/Components.js" defer></script>
+    <!-- <script type="text/javascript" src="./../dev/hamen.io/static/scripts/Components.js" defer></script> -->
+    <script type="text/javascript" src="{{ ENV['staticDirectory'] }}/scripts/article.js"></script>
+    <!-- <script type="text/javascript" src="./../dev/hamen.io/static/scripts/article.js"></script> -->
+    <script type="text/javascript" src="{{ ENV['staticDirectory'] }}/scripts/index.js"></script>
+    <!-- <script type="text/javascript" src="./../dev/hamen.io/static/scripts/index.js"></script> -->
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <!-- Import Prism.js -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-latex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-git.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-batch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-shell.min.js"></script> -->
+  </head>
+  <body>
+    <header></header>
+    <main article-type="guide">
+      <div id="article-wrapper">
+        <article id="tree"></article>
+        <article id="doc">
+          <section id="introduction">
+            <h1 class="" id="doc-title" style="color: rgba(0, 0, 0, 0.73);"> {{ ENV["articleRenderedTitle"] }} </h1>
+            <p>
+              <span>
+                Published
+                <span style="font-weight: 600;">
+                  {{ ENV["date"] }}
+                </span>
+                , by 
+                <a href="https://www.hamen.io/docs/?author={{ ENV["authorID"] }}" class="fancy" target="_blank">
+                  {{ ENV["author"] }}
+                </a>
+              </span>
+            </p>
+          </section>
+          <hr>
+          <section id="content">
+            {{ ENV["articleHTML"] }}
+          </section>
+          <footer id="body-footer"></footer>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>

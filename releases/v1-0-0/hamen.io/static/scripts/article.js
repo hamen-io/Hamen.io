@@ -59,4 +59,78 @@ window.addEventListener("DOMContentLoaded", () => {
   } catch (error) {
     
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    try {
+      if (typeof MathJax !== "undefined") {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      }
+    } catch {}
+  });
+
+  Array.from(document.querySelectorAll(".ui\\:chart")).forEach(chart => {
+    const canvas = chart.querySelector("canvas");
+
+    switch (chart.getAttribute("chart-id")) {
+      case "secant-example-i":
+        (() => {
+          function f(x) {
+            return ((Math.pow(x, 2)) + (4 * x) - (2));
+          }
+
+          var x1 = -1;
+          var x2 = -5;
+          var y1 = -5;
+          var y2 = 3;
+
+          var data = {
+            labels: [],
+            datasets: [
+              {
+                label: 'f(x) = 3x^2 + 4x - 6',
+                data: [],
+                borderColor: 'blue',
+                borderWidth: 2,
+                fill: false,
+              },
+              {
+                label: 'Secant Line',
+                data: [{ x: x1, y: y1 }, { x: x2, y: y2 }],
+                borderColor: 'red',
+                borderWidth: 2,
+                fill: false,
+                showLine: true,
+              }
+            ]
+          };
+
+          var ctx = canvas.getContext('2d');
+          var chartContent = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: {
+              scales: {
+                x: {
+                  type: 'linear',
+                  position: 'bottom'
+                },
+                y: {
+                  min: -10,
+                  max: 10,
+                  type: 'linear',
+                  position: 'left'
+                }
+              }
+            }
+          });
+
+          for (var x = -10; x <= 10; x += 0.5) {
+            data.labels.push(x.toFixed(2));
+            data.datasets[0].data.push(f(x).toFixed(2));
+          }
+
+          chartContent.update();
+        })()
+    }
+  })
 })

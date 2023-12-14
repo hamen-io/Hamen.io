@@ -32,15 +32,20 @@ class UICardList {
     card.classList.add("ui:medium-card");
     const url = info["url"];
     card.href = `https://www.hamen.io/docs/${url}`;
+    for (let key in info) {
+      if (!["url"].includes(key)) {
+        card.setAttribute(`data:${key}`, info[key])
+      }
+    };
 
     card.innerHTML = `
       <div class="header" style="background-color: rgb(77, 151, 255);"></div>
       <div class="body">
         <span class="category">${info.category.join(" / ")}</span>
-        <h4 class="title">${info.title}</h4>
+        <h4 class="title card:title">${info.title}</h4>
         <div class="date" style="flex-direction: row;justify-content: space-between;width: 100%;">
-          <span>${info.date}</span>
-          <span>by ${info.author}</span>
+          <span class="card:date">${info.date}</span>
+          <span class="card:author">by ${info.author}</span>
         </div>
       </div>
     `;
@@ -176,7 +181,7 @@ class UICardList {
 }
 
 const Components = {
-  UIInput(options = { onClear, onInput: value => {}, placeholder: "", id: "", class: "", type: "text", icons: { prefix: "search", suffix: "clear" }}) {
+  UIInput(options = { onClear, value: "", onInput: value => {}, placeholder: "", id: "", class: "", type: "text", icons: { prefix: "search", suffix: "clear" }}) {
     const inputWrapper = document.createElement("div");
     inputWrapper.classList.add("input-wrapper");
 
@@ -226,6 +231,11 @@ const Components = {
         options.onClear(input);
         options.onInput(input.value);
       });
+
+      if (options.value) {
+        input.value = options.value;
+        options.onInput(options.value);
+      }
     };
 
     input.addEventListener("input", () => {

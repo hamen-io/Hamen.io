@@ -6,12 +6,14 @@
 
     <title>Syntax vs. Semantics vs. Grammar vs. Lexicon &bull; Hamen Docs</title>
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin="anonymous"></script>
+
     <meta name="description" content="Explore the fundamental components of language—Syntax, Semantics, Grammar, and Lexicon. Understand how these linguistic concepts work together to structure and convey meaning in human communication">
     <meta name="keywords" content="Syntax, Semantics, Grammar, Lexicon, linguistics, language structure, meaning in language, linguistic concepts, sentence structure, vocabulary, word meaning, linguistic analysis">
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin="anonymous"></script>
-
     <meta name="icon" href="https://www.hamen.io/static/media/favicon/favicon.ico">
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
     <link rel="stylesheet" href="../../../../../../static/styles/index.css">
     <link rel="stylesheet" href="../../../../../../static/styles/prism.css">
@@ -35,8 +37,6 @@
           e.stopImmediatePropagation();
           window.open(`https://www.hamen.io/md/docs/${suffix}`);
         };
-
-        console.log(e.key);
       })
     </script>
 
@@ -54,6 +54,19 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-git.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-batch.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-shell.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script type="text/javascript">
+      const hideAds = true;
+      window.addEventListener("DOMContentLoaded", () => {
+        if (hideAds) {
+          const ads = document.querySelector("#ads");
+          ads.style.width = '0'
+          ads.style.minWidth = '0'
+          ads.style.maxWidth = '0'
+          ads.style.display = 'none'
+        }
+      })
+    </script>
   </head>
   <body>
     <header></header>
@@ -149,11 +162,13 @@
                 min-width: 250px;
                 height: 100%;
                 margin-left: 2em;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
               }
 
               #ads>.ad {
                 width: 100%;
-                height: 30em;
                 position: sticky;
                 top: 2em;
                 min-height: calc(100vh - 4em - var(--header-size));
@@ -178,7 +193,33 @@
               }
             </style>
             <div id="ads">
-              <div class="ad"></div>
+              <div class="ad">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360"
+                crossorigin="anonymous"></script>
+                <!-- Docs Ad -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-1664530166161360"
+                    data-ad-slot="4372855317"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <script type="text/javascript">
+                  window.addEventListener("DOMContentLoaded", () => {
+                    setInterval(() => {
+                      try {
+                        if (!adsbygoogle) {
+                          throw "Error";
+                        }
+                      } catch {
+                        console.warn("Ads not working...");
+                      }
+                    }, 500)
+                  })
+                </script>
+              </div>
             </div>
           </section>
         </article>

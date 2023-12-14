@@ -4,16 +4,13 @@
 /* Poppins: */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* Azeret Mono: */
-@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 /* Noto Sans: */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* Raleway: */
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* Google Fonts: */
+/* Google Icons: */
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 :root {
@@ -24,9 +21,10 @@
   --font-size-normal: 14px;
   --font-size-sub: calc(var(--font-size-normal) - 1px);
 
-  --background-color-primary: hsl(0, 0%, 98%);
-  --background-color-default: hsl(0, 0%, 96%);
-  --background-color-secondary: hsl(0, 0%, 94%);
+  --background-color-primary: hsl(0, 0%, 99.5%);
+  --background-color-default: hsl(0, 0%, 98.5%);
+  --background-color-secondary: hsl(0, 0%, 97.5%);
+  --background-color-box: rgba(0, 0, 0, 0.03);
 
   --border-color-100: rgba(0, 0, 0, 0.02);
   --border-color-200: rgba(0, 0, 0, 0.04);
@@ -48,6 +46,8 @@
   --text-color-800: rgba(0, 0, 0, 0.93);
   --text-color-900: rgba(0, 0, 0, 0.98)
 }
+
+@import url('utility-classes.css');
 
 @media screen and (max-width:1100px) {
   :root {
@@ -135,6 +135,7 @@ textarea {
 
 .fancy {
   font-family: 'MuseoModerno', cursive !important;
+  font-size: var(--font-size-sub)
 }
 
 p a,
@@ -215,7 +216,7 @@ body>header li[list-id=background] {
   height: calc(100vh - var(--header-size));
   top: var(--header-size);
   left: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--background-color-box);
   z-index: 998;
   transition: 0.2s;
   opacity: 0%;
@@ -343,14 +344,29 @@ input {
   font-size: var(--font-size-sub);
 }
 
+p .MJXc-display,
+li .MJXc-display {
+  display: inline !important;
+  margin: 0 !important;
+}
+
+.ui\:chart {
+    position: relative;
+    width: 100%;
+}
+
+main[article-type=guide] #doc>section:last-of-type {
+  margin-bottom: 2em;
+}
+
 button {
-  background: hsl(220, 97%, 62%);
-  border-radius: 2px;
+  background: hsl(220, 100%, 59.5%);
+  border-radius: 8em;
   border-width: 0;
   box-sizing: border-box;
   color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  font-family: 'Raleway', sans-serif;
+  /* font-family: 'Raleway', sans-serif; */
   margin: 0;
   max-width: 100%;
   outline: none;
@@ -358,18 +374,21 @@ button {
   padding-left: 36px;
   padding-right: 36px;
   text-decoration: none !important;
-  transition: .15s;
+  transition: .1s;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   margin-top: 1em;
   margin-bottom: 1em;
-  font-weight: 600;
-  font-family: 'MuseoModerno', cursive
+  font-weight: 500;
+  font-family: 'MuseoModerno', cursive;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: 0px solid transparent;
 }
 
 button .material-symbols-outlined {
+  font-weight: 500 !important;
   font-size: 12px !important;
   padding-top: 1px;
 }
@@ -383,6 +402,7 @@ button:hover {
 button:active {
   background: hsl(220, 66%, 50%);
   color: rgba(255, 255, 255, 0.4);
+  outline: 4px solid hsl(220, 90%, 74%);
   text-decoration: none !important
 }
 
@@ -525,7 +545,7 @@ a.button-wrapper:active {
 }
 
 .homepage>section:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: var(--background-color-box);
 }
 
 .homepage>section>.body {
@@ -754,7 +774,7 @@ hr {
   align-items: center;
   padding: 1.5em;
   outline: 0px solid rgb(77, 151, 255);
-  /* background-color: rgba(0, 0, 0, 0.03) */
+  background-color: var(--background-color-box)
 }
 
 .ui\:long-card a.expand-more {
@@ -864,7 +884,7 @@ hr {
   position: relative;
   transition: .15s;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: var(--background-color-box);
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -993,7 +1013,7 @@ h3 {
 
 #doc ul,
 #doc ol {
-  margin: 0;
+  margin: 1em 0;
   line-height: 1.8
 }
 
@@ -1100,6 +1120,7 @@ li {
 }
 
 #doc .doc-section h2 {
+  gap: 4px;
   display: flex;
   align-items: center;
 }

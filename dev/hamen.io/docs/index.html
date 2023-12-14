@@ -55,6 +55,7 @@
               })
               .finally(() => {
                 let searchInput = document.querySelector("#search-input");
+                let searchAuthor = new URL(window.location.href).searchParams.get("author");
                 searchInput.parentElement.replaceChild(Components.UIInput({
                   placeholder: "Search for an article, guide, or reference!",
                   id: "search-input",
@@ -62,35 +63,51 @@
                     prefix: "search",
                     suffix: "clear"
                   },
+                  value: searchAuthor ? `author:${searchAuthor}` : "",
                   onInput: value => {
                     let allHidden = true;
                     let cards = Array.from(document.querySelectorAll(".body.window .ui\\:card-list a.ui\\:medium-card"));
-                    cards.forEach(card => {
+                    for (card in cards) {
+                      card = cards[card];
                       let tags = Array.from(new Set(
                         card.innerText.split(/[\n \/\-]+/g)
                           .map(tag => tag.trim().toLowerCase())
                       ));
 
-                      let query = value.trim().split(" ").map(term => term.trim().toLowerCase());
-                      let hide = true;
+                      let hideCard = true;
+
+                      let query = value.trim();
+                      if (query.toLowerCase().includes("author:")) {
+                        let authorSelector = query.slice(query.indexOf("author:")).split("author:")[1].split(" ")[0]
+                        let cardAuthor = card.getAttribute("data:authorID");
+                        if (cardAuthor.toLowerCase() === authorSelector.toLowerCase()) {
+                          hideCard = false;
+                        } else {
+                          hideCard = true;
+                          card.style.display = 'none';
+                          continue;
+                        }
+                      }
+
+                      query = query.split(" ").map(term => term.trim().toLowerCase());
                       if (value.trim() === "") {
-                        hide = false;
+                        hideCard = false;
                         allHidden = false;
                       } else {
                         query.forEach(term => {
                           tags.forEach(tag => {
-                            if (tag.includes(term)) hide = false;
+                            if (tag.includes(term)) hideCard = false;
                           })
                         });
                       }
 
-                      if (hide) {
+                      if (hideCard) {
                         card.style.display = 'none';
                       } else {
                         card.style.display = 'flex';
                         allHidden = false;
                       }
-                    });
+                    };
 
                     let noResults = document.querySelector("#no-results");
                     if (allHidden) {

@@ -16,7 +16,7 @@
 
 ## Introduction
 
-When working with data in Python, you'll often come across the need to store and organize information. Arrays are essential data structures that allow you to do just that. In this article, we'll explore four common types of arrays in Python: sets, tuples, lists, and dictionaries. Don't worry if you're new to programming – we'll explain each type in a beginner-friendly way.
+When working with data in Python, you'll often come across the need to store and organize information. Arrays are essential data structures that allow you to do just that. In this article, we'll explore four common types of arrays in Python: sets, tuples, lists, and dictionaries. Don't worry if you're new to programming&mdash;we'll explain each type in a beginner-friendly way.
 
 ## Sets ( `set()` )
 
@@ -71,7 +71,7 @@ Arrays come in various forms in Python, each designed to serve different purpose
 
 If you enjoyed reading this article, here are some related articles we recommend checking out:
 
-- [`zip()` Function in Python]("https://www.hamen.io/...")
+- [`zip()` Function in Python]("https://www.hamen.io/docs/blogs/code/python/built-ins/functions/zip/exploring-the-zip-function-in-python/")
 - [`set()` Methods in Python]("https://www.hamen.io/...")
 - [`list()` Methods in Python]("https://www.hamen.io/...")
 - [`dict()` Methods in Python]("https://www.hamen.io/...")
