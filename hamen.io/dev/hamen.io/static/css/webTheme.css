@@ -1,4 +1,13 @@
 :root {
+    --hmn-fontSize-inlineCode: calc(var(--hmn-fontSize-p) - 1px);
+    --hmn-fontSize-inputText: calc(var(--hmn-fontSize-p) - 1.5px);
+    --hmn-fontSize-icon: 14px;
+    --hmn-fontSize-p: 14px;
+    --hmn-fontSize-h1: 18px;
+    --hmn-fontSize-h1Title: 34px;
+    --hmn-fontSize-h2: 16px;
+    --hmn-fontSize-h2Title: 22px;
+
     --hmn-borderColor-black-primary: rgba(0, 0, 0, 0.06);
     --hmn-borderColor-black-default: rgba(0, 0, 0, 0.03);
     --hmn-borderColor-black-secondary: rgba(0, 0, 0, 0.018);

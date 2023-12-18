@@ -8,6 +8,29 @@ Styles for the UI namespace in Docs
 
 .ui\:engine .ui\:inline-mark { font-weight: 600; }
 
+.ui\:engine .ui\:breadcrumbs {
+    flex-direction: row;
+    padding: 2em 3em;
+    background: var(--hmn-backgroundColor-white-default);
+    position: fixed;
+    top: var(--hmn-headerSize);
+    gap: .5em;
+    transform: translateX(-2em);
+    border-bottom: 1px solid var(--hmn-backgroundColor-box-primary);
+    z-index: 999
+}
+
+.ui\:engine .ui\:inline-code {
+    padding: 0 6px;
+    border: 1px solid #ffe5e5;
+    border-radius: 4px;
+    font-size: var(--hmn-fontSize-inlineCode);
+    background: #ffffff;
+    color: red;
+    display: inline-flex;
+    transform: translateY(-1px);
+}
+
 .ui\:engine .ui\:inline-italic { font-style: italic; }
 
 .ui\:engine .ui\:inline-underline { text-decoration: underline; }
@@ -20,19 +43,57 @@ Styles for the UI namespace in Docs
 
 .ui\:engine .ui\:list-item {  }
 
-.ui\:engine .ui\:text {  }
+.ui\:engine .ui\:text {
+    line-height: 1.8;
+}
 
-.ui\:engine .ui\:h1 {  }
+.ui\:engine .ui\:title {
+    font-size: 1.5em;
+    /* font-family: 'MuseoModerno', cursive; */
+}
 
-.ui\:engine .ui\:h2 {  }
+.ui\:engine .ui\:h1 {
+    font-size: 1.05em;
+}
+
+.ui\:engine .ui\:h2 {
+    font-size: 1em;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.6);
+    font-style: italic;
+    margin-top: 2.5em;
+}
+
+.ui\:engine .ui\:h1 + .ui\:h2 {
+    margin-top: 1em
+}
 
 .ui\:engine .ui\:hrule {
-    width: calc(100% - 8em);
+    width: calc(100% - 12em);
+    margin: 0 auto;
     min-width: 8em;
     height: 2px;
     border-radius: 1em;
+    background: rgba(0, 0, 0, 0.07)
 }
 
 .ui\:engine .ui\:panel {  }
 
 .ui\:engine .ui\:section {  }
+
+.ui\:engine .ui\:code>pre {
+    margin: 0
+}
+
+.ui\:engine .ui\:code {
+    padding: 18px;
+    background: #272a2d;
+    border-radius: 12px;
+    color: white;
+    font-size: var(--hmn-fontSize-inlineCode);
+    margin: 1em 0
+}
+
+.ui\:engine .ui\:code ::selection {
+    background-color: #3a4c65 !important;
+}

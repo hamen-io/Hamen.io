@@ -2,3 +2,4 @@ libsass
 rjsmin
 htmlmin
 csscompressor
+lxml

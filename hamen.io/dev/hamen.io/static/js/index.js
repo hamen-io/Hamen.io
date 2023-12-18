@@ -93,6 +93,29 @@ window.Hamen.onLoad.subscribe(() => {
     })
 })
 
+// Update proportions for breadcrumbs on doc pages:
+window.Hamen.onLoad.subscribe(() => {
+    return new Promise((resolve, reject) => {
+        let breadcrumbs = document.querySelector(".ui\\:breadcrumbs");
+        if (breadcrumbs) {
+            const updateBreadcrumbsProportions = () => {
+                let breadcrumbs = document.querySelector(".ui\\:breadcrumbs");
+                let width = document.querySelector("#doc>article").getBoundingClientRect().width;
+                width = `calc(${width}px - 2px)`
+                breadcrumbs.style.width = width;
+                breadcrumbs.style.minWidth = width;
+                breadcrumbs.style.maxWidth = width;
+            };
+
+            updateBreadcrumbsProportions();
+            window.addEventListener("DOMContentLoaded", updateBreadcrumbsProportions)
+            window.addEventListener("resize", updateBreadcrumbsProportions)
+        }
+
+        resolve();
+    })
+});
+
 // Create header:
 window.Hamen.onLoad.subscribe(() => {
     return new Promise((resolve, reject) => {
@@ -102,7 +125,7 @@ window.Hamen.onLoad.subscribe(() => {
         headerContent.classList.add("header-content");
 
         const headerItems = {
-            "Hamen.io": "https://www.hamen.io/docs",
+            "Hamen.io": "https://www.hamen.io",
             "Docs": "https://www.hamen.io/docs"
         };
 

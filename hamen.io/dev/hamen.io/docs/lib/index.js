@@ -11,7 +11,7 @@ class CardItem {
         this.card.classList.add("result");
         this.card.setAttribute("bg-color", this._color);
         this.card.addEventListener("click", () => window.location.assign(this._url));
-        this.card.innerHTML = `<div class="image"></div><div class="body"><p class="tags">${this._tags.map(tag => "<span class=\"tag\">" + tag + "</span>").join(" / ")}</p><h3 class="title">${this._title}</h3><p class="author-date"><span class="date">${this._date}</span><span class="author">by&nbsp;<span class="author-name">${this._author}</span></span></p></div>`;
+        this.card.innerHTML = `<div class="image"></div><div class="body"><p class="tags">${this._tags.map(tag => "<span class=\"tag\">" + tag + "</span>").join(" » ")}</p><h3 class="title">${this._title}</h3><p class="author-date"><span class="date">${this._date}</span><span class="author">by&nbsp;<span class="author-name">${this._author}</span></span></p></div>`;
     };
 
     get color() { return this._color; }
@@ -43,7 +43,7 @@ const addArticles = async () => {
                 articleData.articleTitle,
                 articleData.articleAuthor,
                 articleData.articleDate["published"],
-                articleData.articleTags,
+                articleData.articleBreadcrumbs.split(",").map(x => x.trim()),
                 (articleData.articleType || "BLOG") === "BLOG" ? "BLUE" : "GREEN",
                 articleData.articlePathURL
             );

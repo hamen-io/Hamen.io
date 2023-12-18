@@ -5,6 +5,7 @@ from typing import Literal,Type
 import re
 from lxml import etree
 import os
+import ftplib
 
 from HamenAPI import (Common,Elements,Exceptions,System,Templates,Types,FileSystem,Minify)
 
@@ -261,6 +262,7 @@ class Hooks:
                         "articlePathURL": f"https://www.hamen.io/docs/doc{articlePathname}",
                         "articleCategory": hdoc.propertyEntries.get("category"),
                         "articleSubCategory": hdoc.propertyEntries.get("subcategory"),
+                        "articleBreadcrumbs": hdoc.propertyEntries.get("breadcrumbs"),
                     }
 
                     manifestList.append(manifest)
@@ -306,16 +308,19 @@ class Hooks:
                             case "properties": element = Elements.Properties()
                             case "document": element = Elements.Document()
                             case "entry": element = Elements.Entry(key = child.attrib.get("key"), value = child.attrib.get("value"))
+                            case "ui:title": element = Elements.UI.Title()
                             case "ui:h1": element = Elements.UI.H1()
                             case "ui:h2": element = Elements.UI.H2()
                             case "ui:section": element = Elements.UI.Section()
                             case "ui:text": element = Elements.UI.Text()
                             case "ui:list": element = Elements.UI.List()
                             case "ui:code": element = Elements.UI.Code()
+                            case "ui:breadcrumbs": element = Elements.UI.Breadcrumbs()
                             case "ui:item": element = Elements.UI.Item()
                             case "ui:break": element = Elements.UI.Break()
                             case "ui:hrule": element = Elements.UI.HRule()
                             case "i": element = Elements.Format.i()
+                            case "a": element = Elements.Format.a()
                             case "em": element = Elements.Format.em()
                             case "b": element = Elements.Format.b()
                             case "u": element = Elements.Format.u()
@@ -326,7 +331,7 @@ class Hooks:
                         element = attachChildren(child, element)
 
                         element.extendAttributes(child.attrib)
-                        element.innerText = (child.text or "").strip()
+                        element.innerText = child.text or ""
                         parentElement.appendChild(element)
 
                     return parentElement
@@ -455,12 +460,22 @@ class Hooks:
                         case _:
                             assert False, f"Invalid match: '{file.fileExtension}'"
 
+    class RenamePublicHTML(Hook):
+        """
+        Renames the `hamen.io` folder to `public_html`
+        """
+        def execute(self) -> None:
+            os.rename(os.path.join(self.buildDirectory, "hamen.io"), os.path.join(self.buildDirectory, "public_html"))
+
 if __name__ == "__main__":
+    os.system("clear")
+    print("--- BUILD START ---\n\n")
+
     release = BuildSite()
 
     # Set build metadata:
-    release.releaseDirectory = r"hamen.io\www"
-    release.devDirectory = r"hamen.io\dev"
+    release.releaseDirectory = r"hamen.io/www"
+    release.devDirectory = r"hamen.io/dev"
     release.buildVersion = (1, 0, 0)
 
     # Add resources:
@@ -471,6 +486,7 @@ if __name__ == "__main__":
     release.createImport("STYLESHEET", "https://www.hamen.io/static/css/webTheme.css")
     release.createImport("STYLESHEET", "https://www.hamen.io/static/css/index.css")
     release.createImport("STYLESHEET", "https://www.hamen.io/static/css/utilityClasses.css")
+    release.createImport("STYLESHEET", "https://www.hamen.io/static/css/doc.css")
 
     # Load and build site:
     release.loadDev()
@@ -485,4 +501,7 @@ if __name__ == "__main__":
     release.registerHook(Hooks.BuildDoc)
     release.registerHook(Hooks.Sass)
     release.registerHook(Hooks.Minify)
+    release.registerHook(Hooks.RenamePublicHTML)
     release.executeHooks()
+
+    print("\n\n--- BUILD END ---")

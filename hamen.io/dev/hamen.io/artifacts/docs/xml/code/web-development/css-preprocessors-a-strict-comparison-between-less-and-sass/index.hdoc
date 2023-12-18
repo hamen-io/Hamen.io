@@ -11,16 +11,25 @@
         <Entry key="description" value="Explore the fundamental components of language—Syntax, Semantics, Grammar, and Lexicon. Understand how these linguistic concepts work together to structure and convey meaning in human communication" />
         <Entry key="category" value="Code" />
         <Entry key="subcategory" value="Web Development" />
-        <Entry key="tags" value="CSS, Preprocessor" />
+        <Entry key="tags" value="CSS, Preprocessor, Web Development, HTML, LESS, SASS, Front End" />
         <Entry key="author" value="Daniel Hamen" />
         <Entry key="authorID" value="danielhamen" />
         <Entry key="date:published" value="2023-11-03" />
         <Entry key="date:modified" value="2023-11-03" />
+        <Entry key="breadcrumbs" value="CSS, Preprocessors, LESS vs. SASS" />
     </Properties>
     <Document>
+        <UI:Breadcrumbs crumbs="Docs, Code, Web Development, CSS, Preprocessors, LESS vs. SASS" />
+        <UI:Section id="title-content">
+            <UI:Title>CSS Preprocessors: <i>A Strict Comparison between LESS and SASS</i></UI:Title>
+            <UI:Text>
+                Written by <a href="https://www.hamen.io/docs?author=danielhamen">Daniel Hamen</a>
+            </UI:Text>
+        </UI:Section>
+        <UI:HRule />
         <UI:Section id="introduction" >
             <UI:H1>
-                CSS Preprocessors: A Strict Comparison between LESS and SASS
+                Introduction
             </UI:H1>
             <UI:Text >
                 CSS preprocessors have become essential tools for web developers, offering enhanced functionality and organization to the traditionally flat and verbose nature of CSS. Among the popular choices, LESS and SASS&em;<i>Syntactically Awesome Stylesheets</i>&em;stand out. In this article, we'll delve into a strict comparison between LESS and SASS to help you make an informed decision on which preprocessor to choose for your next project.

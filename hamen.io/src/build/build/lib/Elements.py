@@ -4,6 +4,7 @@ from typing import Type
 import lib.Exceptions as Exceptions
 import lib.Common as Common
 import lib.Types as Types
+import lib.RenderCode as RenderCode
 
 class Element:
     def __init__(self, *, tagName: str = "Element", innerText: str = "", selfClosing: bool = False, renderAs: str = "span", style: dict = dict(), **attributes):
@@ -111,6 +112,11 @@ class Element:
         del self.attributes[key]
 
 class UI:
+    class Title(Element):
+        def __init__(self):
+            super().__init__(tagName = "UI:Title", renderAs="h1")
+            self.classList.add("ui:title")
+
     class H1(Element):
         def __init__(self):
             super().__init__(tagName = "UI:H1", renderAs="h2")
@@ -140,7 +146,7 @@ class UI:
     class Code(Element):
         def __init__(self):
             super().__init__(tagName = "UI:Code", renderAs="div", selfClosing=False)
-            self.appendAttribute("language", ["LESS", "SASS", "PYTHON", "JAVA", "XML", "HTML", "CSS"])
+            self.appendAttribute("language", RenderCode.supportedLanguages)
             self.appendAttribute("tabsize", str)
             self.classList.add("ui:code")
 
@@ -170,12 +176,36 @@ class UI:
                         lines[lineIndex] = line
                         break
 
-            text = f"""<pre>{"<br>".join(lines)}</pre>"""
+            code = "<br>".join(lines)
+            code = code.strip()
+            if code.startswith("<br>"): code = code[len("<br>"):]
+            if code.endswith("<br>"): code = code[:-len("<br>")]
+            code = code.strip()
+            # code = RenderCode.renderCode(code, lang=self.getAttribute("language"))
+            text = f"""<pre>{code}</pre>"""
 
             if self.selfClosing:
                 return f"<{tag}{attrs} />"
 
             return f"<{tag}{attrs}>{text}{children}</{tag}>"
+
+    class Breadcrumbs(Element):
+        def __init__(self):
+            super().__init__(tagName = "UI:Breadcrumbs", renderAs="div", selfClosing=True)
+            self.classList.add("ui:breadcrumbs")
+            self.appendAttribute("crumbs", str)
+        
+        def __str__(self, renderTags: bool = False) -> str:
+            attrs = Common.renderInlineAttributes(self.attributes)
+            attrs = (" " if attrs else "") + attrs
+
+            tag = self.tagName.lower()
+            if renderTags and self._renderAs:
+                tag = self._renderAs.lower()
+
+            return f"""<{tag}{attrs}>
+    {" » ".join(['<a href="javascript:void(0);">' + x.strip() + '</a>' for x in self.getAttribute("crumbs").split(",")])}
+</{tag}>"""
 
     class Break(Element):
         def __init__(self):
@@ -211,6 +241,13 @@ class Format:
         def __init__(self):
             super().__init__(tagName = "u", renderAs="u")
             self.classList.add("ui:inline-underline")
+
+    class a(Element):
+        def __init__(self):
+            super().__init__(tagName = "a", renderAs="a")
+            self.classList.add("ui:inline-anchor")
+            self.appendAttribute("href", str)
+            self.appendAttribute("target", ["CURRENT_TAB", "NEW_TAB"])
 
     class i(Element):
         def __init__(self):

@@ -13,7 +13,7 @@ html,body {
     width: 100%;
     height: 100%;
     padding: 0;
-    font-size: 13px;
+    font-size: var(--hmn-fontSize-p);
     margin: 0;
     box-sizing: border-box;
 }
@@ -63,6 +63,10 @@ body {
     }
 }
 
+input, button, textarea {
+    font-size: var(--hmn-fontSize-inputText)
+}
+
 div,section,main,article,aside,nav,header,footer,form {
     display: flex;
     flex-direction: column;
@@ -82,9 +86,20 @@ hr {
     background-color: var(--hmn-backgroundColor-box-primary);
 }
 
-body,button,input,textarea {
-    font-family: 'Raleway', sans-serif;
+body, button, input, textarea {
+    font-family: 'Public Sans',sans-serif;
     color: var(--hmn-textColor-black-default);
+    font-weight: 300;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #556fff;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 p,input,button {
@@ -92,7 +107,8 @@ p,input,button {
 }
 
 p {
-    line-height: 1.5
+    line-height: 1.5;
+    font-weight: 200
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -106,18 +122,18 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 h1 {
-    font-size: 1.7em;
+    font-size: var(--hmn-fontSize-h1);
 
     &.title {
-        font-size: 2.6em
+        font-size: var(--hmn-fontSize-h1Title)
     }
 }
 
 h2 {
-    font-size: 1.7em;
+    font-size: var(--hmn-fontSize-h2);
 
     &.title {
-        font-size: 2em
+        font-size: var(--hmn-fontSize-h2Title)
     }
 }
 
@@ -127,19 +143,22 @@ h2 {
 
 textarea,input,button {
     padding: 10px;
-    outline: 0;
-    border-radius: 6px;
+    outline: 0;border-radius: 12.5px;
     outline: 0px solid transparent;
-    border: 1px solid var(--hmn-borderColor-black-primary);
     transition: 0.1s;
 }
 
-textarea,input,button,li {
-    font-size: 12px;
+textarea,input {
+    border: 1px solid var(--hmn-borderColor-black-primary);
 }
 
-input,button {
-    padding: 10px 20px
+input {
+    padding: 12.5px 20px
+}
+
+button {
+    padding: 12.5px 32px !important;
+    border: 0;
 }
 
 section {
@@ -153,6 +172,7 @@ textarea {
 body>header,body>header>.header-content {
     flex-direction: row;
     width: 100%;
+    font-size: calc(1em - 0.5px);
 }
 
 body>header>.header-content>a:first-of-type {
@@ -195,7 +215,7 @@ button {
     color: rgba(255, 255, 255, 0.9);
     background: #488aec;
     outline: 0px solid transparent;
-    font-family: 'MuseoModerno', cursive;
+    // font-family: 'MuseoModerno', cursive;
     font-weight: 600;
     letter-spacing: 0.3px;
 }
@@ -213,7 +233,7 @@ button:active {
 }
 
 button .material-symbols-outlined {
-    font-size: 14px;
+    font-size: var(--hmn-fontSize-icon);
 }
 
 .material-symbols-outlined {
