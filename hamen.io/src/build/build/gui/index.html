@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Hamen.io Builder</title>
+
+        <link rel="stylesheet" href="./index.css">
+        <script type="text/javascript" src="./index.js"></script>
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    </head>
+    <body>
+        <main>
+            <div class="view" name="properties" id="properties">
+                <aside id="side-panel">
+                    <details>
+                        <summary><code>.htaccess</code></summary>
+                        <textarea id="htaccessContent-textarea" special-content="true" initial-height-to-content="true" style="min-height: 8em">{{ htaccessContent }}</textarea>
+                    </details>
+                </aside>
+                <article></article>
+            </div>
+            <div class="view" name="publish" id="publish">
+
+            </div>
+        </main>
+        <footer>
+            <ul id="view-list">
+                <li for="properties"> Properties </li>
+                <li for="publish"> Publish </li>
+            </ul>
+        </footer>
+    </body>
+</html>

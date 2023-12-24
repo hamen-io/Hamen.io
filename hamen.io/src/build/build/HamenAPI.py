@@ -7,4 +7,3 @@ import lib.Templates as Templates
 import lib.Configuration as Configuration
 import lib.FileSystem as FileSystem
 import lib.Minify as Minify
-import lib.RenderCode as RenderCode

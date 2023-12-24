@@ -4,7 +4,8 @@ from typing import Type
 import lib.Exceptions as Exceptions
 import lib.Common as Common
 import lib.Types as Types
-import lib.RenderCode as RenderCode
+
+supportedLanguages = ("python", "css", "markdown", "markup", "javascript", "typescript", "jsx", "latex", "less", "scss")
 
 class Element:
     def __init__(self, *, tagName: str = "Element", innerText: str = "", selfClosing: bool = False, renderAs: str = "span", style: dict = dict(), **attributes):
@@ -146,7 +147,7 @@ class UI:
     class Code(Element):
         def __init__(self):
             super().__init__(tagName = "UI:Code", renderAs="div", selfClosing=False)
-            self.appendAttribute("language", RenderCode.supportedLanguages)
+            self.appendAttribute("language", list(supportedLanguages) + [x.upper() for x in list(supportedLanguages)])
             self.appendAttribute("tabsize", str)
             self.classList.add("ui:code")
 
@@ -176,13 +177,12 @@ class UI:
                         lines[lineIndex] = line
                         break
 
-            code = "<br>".join(lines)
+            code = "\n".join(lines)
             code = code.strip()
-            if code.startswith("<br>"): code = code[len("<br>"):]
-            if code.endswith("<br>"): code = code[:-len("<br>")]
+            # if code.startswith("<br>"): code = code.rstrip()
+            # if code.endswith("<br>"): code = code.lstrip()
             code = code.strip()
-            # code = RenderCode.renderCode(code, lang=self.getAttribute("language"))
-            text = f"""<pre>{code}</pre>"""
+            text = f"""<pre><code class="language-{self.getAttribute("language") or ""}">{code}</code></pre>"""
 
             if self.selfClosing:
                 return f"<{tag}{attrs} />"

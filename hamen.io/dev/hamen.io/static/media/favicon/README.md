@@ -1,0 +1,1 @@
+Content copied from `hamen.io/src/content/logo`; this file will be ignored by builder; see `.hmnbuilderconfig`

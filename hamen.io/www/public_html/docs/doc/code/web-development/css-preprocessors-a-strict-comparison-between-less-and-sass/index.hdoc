@@ -87,7 +87,7 @@
             <UI:Text>
                 In SASS, variables are declared using the <code>$</code> symbol. The syntax is similar to LESS:
             </UI:Text>
-            <UI:Code language="SASS" tabSize="4" >
+            <UI:Code language="SCSS" tabSize="4" >
                 $main-color: #3498db
                 body {
                     background-color: $main-color
@@ -97,7 +97,7 @@
             <UI:Text>
                 SASS mixins use the <code>@mixin</code> directive, providing a way to group styles for reuse:
             </UI:Text>
-            <UI:Code language="SASS" tabSize="4" >
+            <UI:Code language="SCSS" tabSize="4" >
                 @mixin border-radius($radius) {
                     border-radius: $radius;
                 }
@@ -108,7 +108,7 @@
             </UI:Code>
             <UI:H2>Operations</UI:H2>
             <UI:Text>SASS supports operations for calculations, just like LESS:</UI:Text>
-            <UI:Code language="SASS" tabSize="4" >
+            <UI:Code language="SCSS" tabSize="4" >
                 $base-font-size: 16px
                 $large-font-size: $base-font-size * 1.5
 
@@ -134,7 +134,7 @@
                     }
                 }
             </UI:Code>
-            <UI:Code language="SASS" tabSize="4" >
+            <UI:Code language="SCSS" tabSize="4" >
                 nav
                 ul
                     margin: 0
@@ -150,7 +150,7 @@
             <UI:Text>
                 SASS provides the <code>@extend</code> directive for inheritance, allowing styles to inherit from other selectors. LESS, however, lacks this feature.
             </UI:Text>
-            <UI:Code language="SASS" tabSize="4" >
+            <UI:Code language="SCSS" tabSize="4" >
                 .success {
                     border: 1px solid #4CAF50;
                     color: #4CAF50;

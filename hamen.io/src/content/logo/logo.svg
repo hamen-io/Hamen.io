@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 503.85 503.85">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #e6e7e8;
+        stroke-linejoin: bevel;
+        stroke-width: 20px;
+      }
+
+      .cls-2 {
+        fill: #2a2b2c;
+      }
+
+      .cls-2, .cls-3 {
+        stroke-width: 0px;
+      }
+
+      .cls-3 {
+        fill: #e6e7e8;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <rect class="cls-2" x="93.79" y="93.79" width="316.28" height="316.28" transform="translate(-104.35 251.93) rotate(-45)"/>
+    <g>
+      <polyline class="cls-1" points="294.55 423.18 294.47 306.36 294.55 183.29"/>
+      <polyline class="cls-1" points="209.31 85.67 209.3 197.49 209.3 320.84"/>
+      <line class="cls-1" x1="294.55" y1="251.8" x2="209.3" y2="251.8"/>
+    </g>
+    <path class="cls-3" d="M251.93,56.57l195.36,195.36-195.36,195.36L56.57,251.93,251.93,56.57M251.93,28.28L28.29,251.93l223.64,223.64,223.64-223.64L251.93,28.28h0Z"/>
+    <path class="cls-2" d="M251.93,28.28l223.64,223.64-223.64,223.64L28.28,251.93,251.93,28.28M251.93,0l-14.14,14.14L14.14,237.78l-14.14,14.14,14.14,14.14,223.64,223.64,14.14,14.14,14.14-14.14,223.64-223.64,14.14-14.14-14.14-14.14L266.07,14.14l-14.14-14.14h0Z"/>
+  </g>
+</svg>

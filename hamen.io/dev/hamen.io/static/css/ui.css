@@ -82,7 +82,16 @@ Styles for the UI namespace in Docs
 .ui\:engine .ui\:section {  }
 
 .ui\:engine .ui\:code>pre {
-    margin: 0
+    margin: 0;
+    background-color: transparent;
+}
+
+.ui\:engine .ui\:code>pre>code {
+    text-shadow: 0 0  transparent;
+}
+
+.ui\:engine .ui\:code>pre .token {
+    text-shadow: 0 0  transparent;
 }
 
 .ui\:engine .ui\:code {

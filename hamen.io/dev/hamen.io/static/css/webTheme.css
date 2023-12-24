@@ -1,6 +1,6 @@
 :root {
     --hmn-fontSize-inlineCode: calc(var(--hmn-fontSize-p) - 1px);
-    --hmn-fontSize-inputText: calc(var(--hmn-fontSize-p) - 1.5px);
+    --hmn-fontSize-inputText: calc(var(--hmn-fontSize-p) - 1px);
     --hmn-fontSize-icon: 14px;
     --hmn-fontSize-p: 14px;
     --hmn-fontSize-h1: 18px;

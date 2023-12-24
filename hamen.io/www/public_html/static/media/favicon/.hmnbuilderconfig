@@ -1,0 +1,1 @@
+SF --ignoreFile "./README.md" -> true;

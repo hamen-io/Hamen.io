@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1664530166161360" crossorigin="anonymous"></script>
-        <meta name="description" content="Hamen.io stands as the preeminent online platform, serving as the vanguard for discovering a rich spectrum of educational resources, including blogs, courses, quizzes, calculators, and myriad intellectual offerings. Its resounding motto resounds as 'Unleashing the Potential of Academic Excellence through Code'">
+        <meta name="description" content="Hamen.io; Unleashing the Potential of Academic Excellence through Code\n">
         <meta name="author" content="Hamen.io">
         <meta name="keywords" content="hamen.io, Hamen, Daniel Hamen, education, code, quiz, docs, blogs, articles, guides, courses, calculators, software">
         <meta name="og:title" content="Hamen.io">
@@ -26,7 +26,7 @@
         <script type="text/javascript" src="./static/js/index.js"></script>
 
         <!-- Favicon: -->
-        <link rel="icon" href="./favicon.ico" />
+        <link rel="icon" href="./favicon.png" />
     </head>
     <body>
         <header></header>
@@ -45,9 +45,9 @@
                     }
                 }
             </style>
-            <section id="introduction">
+            <section id="introduction" style="padding: 2em;">
                 <h1 class="title">Hamen.io</h1>
-                <p>Unleashing the Potential of Academic Excellence through Code</p>
+                <p style="text-align: center">Unleashing the Potential of Academic Excellence through Code</p>
                 <form method="GET" action="https://www.hamen.io/search" style="width: 100%;max-width:600px;align-items: center;">
                     <input type="text" id="search-input" placeholder="Search for something on our site!">
                     <button type="submit" id="search-bttn">
@@ -88,6 +88,24 @@
 
                 .homepage>section:last-of-type {
                     border-bottom: 1px solid var(--hmn-borderColor-black-default)
+                }
+
+                @media screen and (max-width:550px) {
+                    .homepage>section:not(:first-of-type) {
+                        flex-direction: column;
+                    }
+
+                    .homepage>section:not(:first-of-type) .icon {
+                        display: none;
+                    }
+
+                    .homepage>section:not(:first-of-type) .button {
+                        margin: 0 auto
+                    }
+
+                    .homepage>section:not(:first-of-type) .body * {
+                        text-align: center;
+                    }
                 }
             </style>
             <section id="docs">

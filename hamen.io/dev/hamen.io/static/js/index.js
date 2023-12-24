@@ -39,8 +39,8 @@ class EventList {
     
                         return executeNext(i+1, list);
                     })
-                    .catch(() => {
-                        return reject("Error triggering event.");
+                    .catch((error) => {
+                        return reject("Error triggering event: " + i + "\n\n" + error);
                     })
             };
     
@@ -100,7 +100,7 @@ window.Hamen.onLoad.subscribe(() => {
         if (breadcrumbs) {
             const updateBreadcrumbsProportions = () => {
                 let breadcrumbs = document.querySelector(".ui\\:breadcrumbs");
-                let width = document.querySelector("#doc>article").getBoundingClientRect().width;
+                let width = document.querySelector("#doc article.article\\:document").getBoundingClientRect().width;
                 width = `calc(${width}px - 2px)`
                 breadcrumbs.style.width = width;
                 breadcrumbs.style.minWidth = width;
@@ -111,10 +111,19 @@ window.Hamen.onLoad.subscribe(() => {
             window.addEventListener("DOMContentLoaded", updateBreadcrumbsProportions)
             window.addEventListener("resize", updateBreadcrumbsProportions)
         }
-
         resolve();
     })
 });
+
+window.Hamen.onLoad.subscribe(() => {
+    return new Promise((resolve, reject) => {
+        let breadcrumbs = document.querySelector(".ui\\:breadcrumbs");
+        if (breadcrumbs) {
+            document.querySelector(":root").style.setProperty("--doc-ui-breadcrumbs-height", breadcrumbs.getBoundingClientRect().height + "px")
+        }
+        resolve()
+    })
+})
 
 // Create header:
 window.Hamen.onLoad.subscribe(() => {
@@ -123,19 +132,39 @@ window.Hamen.onLoad.subscribe(() => {
         if (!header) return resolve();
         const headerContent = document.createElement("div");
         headerContent.classList.add("header-content");
+        headerContent.style.alignItems = "center";
+        headerContent.style.marginRight = "12px"
 
         const headerItems = {
             "Hamen.io": "https://www.hamen.io",
             "Docs": "https://www.hamen.io/docs"
         };
 
-        Object.keys(headerItems).forEach(item => {
+        Object.keys(headerItems).forEach((item, i) => {
             const anchor = document.createElement("a");
             anchor.href = headerItems[item];
             anchor.target = "_self";
             anchor.classList.add("title");
-            anchor.innerText = item;
-            headerContent.appendChild(anchor)
+
+            if (i === 0) {
+                const headerLogo = document.createElement("img");
+                headerLogo.src = "https://hamen.io/static/media/logo.png";
+                headerLogo.id = "header-logo";
+                headerLogo.setAttribute("width", "24px");
+                headerLogo.setAttribute("height", "24px");
+                headerLogo.style.marginRight = "8px";
+                anchor.appendChild(headerLogo);
+
+                anchor.style.display = "flex";
+                anchor.style.alignItems = "center";
+            }
+
+            let innerText = document.createElement("span");
+            innerText.innerText = item;
+
+            anchor.appendChild(innerText);
+            
+            headerContent.appendChild(anchor);
         });
 
         header.appendChild(headerContent);
