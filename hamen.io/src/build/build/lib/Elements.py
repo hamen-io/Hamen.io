@@ -4,14 +4,17 @@ from typing import Type
 import lib.Exceptions as Exceptions
 import lib.Common as Common
 import lib.Types as Types
+import xml.etree.ElementTree as ET
 
 supportedLanguages = ("python", "css", "markdown", "markup", "javascript", "typescript", "jsx", "latex", "less", "scss")
 
 class Element:
-    def __init__(self, *, tagName: str = "Element", innerText: str = "", selfClosing: bool = False, renderAs: str = "span", style: dict = dict(), **attributes):
+    def __init__(self, *, tagName: str = "Element", innerText: str = "", selfClosing: bool = False, renderAs: str = "span", style: dict = dict(), preText: str = "", postText: str = "", **attributes):
         self.tagName: str = tagName.upper()
         self.children: list[Element] = list()
         self.innerText: str = innerText
+        self.preText = preText
+        self.postText = postText
         self._attributes: dict = dict()
         self.selfClosing = selfClosing
         self._acceptedAttributes = {"id": str, "class": str}
@@ -79,7 +82,7 @@ class Element:
         if self.selfClosing:
             return f"<{tag}{attrs} />"
 
-        return f"<{tag}{attrs}>{text}{children}</{tag}>"
+        return f"<{tag}{attrs}>{self.preText}{text}{children}</{tag}>{self.postText or ""}"
 
     def appendChild(self, child: Type['Element']) -> None:
         assert not self.selfClosing, f"Cannot append child to self-closing tag"
@@ -158,7 +161,7 @@ class UI:
             tag = self.tagName.lower()
             if renderTags and self._renderAs:
                 tag = self._renderAs.lower()
-            text = self.innerText
+            text = self.preText + self.postText
             children = "".join([x.__str__(renderTags) for x in self.children])
 
             tabSize = self.getAttribute("tabsize") or "4"
@@ -268,6 +271,23 @@ class Format:
         def __init__(self):
             super().__init__(tagName = "code", renderAs="code")
             self.classList.add("ui:inline-code")
+
+    class define(Element):
+        def __init__(self):
+            super().__init__(tagName = "span")
+            self.appendAttribute("content", str)
+            self.appendAttribute("word", str)
+            self.appendAttribute("pos", str)
+            self.classList.add("ui:define")
+
+        def __str__(self, renderTags: bool = False) -> str:
+            attrs = Common.renderInlineAttributes(self.attributes)
+            attrs = (" " if attrs else "") + attrs
+
+            tag = self.tagName.lower()
+            children = "".join([x.__str__(renderTags) for x in self.children])
+
+            return f"<{tag}{attrs}>{self.preText}{children}</{tag}>{self.postText}"
 
 class Doc(Element):
     def __init__(self):

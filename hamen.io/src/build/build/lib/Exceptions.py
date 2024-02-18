@@ -1,4 +1,4 @@
-class HamenBaseException:
+class HamenBaseException(Exception):
     """ Base class for all Hamen Build Errors """
 
 class ReadOnlyError(HamenBaseException):

@@ -1,0 +1,67 @@
+{
+	// Place your Hamen.io workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"New `hdoc` Article": {
+		"scope": "xml",
+		"prefix": "hdoc",
+		"body": [
+			"",
+"<!DOCTYPE Doc [",
+"    <!ENTITY mdash \"—\">",
+"]>",
+"<Doc docType=\"BLOG\" xmlns:UI=\"https://hamen.io/artifacts/xml/namespaces/ui\" >",
+"    <Properties>",
+"        <Entry key=\"encoding\" value=\"utf-8\" />",
+"        <Entry key=\"lang\" value=\"en\" />",
+"",
+"        <Entry key=\"title\" value=\"${1:Title of Article}\" />",
+"        <Entry key=\"titleID\" value=\"${2:title-id-of-article}\" />",
+"        <Entry key=\"description\" value=\"${3:Explore the description of this article!}\" />",
+"        <Entry key=\"category\" value=\"${4:Code}\" />",
+"        <Entry key=\"subcategory\" value=\"${5:Python}\" />",
+"        <Entry key=\"tags\" value=\"${6:CSV,list,of,tags}\" />",
+"        <Entry key=\"author\" value=\"${7:Author}\" />",
+"        <Entry key=\"authorID\" value=\"${8:authorid}\" />",
+"        <Entry key=\"date:published\" value=\"202${9:Y}-${10:MM}-${11:DD}\" />",
+"        <Entry key=\"date:modified\" value=\"202${9:Y}-${10:MM}-${11:DD}\" />",
+"        <Entry key=\"breadcrumbs\" value=\"Docs, ${12:CSV,of,breacrumbs,leading,to,this,file}\" />",
+"    </Properties>",
+"    <Document>",
+"        <UI:Breadcrumbs crumbs=\"Docs, $12\" />",
+"        <UI:Section id=\"title-content\">",
+"            <UI:Title>$13</UI:Title>",
+"            <UI:Text>",
+"                Written by <a href=\"https://www.hamen.io/docs?author=danielhamen\">$7</a>",
+"            </UI:Text>",
+"        </UI:Section>",
+"        <UI:HRule />",
+"        <UI:Section id=\"introduction\" >",
+"            <UI:H1>",
+"                Introduction",
+"            </UI:H1>",
+"            <UI:Text >",
+"                $14",
+"            </UI:Text>",
+"        </UI:Section>",
+"    </Document>",
+"</Doc>",
+""
+		],
+		"description": "New `hdoc` article"
+	}
+}

@@ -127,4 +127,4 @@ If you enjoyed this article, here are some other articles similar to this one:
 - [Tutorial to Python's `sort` Function]("https://www.hamen.io/...")
 - [Types of Arrays in Python]("https://www.hamen.io/docs/blogs/code/python/data-types/arrays/types-of-arrays-in-python/")
 
-Finally, we recommend checking out our *free* [Python Course]("https://www.hamen.io/...") if you want to learn more about this great language!
+Finally, we recommend checking out our *free* [Python Course]("https://www.hamen.io/...") if you want to learn more about this great language!Lambda Functions with Built-in Functions

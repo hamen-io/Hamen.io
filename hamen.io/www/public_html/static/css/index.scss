@@ -52,7 +52,7 @@ body {
         position: fixed;
         top: 0;
         z-index: 1000;
-        padding: 24px 48px;
+        padding: var(--hmn-header-paddingY) var(--hmn-header-paddingX);
         background-color: var(--hmn-backgroundColor-white-primary);
     }
 
@@ -119,7 +119,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .title {
-    font-family: 'MuseoModerno', cursive;
+    font-family: 'Poppins', sans-serif;
 }
 
 h1 {
@@ -176,8 +176,25 @@ body>header,body>header>.header-content {
     font-size: calc(1em - 0.5px);
 }
 
+body>header>.header-content>a,
+body>header>.header-content>a * {
+    transition: 0.05s;
+}
+
 body>header>.header-content>a:first-of-type {
     margin-right: auto;
+}
+
+body>header>.header-content>a:first-of-type .hmn-favicon-logo-svg-cls-3 {
+    fill: #2a2b2c;
+}
+
+body>header>.header-content>a:first-of-type:hover .hmn-favicon-logo-svg-cls-3 {
+    fill: var(--hmn-textColor-blue-primary);
+}
+
+body>header>.header-content>a:first-of-type:active .hmn-favicon-logo-svg-cls-3 {
+    fill: var(--hmn-textColor-blue-secondary);
 }
 
 input {
@@ -262,6 +279,7 @@ a.button>button {
 }
 
 a.title {
+    font-family: 'MuseoModerno', cursive;
     text-decoration: none;
     font-weight: 700;
     color: var(--hmn-textColor-black-primary)

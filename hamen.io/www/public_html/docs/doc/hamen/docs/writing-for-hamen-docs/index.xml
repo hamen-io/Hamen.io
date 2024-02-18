@@ -1,0 +1,64 @@
+
+<!DOCTYPE Doc [
+    <!ENTITY mdash "—">
+]>
+<Doc docType="BLOG" xmlns:UI="https://hamen.io/artifacts/xml/namespaces/ui" >
+    <Properties>
+        <Entry key="encoding" value="utf-8" />
+        <Entry key="lang" value="en" />
+
+        <Entry key="title" value="Writing Articles for Hamen Docs" />
+        <Entry key="titleID" value="writing-articles-for-hamen-docs" />
+        <Entry key="description" value="Explore how to write for Hamen Docs; learn the syntax, practices, and more" />
+        <Entry key="category" value="Hamen" />
+        <Entry key="subcategory" value="Docs" />
+        <Entry key="tags" value="Hamen Docs, Hamen.io, Docs, Writing, Blogs, Articles, Teaching" />
+        <Entry key="author" value="Daniel Hamen" />
+        <Entry key="authorID" value="danielhamen" />
+        <Entry key="date:published" value="2023-12-26" />
+        <Entry key="date:modified" value="2023-12-26" />
+        <Entry key="breadcrumbs" value="Docs, Hamen Docs, Writing for HDocs" />
+        <Entry key="showInFeed" value="false" />
+    </Properties>
+    <Document>
+        <UI:Breadcrumbs crumbs="Docs, Hamen Docs, Writing for HDocs" />
+        <UI:Section id="title-content">
+            <UI:Title>Writing Articles for Hamen Docs</UI:Title>
+            <UI:Text>
+                Written by <a href="https://www.hamen.io/docs?author=danielhamen">Daniel Hamen</a>
+            </UI:Text>
+        </UI:Section>
+        <UI:HRule />
+        <UI:Section id="introduction" >
+            <UI:H1>
+                Introduction
+            </UI:H1>
+            <UI:Text >
+                Thank you for showing interest in writing for Hamen Docs! In this article, we'll dive into how you can get started with writing for Hamen Docs.
+            </UI:Text>
+        </UI:Section>
+        <UI:Section id="setting-up-writing-environment">
+            <UI:H1>
+                Steps to setup your writing environment
+            </UI:H1>
+            <UI:Text>
+                Once 
+            </UI:Text>
+        </UI:Section>
+        <UI:Section id="the-hamen-style-guide">
+            <UI:H1>
+                Style Guide
+            </UI:H1>
+            <UI:Text>
+                Once 
+            </UI:Text>
+        </UI:Section>
+        <UI:Section id="supported-components">
+            <UI:H1>
+            </UI:H1>
+            <UI:Text>
+                Once 
+            </UI:Text>
+        </UI:Section>
+    </Document>
+</Doc>

@@ -1,16 +1,18 @@
 :root {
-    --hmn-fontSize-inlineCode: calc(var(--hmn-fontSize-p) - 1px);
+    --hmn-fontSize-inlineCode: calc(var(--hmn-fontSize-p) - 1.5px);
     --hmn-fontSize-inputText: calc(var(--hmn-fontSize-p) - 1px);
     --hmn-fontSize-icon: 14px;
     --hmn-fontSize-p: 14px;
     --hmn-fontSize-h1: 18px;
-    --hmn-fontSize-h1Title: 34px;
+    --hmn-fontSize-h1Title: 28px;
     --hmn-fontSize-h2: 16px;
     --hmn-fontSize-h2Title: 22px;
 
     --hmn-borderColor-black-primary: rgba(0, 0, 0, 0.06);
     --hmn-borderColor-black-default: rgba(0, 0, 0, 0.03);
     --hmn-borderColor-black-secondary: rgba(0, 0, 0, 0.018);
+
+    --hmn-boxShadow-black-default: rgba(0, 0, 0, 0.04);
 
     --hmn-outlineColor-blue-primary: #397debdb;
     --hmn-outlineColor-blue-default: #66a1ff80;
@@ -62,4 +64,7 @@
     --hmn-scrollbar-active: hsl(0, 0%, 80%);
     --hmn-scrollbar-normal: hsl(0, 0%, 88%);
     --hmn-scrollbar-hover: hsl(0, 0%, 93%);
+
+    --hmn-header-paddingX: 48px;
+    --hmn-header-paddingY: 24px;
 }

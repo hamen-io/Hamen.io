@@ -12,6 +12,7 @@ class CardItem {
         this.card.setAttribute("bg-color", this._color);
         this.card.addEventListener("click", () => window.location.assign(this._url));
         this.card.innerHTML = `<div class="image"></div><div class="body"><p class="tags">${this._tags.map(tag => "<span class=\"tag\">" + tag + "</span>").join(" » ")}</p><h3 class="title">${this._title}</h3><p class="author-date"><span class="date">${this._date}</span><span class="author">by&nbsp;<span class="author-name">${this._author}</span></span></p></div>`;
+        this.card.setAttribute("content", Array.from(new Set(this.card.innerText.split(/([\s]|[^a-zA-Z0-9])/g))).filter(x => x.trim()).map(x => x.toLowerCase()))
     };
 
     get color() { return this._color; }
@@ -39,16 +40,18 @@ const addArticles = async () => {
     fetchArticles()?.then(articles => {
         let results = document.querySelector(".results");
         articles.forEach(articleData => {
-            let article = new CardItem(
-                articleData.articleTitle,
-                articleData.articleAuthor,
-                articleData.articleDate["published"],
-                articleData.articleBreadcrumbs.split(",").map(x => x.trim()),
-                (articleData.articleType || "BLOG") === "BLOG" ? "BLUE" : "GREEN",
-                articleData.articlePathURL
-            );
-
-            results.appendChild(article.card);
+            if (articleData["showInFeed"] != false) {
+                let article = new CardItem(
+                    articleData.articleTitle,
+                    articleData.articleAuthor,
+                    articleData.articleDate["published"],
+                    articleData.articleBreadcrumbs.split(",").map(x => x.trim()),
+                    (articleData.articleType || "BLOG") === "BLOG" ? "BLUE" : "GREEN",
+                    articleData.articlePathURL
+                );
+    
+                results.appendChild(article.card);
+            }
         });
     });
 };

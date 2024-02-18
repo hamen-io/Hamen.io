@@ -19,6 +19,45 @@
                         <summary><code>.htaccess</code></summary>
                         <textarea id="htaccessContent-textarea" special-content="true" initial-height-to-content="true" style="min-height: 8em">{{ htaccessContent }}</textarea>
                     </details>
+                    <hr>
+                    <details>
+                        <summary>Sub-Domain Redirects</summary>
+                        <div style="overflow-x: auto" id="sub-domain-redirects-table">
+                            <table class="table-list-widget">
+                                <thead>
+                                    <tr>
+                                        <th>Source</th>
+                                        <th>Destination</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 50%;">
+                                            <code class="inline-input">
+                                                <input type="text" initial-width-to-content placeholder="docs" validation="SAFE_FILENAME">
+                                                .hamen.io
+                                            </code>
+                                        </td>
+                                        <td style="width: 100%;display: flex;align-items: center;">
+                                            <code class="inline-input">
+                                                hamen.io/
+                                                <input type="text" initial-width-to-content placeholder="docs" validation="SAFE_FILENAME">
+                                            </code>
+                                            <span class="remove-button material-symbols-outlined" style="margin-left: auto"> close </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="margin-left: auto;margin-right: auto;transform: translateY(-1em)" class="icon-button" id="add-row"><span class="material-symbols-outlined"> add </span></div>
+                            <script>
+                                let addRow = document.querySelector("#sub-domain-redirects-table #sub-domain-redirects-add-row");
+                                let table = document.querySelector("#sub-domain-redirects-table")
+                                addRow.addEventListener("click", () => {
+                                    
+                                })
+                            </script>
+                        </div>
+                    </details>
                 </aside>
                 <article></article>
             </div>

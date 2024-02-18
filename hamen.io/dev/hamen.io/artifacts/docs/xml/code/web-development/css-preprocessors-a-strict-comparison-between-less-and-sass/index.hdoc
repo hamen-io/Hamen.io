@@ -1,7 +1,5 @@
-<!DOCTYPE Doc [
-    <!ENTITY em "—">
-]>
-<Doc docType="BLOG" xmlns:UI="https://hamen.io/artifacts/xml/namespaces/ui" >
+<?xml-model href="../../../hdoc.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<Doc docType="BLOG" >
     <Properties>
         <Entry key="encoding" value="utf-8" />
         <Entry key="lang" value="en" />
@@ -19,45 +17,45 @@
         <Entry key="breadcrumbs" value="CSS, Preprocessors, LESS vs. SASS" />
     </Properties>
     <Document>
-        <UI:Breadcrumbs crumbs="Docs, Code, Web Development, CSS, Preprocessors, LESS vs. SASS" />
-        <UI:Section id="title-content">
-            <UI:Title>CSS Preprocessors: <i>A Strict Comparison between LESS and SASS</i></UI:Title>
-            <UI:Text>
-                Written by <a href="https://www.hamen.io/docs?author=danielhamen">Daniel Hamen</a>
-            </UI:Text>
-        </UI:Section>
-        <UI:HRule />
-        <UI:Section id="introduction" >
-            <UI:H1>
+        <UIBreadcrumbs crumbs="Docs, Code, Web Development, CSS, Preprocessors, LESS vs. SASS" />
+        <UIHeader id="title-content">
+            <UITitle>CSS Preprocessors: <i>A Strict Comparison between LESS and SASS</i></UITitle>
+            <UIText>
+                Written by <link href="https://www.hamen.io/docs?author=danielhamen">Daniel Hamen</link>
+            </UIText>
+        </UIHeader>
+        <UIHRule />
+        <UISection id="introduction" >
+            <UIHeading level="H1">
                 Introduction
-            </UI:H1>
-            <UI:Text >
-                CSS preprocessors have become essential tools for web developers, offering enhanced functionality and organization to the traditionally flat and verbose nature of CSS. Among the popular choices, LESS and SASS&em;<i>Syntactically Awesome Stylesheets</i>&em;stand out. In this article, we'll delve into a strict comparison between LESS and SASS to help you make an informed decision on which preprocessor to choose for your next project.
-            </UI:Text>
-        </UI:Section>
-        <UI:Section id="less-overview">
-            <UI:H1>
+            </UIHeading>
+            <UIText >
+                CSS preprocessors have become essential tools for web developers, offering enhanced functionality and organization to the traditionally flat and verbose nature of CSS. Among the popular choices, LESS and SASS—<i>Syntactically Awesome Stylesheets</i>—stand out. In this article, we'll delve into a strict comparison between LESS and SASS to help you make an informed decision on which preprocessor to choose for your next project.
+            </UIText>
+        </UISection>
+        <UISection id="less-overview">
+            <UIHeading level="H1">
                 LESS Overview
-            </UI:H1>
-            <UI:H2>Variables</UI:H2>
-            <UI:Text>
+            </UIHeading>
+            <UIHeading level="H2">Variables</UIHeading>
+            <UIText>
                 LESS introduces variables with the <code>@</code> symbol, allowing developers to store and reuse values throughout their stylesheets.
-            </UI:Text>
-            <UI:Text>For example:</UI:Text>
-            <UI:Code language="LESS" tabSize="4" >
+            </UIText>
+            <UIText>For example:</UIText>
+            <UICode language="LESS" tabSize="4" >
                 @main-color: #3498db;
                 body {
                     background-color: @main-color;
                 }
-            </UI:Code>
-            <UI:H2>Mixins</UI:H2>
-            <UI:Text>
-                Mixins in LESS enable the reuse of sets of properties, promoting modular and DRY&em;<i>Don't Repeat Yourself</i>&em;code.
-            </UI:Text>
-            <UI:Text>
+            </UICode>
+            <UIHeading level="H2">Mixins</UIHeading>
+            <UIText>
+                Mixins in LESS enable the reuse of sets of properties, promoting modular and DRY—<i>Don't Repeat Yourself</i>—code.
+            </UIText>
+            <UIText>
                 Here's an example:
-            </UI:Text>
-            <UI:Code language="LESS" tabSize="4" >
+            </UIText>
+            <UICode language="LESS" tabSize="4" >
                 .border-radius(@radius) {
                     border-radius: @radius;
                 }
@@ -65,39 +63,39 @@
                 .button {
                     .border-radius(5px);
                 }                  
-            </UI:Code>
-            <UI:H2>Operations</UI:H2>
-            <UI:Text>
+            </UICode>
+            <UIHeading level="H2">Operations</UIHeading>
+            <UIText>
                 LESS supports mathematical operations directly in the stylesheet, facilitating calculations for values:
-            </UI:Text>
-            <UI:Code language="LESS" tabSize="4" >
+            </UIText>
+            <UICode language="LESS" tabSize="4" >
                 @base-font-size: 16px;
                 @large-font-size: @base-font-size * 1.5;
 
                 body {
                     font-size: @large-font-size;
                 }
-            </UI:Code>
-        </UI:Section>
-        <UI:Section>
-            <UI:H1>
+            </UICode>
+        </UISection>
+        <UISection>
+            <UIHeading level="H1">
                 SASS Overview
-            </UI:H1>
-            <UI:H2>Variables</UI:H2>
-            <UI:Text>
+            </UIHeading>
+            <UIHeading level="H2">Variables</UIHeading>
+            <UIText>
                 In SASS, variables are declared using the <code>$</code> symbol. The syntax is similar to LESS:
-            </UI:Text>
-            <UI:Code language="SCSS" tabSize="4" >
+            </UIText>
+            <UICode language="SCSS" tabSize="4" >
                 $main-color: #3498db
                 body {
                     background-color: $main-color
                 }
-            </UI:Code>
-            <UI:H2>Mixins</UI:H2>
-            <UI:Text>
+            </UICode>
+            <UIHeading level="H2">Mixins</UIHeading>
+            <UIText>
                 SASS mixins use the <code>@mixin</code> directive, providing a way to group styles for reuse:
-            </UI:Text>
-            <UI:Code language="SCSS" tabSize="4" >
+            </UIText>
+            <UICode language="SCSS" tabSize="4" >
                 @mixin border-radius($radius) {
                     border-radius: $radius;
                 }
@@ -105,23 +103,23 @@
                 .button {
                     @include border-radius(5px);                  
                 }
-            </UI:Code>
-            <UI:H2>Operations</UI:H2>
-            <UI:Text>SASS supports operations for calculations, just like LESS:</UI:Text>
-            <UI:Code language="SCSS" tabSize="4" >
+            </UICode>
+            <UIHeading level="H2">Operations</UIHeading>
+            <UIText>SASS supports operations for calculations, just like LESS:</UIText>
+            <UICode language="SCSS" tabSize="4" >
                 $base-font-size: 16px
                 $large-font-size: $base-font-size * 1.5
 
                 body {
                     font-size: $large-font-size
                 }
-            </UI:Code>
-        </UI:Section>
-        <UI:Section>
-            <UI:H1>Feature Comparison</UI:H1>
-            <UI:H2>Nesting</UI:H2>
-            <UI:Text>Both LESS and SASS support nesting, allowing developers to write more readable and maintainable styles:</UI:Text>
-            <UI:Code language="LESS" tabSize="4" >
+            </UICode>
+        </UISection>
+        <UISection>
+            <UIHeading level="H1">Feature Comparison</UIHeading>
+            <UIHeading level="H2">Nesting</UIHeading>
+            <UIText>Both LESS and SASS support nesting, allowing developers to write more readable and maintainable styles:</UIText>
+            <UICode language="LESS" tabSize="4" >
                 .nav {
                     ul {
                         margin: 0;
@@ -133,8 +131,8 @@
                         display: inline-block;
                     }
                 }
-            </UI:Code>
-            <UI:Code language="SCSS" tabSize="4" >
+            </UICode>
+            <UICode language="SCSS" tabSize="4" >
                 nav
                 ul
                     margin: 0
@@ -143,14 +141,14 @@
 
                 li
                     display: inline-block
-            </UI:Code>
-        </UI:Section>
-        <UI:Section>
-            <UI:H1>Extensibility</UI:H1>
-            <UI:Text>
+            </UICode>
+        </UISection>
+        <UISection>
+            <UIHeading level="H1">Extensibility</UIHeading>
+            <UIText>
                 SASS provides the <code>@extend</code> directive for inheritance, allowing styles to inherit from other selectors. LESS, however, lacks this feature.
-            </UI:Text>
-            <UI:Code language="SCSS" tabSize="4" >
+            </UIText>
+            <UICode language="SCSS" tabSize="4" >
                 .success {
                     border: 1px solid #4CAF50;
                     color: #4CAF50;
@@ -160,15 +158,15 @@
                     @extend .success;
                     font-size: 18px;
                 }
-            </UI:Code>
-        </UI:Section>
-        <UI:Section>
-            <UI:H1>Community and Adoption</UI:H1>
-            <UI:Text>Both LESS and SASS have large and active communities, with extensive documentation and widespread adoption in the industry. Your choice may depend on factors such as existing team expertise or project requirements.</UI:Text>
-        </UI:Section>
-        <UI:Section>
-            <UI:H1>Conclusion</UI:H1>
-            <UI:Text>Within the context of CSS preprocessors, both LESS and SASS offer powerful features that significantly enhance the development workflow. The decision between the two often comes down to personal preference, team familiarity, and specific project needs. Experimenting with both will help you determine which preprocessor aligns better with your coding style and project requirements.</UI:Text>
-        </UI:Section>
+            </UICode>
+        </UISection>
+        <UISection>
+            <UIHeading level="H1">Community and Adoption</UIHeading>
+            <UIText>Both LESS and SASS have large and active communities, with extensive documentation and widespread adoption in the industry. Your choice may depend on factors such as existing team expertise or project requirements.</UIText>
+        </UISection>
+        <UISection>
+            <UIHeading level="H1">Conclusion</UIHeading>
+            <UIText>Within the context of CSS preprocessors, both LESS and SASS offer powerful features that significantly enhance the development workflow. The decision between the two often comes down to personal preference, team familiarity, and specific project needs. Experimenting with both will help you determine which preprocessor aligns better with your coding style and project requirements.</UIText>
+        </UISection>
     </Document>
 </Doc>

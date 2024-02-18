@@ -7,7 +7,7 @@ class CompileSASS(Hook):
     """
     def execute(self) -> None:
         for file in self.searchFiles(filePattern=r"\.scss|\.sass"):
-            with open(file.withExtension("css").fullFilePath, "x", encoding="utf-8") as cssFile:
+            with open(file.withExtension("css").fullFilePath, "w+", encoding="utf-8") as cssFile:
                 with open(file.fullFilePath, "r", encoding="utf-8") as sassFile:
                     cssFile.write(
                         sass.compile(

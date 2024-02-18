@@ -1,0 +1,1 @@
+.ui\:icon-toggle-button{width:fit-content;padding:4px;aspect-ratio:1/1;border:0;background:var(--colorRamp-bg-black-100);color:var(--colorRamp-bg-black-800);transition:250ms;outline:0 !important}.ui\:icon-toggle-button[toggled]{background:var(--colorRamp-bg-blue-200);color:var(--colorRamp-fg-blue-400)}.ui\:icon-toggle-button[disabled]{cursor:not-allowed}

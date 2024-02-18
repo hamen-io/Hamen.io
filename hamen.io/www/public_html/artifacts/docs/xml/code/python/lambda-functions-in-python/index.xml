@@ -1,0 +1,113 @@
+<?xml-model href="../../../hdoc.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<Doc docType="BLOG" >
+    <Properties>
+        <Entry key="encoding" value="utf-8" />
+        <Entry key="lang" value="en" />
+
+        <Entry key="title" value="Lambda Functions in Python" />
+        <Entry key="titleID" value="lambda-functions-in-python" />
+        <Entry key="description" value="Explore lambda functions/expressions in Python, what they are, their history, and how you can use them" />
+        <Entry key="category" value="Code" />
+        <Entry key="subcategory" value="Python" />
+        <Entry key="tags" value="Python,Lambda functions,Serverless,AWS Lambda,Function as a Service,Event-driven programming,Cloud computing,Microservices,Serverless architecture,Event processing,Serverless computing,AWS,Python programming,AWS services,Serverless development,Event-driven architecture,Serverless Python,Event handlers,Function deployment,Scalable applications,Serverless deployment,Serverless frameworks,Serverless best practices,AWS cloud,AWS Lambda triggers,AWS Lambda functions,Python scripting,AWS Lambda event sources,Event-driven design,Serverless patterns,Serverless security,AWS serverless architecture,AWS serverless development,Serverless advantages,Serverless challenges,AWS Lambda use cases,AWS Lambda tutorial,Serverless cost optimization,AWS Lambda scalability,AWS Lambda performance,AWS Lambda benefits,AWS Lambda setup,AWS Lambda ecosystem,AWS Lambda automation,AWS Lambda integration,AWS Lambda examples" />
+        <Entry key="author" value="Daniel Hamen" />
+        <Entry key="authorID" value="danielhamen" />
+        <Entry key="date:published" value="2023-12-26" />
+        <Entry key="date:modified" value="2023-12-26" />
+        <Entry key="breadcrumbs" value="Python, Advance Syntax, Lambda Function" />
+    </Properties>
+    <Document>
+        <UIBreadcrumbs crumbs="Docs, Code, Python, Advance Syntax, Lambda Function" />
+        <UIHeader id="title-content">
+            <UITitle>Lambda Functions in Python</UITitle>
+            <UIText>
+                Written by <link href="https://www.hamen.io/docs?author=danielhamen">Daniel Hamen</link>
+            </UIText>
+        </UIHeader>
+        <UIHRule />
+        <UISection id="introduction" >
+            <UIHeading level="H1">
+                Introduction
+            </UIHeading>
+            <UIText >
+                Lambda functions, also known as anonymous functions, are a powerful and concise way to define small, throwaway functions in Python. These functions can be extremely handy when you need a quick function without the formality of a complete function definition. In this article, we'll dive into what lambda functions are, why they're useful, and how to use them effectively.
+            </UIText>
+        </UISection>
+        <UISection id="introduction-to-lambda-function">
+            <UIHeading level="H1">
+                Introduction to Lambda Functions
+            </UIHeading>
+            <UIText>
+                A lambda function is a small, unnamed function in Python that can have any number of arguments but can only have a single expression. It is defined using the lambda keyword, makinglambda arguments: expression it a quick and convenient way to create on-the-fly functions for specific tasks.
+            </UIText>
+        </UISection>
+        <UISection id="syntax-of-lambda-functions">
+            <UIHeading level="H1">
+                Syntax of Lambda Functions
+            </UIHeading>
+            <UIText>The basic syntax of a lambda function is as follows:</UIText>
+            <UICode language="PYTHON" tabSize="4">
+                lambda arguments: expression
+            </UICode>
+            <UIText>Lambda functions consist of three main components:</UIText>
+            <UIList>
+                <Item>The <code>lambda</code> keyword</Item>
+                <Item>A list of arguments (similar to a function's parameter list)</Item>
+                <Item>A single expression that gets executed when the lambda function is called</Item>
+            </UIList>
+        </UISection>
+        <UISection id="using-lambda-functions">
+            <UIHeading level="H1">Using Lambda Functions</UIHeading>
+            <UIHeading level="H2">Simple Lambda Functions</UIHeading>
+            <UIText>Let's start with a simple example. Suppose you want a function to calculate the square of a number. Instead of defining a separate function, you can use a lambda function like this:</UIText>
+            <UICode language="PYTHON" tabSize="4">
+                square = lambda x: x ** 2
+                
+                print(square(5))  # Output: 25
+            </UICode>
+            <UIText>This example is the exact same as doing the following; just in a condensed, and shorter—lambda— notation:</UIText>
+            <UICode language="PYTHON" tabSize="4">
+                def square(x):
+                    return x ** 2
+
+                print(square(5)) # Output: 25
+            </UICode>
+            <UIPanel type="NOTE">
+                <UIText>Lambda-functions do not <def word="natively" pos="adv." content="inherent or built-in support without additional modifications">natively</def> support <link href="">type-annotations</link>; however, there is a workaround</UIText>
+            </UIPanel>
+        </UISection>
+        <UISection id="lambda-functions-with-built-in-functions">
+            <UIHeading level="H1">Lambda Functions with Build-in Functions</UIHeading>
+            <UIText>Lambda functions are often used in conjunction with built-in functions like <code>map()</code>, <code>filter()</code>, and <code>reduce()</code>. Here's an example using <code>map()</code> to double a list of numbers:</UIText>
+            <UICode language="PYTHON" tabSize="4">
+                def double_number(x):
+                    return x * 2
+
+                numbers = [1, 2, 3, 4, 5]
+                doubled_numbers = list(map(double_number))
+                print(doubled_number)  # Output: [2, 4, 6, 8, 10]
+            </UICode>
+            <UIText>Or to simplify this even further, in case you are not familiar with the `map` function, you can achieve the same results in a for-loop:</UIText>
+            <UICode language="PYTHON" tabSize="4">
+                def double_number(x):
+                    return x * 2
+
+                numbers = [1, 2, 3, 4, 5]
+                for i,number in enumerate(numbers):
+                    numbers[i] = double_number(number)
+                print(numbers)  # Output: [2, 4, 6, 8, 10]
+            </UICode>
+            <UIText>Note that in this example, we modified the original list, instead of creating a new one</UIText>
+        </UISection>
+        <UISection id="lambda-functions-in-sorting">
+            <UIHeading level="H1">Lambda Functions in Sorting</UIHeading>
+            <UIText>Lambda functions are handy for sorting lists of complex objects based on specific attributes. Let's say you have a list of tuples representing people's names and ages, and you want to sort them by age:</UIText>
+            <UICode language="PYTHON" tabSize="4">
+                people = [('Alice', 30), ('Bob', 25), ('Charlie', 40)]
+                people.sort(key=lambda person: person[1])
+                print(people)
+                # Output: [('Bob', 25), ('Alice', 30), ('Charlie', 40)]
+            </UICode>
+        </UISection>
+    </Document>
+</Doc>

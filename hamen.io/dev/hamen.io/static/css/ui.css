@@ -43,7 +43,8 @@ Styles for the UI namespace in Docs
 
 .ui\:engine .ui\:list-item {  }
 
-.ui\:engine .ui\:text {
+.ui\:engine .ui\:text,
+.ui\:engine .ui\:list {
     line-height: 1.8;
 }
 
@@ -53,15 +54,41 @@ Styles for the UI namespace in Docs
 }
 
 .ui\:engine .ui\:h1 {
-    font-size: 1.05em;
+    font-size: 1.1em;
 }
 
 .ui\:engine .ui\:h2 {
-    font-size: 1em;
+    font-size: 0.95em;
     font-weight: 600;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.5);
     font-style: italic;
     margin-top: 2.5em;
+}
+
+.ui\:engine .ui\:define {
+    cursor: pointer;
+    border-bottom: 2px dotted;
+}
+
+.ui\:engine .ui\:define .ui\:define-text {
+    display: inline-flex;
+    position: absolute;
+    transform: translateY(1.2em);
+    opacity: 0%;
+    background-color: var(--hmn-backgroundColor-white-default);
+    padding: 8px;
+    border: 1px solid var(--hmn-borderColor-black-default);
+    text-align: center;
+    border-radius: 8px;
+    max-width: 300px;
+    transition: 0.1s;
+    pointer-events: none;
+    box-shadow: 4px 4px 8px var(--hmn-boxShadow-black-default);
+}
+
+.ui\:engine .ui\:define:hover .ui\:define-text {
+    transform: translateY(1.8em);
+    opacity: 100%;
 }
 
 .ui\:engine .ui\:h1 + .ui\:h2 {
@@ -77,7 +104,24 @@ Styles for the UI namespace in Docs
     background: rgba(0, 0, 0, 0.07)
 }
 
-.ui\:engine .ui\:panel {  }
+.ui\:engine .ui\:panel {
+    --color-bg: #fdffc8;
+    --color-fg: #7b7e1f;
+    --color-border: #e6ed29;
+    padding: 1em;
+    margin: 1em 0;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-fg);
+    border-radius: 8px;
+    padding: 1em 2em;
+}
+
+.ui\:engine .ui\:panel>p:first-of-type::before {
+    font-weight: 700;
+    content: 'Note: ';
+    cursor: text;
+}
 
 .ui\:engine .ui\:section {  }
 

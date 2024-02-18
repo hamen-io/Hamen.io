@@ -29,6 +29,31 @@ onLoad.push(() => {
     })
 })
 
+// Add input[validation] functionality:
+onLoad.push(() => {
+    return new Promise((resolve, reject) => {
+        document.querySelectorAll("input[validation]").forEach(input => {
+            input.addEventListener("keydown", e => {
+                if (!(() => {
+                    switch (input.getAttribute("validation")) {
+                        case "SAFE_FILENAME":
+                            return /[a-zA-Z0-9_\-\.]/gi
+                    }
+    
+                    return /./;
+                })().test(e.key)) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    e.stopPropagation();
+                }
+            })
+    
+        })
+    
+        resolve()
+    })
+})
+
 // Add icon to all <details>:
 onLoad.push(() => {
     return new Promise((resolve, reject) => {
@@ -43,6 +68,18 @@ onLoad.push(() => {
         })
 
         resolve();
+    })
+})
+
+onLoad.push(() => {
+    return new Promise((resolve, reject) => {
+        document.querySelectorAll("input[initial-width-to-content]").forEach(input => {
+            let resizeInput = input => input.style.width = (input.value ? input.value.length : input.placeholder.length) + "ch";
+            resizeInput(input)
+            input.addEventListener("input", () => resizeInput(input));
+        })
+
+        resolve()
     })
 })
 

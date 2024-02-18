@@ -1,0 +1,55 @@
+<?xml-model href="../../../hdoc.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<Doc docType="BLOG" >
+    <Properties>
+        <Entry key="encoding" value="utf-8" />
+        <Entry key="lang" value="en" />
+
+        <Entry key="title" value="Type Annotations in Python" />
+        <Entry key="titleID" value="type-annotation-in-python" />
+        <Entry key="description" value="Learn how to correctly annotate/hint types when coding in Python!" />
+        <Entry key="category" value="Code" />
+        <Entry key="subcategory" value="Python" />
+        <Entry key="tags" value="Type Annotation, Python, Programming, Code Readability, Documentation, IDE Support, Static Analysis, Mypy, Pyright, Collaboration, Maintainability, Variables, Union Types, Optional Types" />
+        <Entry key="author" value="Daniel Hamen" />
+        <Entry key="authorID" value="danielhamen" />
+        <Entry key="date:published" value="2023-12-26" />
+        <Entry key="date:modified" value="2023-12-26" />
+        <Entry key="breadcrumbs" value="Docs, Code, Python, Advanced-Syntax, Type-Annotation" />
+    </Properties>
+    <Document>
+        <UIBreadcrumbs crumbs="Docs, Code, Python, Advanced-Syntax, Type-Annotation" />
+        <UIHeader id="title-content">
+            <UITitle>Type Annotations in Python</UITitle>
+            <UIText>
+                Written by <link href="https://www.hamen.io/docs?author=danielhamen">Daniel Hamen</link>
+            </UIText>
+        </UIHeader>
+        <UIHRule />
+        <UISection id="introduction" >
+            <UIHeading level="H1">
+                Introduction
+            </UIHeading>
+            <UIText >
+                Python is a dynamically-typed language, allowing for flexibility in variable assignments and function parameters. However, as projects grow larger and more complex, it becomes increasingly important to add a layer of clarity and documentation to your code. This is where type annotations come into play.
+            </UIText>
+        </UISection>
+        <UISection id="what-is-type-annotation">
+            <UIHeading level="H1">
+                What is Type Annotation?
+            </UIHeading>
+            <UIText>
+                Type annotation is the practice of explicitly specifying the data type of a variable or function argument in your code. While Python itself doesn't enforce these types at runtime (it remains dynamically-typed), annotations serve as documentation for developers, tools, and IDEs to understand the intended types.
+            </UIText>
+            <UIText>
+                Here's a simple example of type annotation for a function:
+            </UIText>
+            <UICode language="PYTHON" tabSize="4">
+                def add_numbers(a: int, b: int) -&gt; int:
+                    return a + b
+            </UICode>
+            <UIText>
+                In this function, <code>a</code> and <code>b</code> are annotated as integers ( <code>int</code> ), and the return type is specified as an integer as well. This makes it clear to anyone reading the code that the function expects two integers as input and will produce an integer result.
+            </UIText>
+        </UISection>
+    </Document>
+</Doc>

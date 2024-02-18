@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang=en> <head><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><title>Editor &bull; Notes by Hamen.io</title><script type=module src=./index.js></script><link id=import-google-icons rel=stylesheet href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"><script type=text/javascript src=./src/static/scripts/DEFAULTS.js defer></script><script type=text/javascript defer>
+            /**
+             * A list of Promises to be executed before the page loader animation becomes hidden
+             * 
+             * @global
+             */
+            var preLoadedEventList = [
+                () => {
+                    return new Promise((resolve, reject) => {
+                        // if (window.location.protocol === "file:") return resolve();
+                        setTimeout(() => resolve(), $_DEFAULTS.PAGE.MINIMUM_INSISTENT_WAIT);
+                    })
+                }
+            ];
+
+            /**
+             * A list of Promises to be executed AFTER `preLoadedEventList` is completed AND after the page is done loading
+             * 
+             * @global
+             */
+            var postLoadedEventList = [];
+        </script><link rel=stylesheet href=../../styles/global.css><link rel=stylesheet href=../../styles/ui.css><link rel=stylesheet href=./src/static/styles/docUI.css><link rel=stylesheet href=./src/static/styles/index.css><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel=stylesheet><link rel=stylesheet href=https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css><script defer src=https://code.jquery.com/jquery-3.6.0.js></script><script defer src=https://code.jquery.com/ui/1.13.2/jquery-ui.js></script><script type=text/javascript src=../../scripts/global.js defer></script><script type=text/javascript src=./src/static/scripts/index.js defer></script><script type=text/javascript src=../../scripts/ui.js defer></script><script type=text/javascript src=./src/static/scripts/Editor.js defer></script><script type=text/javascript defer src=./init.js></script></head> <body> <div id=alert:alert class=ui:alert type=ALERT></div> <div id=alert:prompt class=ui:alert type=PROMPT></div> <div id=alert:confirm class=ui:alert type=CONFIRM></div> <div id=page-loader> <div class=ui:loader> <div></div> <div></div> <div></div> </div> <div class="ui:loader-message zws-placeholder"> <span class=textcontent> Loading </span> <span class=ui:loading-ellipsis-animation></span> </div> <i icon style="color: transparent"> info </i> </div> <main id=app style="max-height: 100vh;flex-direction: column;"> <header id=file-menu class=window borders=BOTTOM style="flex-direction: row;align-items: center;padding: 0 calc(var(--win-padd) / 2)"> <div style="height: 32px;width: fit-content;aspect-ratio: 1/1;padding: 4px;display: none;"> <img src=https://www.hamen.io/favicon.ico style="pointer-events: none;user-select: none"> </div> <ul id=file-menu-items> <li> File <ul> <li>New</li> <li>New File</li> <li>New Folder</li> </ul> </li> <li> Edit <ul></ul> </li> <li> View <ul> <li>New</li> <li>New File</li> <li>New Folder</li> </ul> </li> </ul> </header> <div id=main-content style="flex-direction: row;"> <aside id=action-menu class=window win-id=ACTION_MENU borders=RIGHT style="padding: var(--win-padd) 0" expanded> <ul> <li tooltip="Create Note! ( ⌘ N )"> <i icon> add </i> <label>New</label> </li> <li tooltip="Open Note! ( ⌘ O )"> <i icon> file_open </i> <label>Open</label> </li> <li style="cursor: auto"> <hr> </li> <li tooltip=Home> <i icon icon:fill> home </i> <label>Home</label> </li> <li class=expand-menu style="margin-top: auto" tooltip="Expand menu ( ⌘ E )"> <label></label> <i icon> </i> </li> <style>
+                            #action-menu[expanded] li[tooltip]::after {
+                                display: none !important;
+                            }
+                        </style> </ul> </aside> <script type=text/javascript>
+                    postLoadedEventList.push(
+                        () => {
+                            return new Promise((resolve, reject) => {
+                                const actionMenu = document.querySelector("#action-menu");
+                                const actionMenuToggle = actionMenu.querySelector(".expand-menu");
+    
+                                // ERROR ( `ACTION_MENU_TOGGLE_FUNCTIONALITY_IMPLEMENTATION_ERROR` )
+                                if (!actionMenu || !actionMenuToggle) return reject(
+                                    `ERROR : An error occurred while trying to add the click functionality to the action menu ; one or more elements could not be selected:\n\t[actionMenu, actionMenuToggle] => respective values => [${actionMenu}, ${actionMenuToggle}]\n\ns§ 'ACTION_MENU_TOGGLE_FUNCTIONALITY_IMPLEMENTATION_ERROR'`
+                                );
+    
+                                actionMenuToggle.addEventListener("click", () => actionMenu.toggleAttribute("expanded"));
+    
+                                resolve();
+                            })
+                        }
+                    )
+                </script> <aside id=expanded-menu class=window borders=RIGHT win-id=EXPANDABLE_MENU></aside> <article id=editor> <header class=window borders=BOTTOM win-id=DOCUMENT_HEADER> <div class=header-top> <span tooltip="Fullscreen ( ⌥ ⌘ F )" style="border-radius: 999px;--offset-x: 4em;"> <i icon icon:button> open_in_full </i> </span> <vr> </div> <div class=header-bottom> <span tooltip="Rename document ( ⌥ ⇧ R )" style="width: 250px;--offset-x: 260px;"> <input type=text id=document:name placeholder="Untitled Note" style="width: 100%"> </span> <vr></vr> <div style="flex-direction: row;" id=format-options> <button preserve-focus type=button id=format:bold class=ui:icon-toggle-button toggled> <i icon> format_bold </i> </button> <button preserve-focus type=button id=format:bold class=ui:icon-toggle-button> <i icon> format_italic </i> </button> <button preserve-focus type=button id=format:bold class=ui:icon-toggle-button toggled> <i icon> format_underlined </i> </button> <vr></vr> <button preserve-focus type=button id=format:bold class=ui:icon-toggle-button> <i icon> superscript </i> </button> <button preserve-focus type=button id=format:bold class=ui:icon-toggle-button> <i icon> subscript </i> </button> </div> </div> </header> <div class=document> <div id=document class=window win-id=DOCUMENT></div> <aside id=properties-panel class=window win-id=PROPERTIES_PANEL> <header id=properties-header> <ul></ul> </header> <div id=properties-body> </div> </aside> </div> </article> </div> </main> </body> </html>

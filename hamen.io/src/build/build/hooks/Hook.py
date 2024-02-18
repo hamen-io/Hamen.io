@@ -17,11 +17,12 @@ class Hook:
     def execute(self) -> bool:
         return True
     
-    def searchFiles(self, *, folderPattern: str = None, filePattern: str = None, limit: int = None) -> list[FileSystem.File]:
+    def searchFiles(self, *, folderPattern: str = None, filePattern: str = None, limit: int = None, rootDirectory: str = None) -> list[FileSystem.File]:
         assert folderPattern or filePattern
+        rootDirectory = os.path.join(self.buildDirectory, rootDirectory or "")
         fileList = []
 
-        for root, dirs, files in os.walk(self.buildDirectory, topdown=False):
+        for root, dirs, files in os.walk(rootDirectory, topdown=False):
             for file in files:
                 path = os.path.join(root, file)
                 if re.findall(filePattern, file):

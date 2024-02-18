@@ -1,0 +1,1 @@
+.doc\:p::before{content:'\200B'}.caret{position:absolute;width:2px;background:black;pointer-events:none;border-radius:1em;opacity:100%}.window:not(.focused) .caret{visibility:hidden}.window.focused .caret{opacity:100%}.window.focused .caret.hidden{opacity:0}.window.focused .caret.typing{opacity:100% !important}

@@ -6,6 +6,7 @@ import json
 import lib.Templates as Templates
 import lib.Elements as Elements
 from lxml import etree
+import xml.etree.ElementTree as ET
 import re
 
 _HTML_TAB_ = "    "
@@ -35,7 +36,7 @@ class BuildDoc(Hook):
     """
     def execute(self) -> bool:
         manifestList = []
-        for file in self.searchFiles(filePattern = r"^(.*\.hdoc)$"):
+        for file in self.searchFiles(filePattern = r"^(.*\.xml)$", rootDirectory = os.path.join("public_html", "artifacts", "docs", "xml")):
             hdoc = self._handleHDOC(file.fullFilePath)
 
             manifestFolder = os.path.join(file.filePath, "manifest")
@@ -59,6 +60,7 @@ class BuildDoc(Hook):
                     "articleCategory": hdoc.propertyEntries.get("category"),
                     "articleSubCategory": hdoc.propertyEntries.get("subcategory"),
                     "articleBreadcrumbs": hdoc.propertyEntries.get("breadcrumbs"),
+                    "showInFeed": False if (hdoc.propertyEntries.get("showInFeed") or "").lower() == "false" else True
                 }
 
                 manifestList.append(manifest)
@@ -79,16 +81,16 @@ class BuildDoc(Hook):
             # code = re.sub(r"<!--[\s\S]*?-->", "", code)
             # code = re.sub(r"""(\w+)={\s*(("|')?((.|\n)*?)(\3)?)\s*}""", r'\1="\4"', code)
 
-            root = etree.fromstring(code)
-            root: etree._Element
-            assert root.tag.upper() == "DOC", f"Root element should be <Doc>; not: '{root.tag}'"
+            root = ET.fromstring(code)
+            root: ET.Element
+            assert root.tag.upper() == "DOC", f"Root element should be <Doc>; not: '{root.tag}'\n\n\tAsserted in '{hdoc}'"
 
             doc_root = Elements.Doc()
             doc_root.extendAttributes(root.attrib)
 
-            def attachChildren(children: etree._Element, parentElement: Elements.Element):
+            def attachChildren(children: ET.Element, parentElement: Elements.Element):
                 for child in children:
-                    child: etree._Element
+                    child: ET.Element
 
                     element = None
                     tag = child.tag
@@ -104,17 +106,19 @@ class BuildDoc(Hook):
                         case "properties": element = Elements.Properties()
                         case "document": element = Elements.Document()
                         case "entry": element = Elements.Entry(key = child.attrib.get("key"), value = child.attrib.get("value"))
-                        case "ui:title": element = Elements.UI.Title()
-                        case "ui:h1": element = Elements.UI.H1()
-                        case "ui:h2": element = Elements.UI.H2()
-                        case "ui:section": element = Elements.UI.Section()
-                        case "ui:text": element = Elements.UI.Text()
-                        case "ui:list": element = Elements.UI.List()
-                        case "ui:code": element = Elements.UI.Code()
-                        case "ui:breadcrumbs": element = Elements.UI.Breadcrumbs()
-                        case "ui:item": element = Elements.UI.Item()
-                        case "ui:break": element = Elements.UI.Break()
-                        case "ui:hrule": element = Elements.UI.HRule()
+                        case "uititle": element = Elements.UI.Title()
+                        case "uiheader": element = Elements.UI.Section()
+                        case "uih1": element = Elements.UI.H1()
+                        case "uih2": element = Elements.UI.H2()
+                        case "uisection": element = Elements.UI.Section()
+                        case "uitext": element = Elements.UI.Text()
+                        case "uilist": element = Elements.UI.List()
+                        case "uicode": element = Elements.UI.Code()
+                        case "uibreadcrumbs": element = Elements.UI.Breadcrumbs()
+                        case "uiitem": element = Elements.UI.Item()
+                        case "uibreak": element = Elements.UI.Break()
+                        case "uihrule": element = Elements.UI.HRule()
+                        case "uipanel": element = Elements.UI.Panel()
                         case "i": element = Elements.Format.i()
                         case "a": element = Elements.Format.a()
                         case "em": element = Elements.Format.em()
@@ -122,12 +126,14 @@ class BuildDoc(Hook):
                         case "u": element = Elements.Format.u()
                         case "mark": element = Elements.Format.mark()
                         case "code": element = Elements.Format.code()
+                        case "define": element = Elements.Format.define()
                         case _: raise SyntaxError(f"Unknown tag: '{tag}'")
 
                     element = attachChildren(child, element)
+                    element.preText = child.text
+                    element.postText = child.tail
 
                     element.extendAttributes(child.attrib)
-                    element.innerText = child.text or ""
                     parentElement.appendChild(element)
 
                 return parentElement

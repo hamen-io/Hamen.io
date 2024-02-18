@@ -1,0 +1,30 @@
+interface Primitive {
+  wrappedValue: Any
+
+  toString() {
+    
+  }
+}
+
+type Boolean extends Primitive {
+
+}
+
+@declareOperator
+@complexIdentifier
+@declareFinal
+function {a}\?{b}\:{c}( const a: some Boolean ; b : Any ; c : Any ): Any {
+
+}
+
+@declareEscaping
+@declareFinal
+function assert( const condition: some Boolean ; throwException: Exception ) {
+  return (condition);
+}
+
+@declareFinal
+let true: Boolean = new Boolean.fromNumber(1)
+
+@declareFinal
+let false: Boolean = new Boolean.fromNumber(0)

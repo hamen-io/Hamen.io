@@ -5,6 +5,8 @@ body>main {
         padding: 24px 16px;
 
         >.header {
+            gap: 1em;
+
             @media screen and (min-width:800px) {
                 flex-direction: row;
                 justify-content: space-between;
@@ -82,7 +84,9 @@ ul.expanded-items>li.selected {
     gap: 2em;
 
     >article.result {
-        width: calc(100% / 4);
+        font-size: calc(1em - 1px);
+        
+        // width: calc(100% / 4);
         flex-grow: 1;
         height: 18em;
         border-radius: 10px;
@@ -98,7 +102,8 @@ ul.expanded-items>li.selected {
         >.image {
             border-radius: 8px;
             width: 100%;
-            height: 50%;
+            height: 96px;
+            min-height: 96px;
         }
 
         >.image {
@@ -143,12 +148,12 @@ ul.expanded-items>li.selected {
             user-select: none;
 
             >.tags {
-                font-family: 'MuseoModerno', cursive;
+                // font-family: 'MuseoModerno', cursive;
                 font-weight: 700;
                 color: rgba(0, 0, 0, 0.35);
 
                 >.tag {
-                    text-transform: capitalize;
+                    // text-transform: capitalize;
                 }
             }
 
