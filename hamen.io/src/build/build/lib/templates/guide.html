@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {{ headMetadata }}
+
+        <!-- Title of the document -->
+        <title>{{ articleTitle }} &bull; Hamen.io/docs</title>
+
+        <!-- Import Style Sheets -->
+        {{ importStyles }}
+
+        <!-- import JavaScript -->
+        {{ importJavaScript }}
+    </head>
+    <body>
+        <header></header>
+        <main class="ui:engine" id="doc" doc-type="guide">
+            <div id="doc-content">
+                <aside id="guide-content">
+                    {{ guideContent }}
+                </aside>
+                {{ articleBody }}
+                <div id="toggle-guide-content">
+                    <span class="material-symbols-outlined"> menu </span>
+                </div>
+                <script type="text/javascript">
+                    const guideContent = document.querySelector("body>main>div#doc-content>aside#guide-content");
+                    const toggleGuideContentButton = document.querySelector("body>main>div#doc-content>div#toggle-guide-content");
+                    const toggleGuideContentSpan = document.querySelector("body>main>div#doc-content>div#toggle-guide-content>span.material-symbols-outlined");
+                    let guideContentVisible = false;
+                    function showGuideContent() {
+                        guideContentVisible = true;
+                        guideContent.classList.add("visible");
+                        toggleGuideContentSpan.innerHTML = "close";
+                    };
+
+                    function hideGuideContent() {
+                        guideContentVisible = false;
+                        guideContent.classList.remove("visible");
+                        toggleGuideContentSpan.innerHTML = "menu";
+                    };
+
+                    toggleGuideContentButton.addEventListener("click", () => {
+                        guideContentVisible ? hideGuideContent() : showGuideContent();
+                    })
+                </script>
+                <aside id="doc-aside">
+                    <div id="doc-aside-content">
+                        {{ articleAside }}
+                    </div>
+                </aside>
+            </div>
+        </main>
+        <footer></footer>
+    </body>
+</html>

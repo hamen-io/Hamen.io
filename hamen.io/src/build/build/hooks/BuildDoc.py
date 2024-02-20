@@ -36,13 +36,13 @@ class BuildDoc(Hook):
     """
     def execute(self) -> bool:
         manifestList = []
-        for file in self.searchFiles(filePattern = r"^(.*\.xml)$", rootDirectory = os.path.join("public_html", "artifacts", "docs", "xml")):
+        for file in self.searchFiles(filePattern = r"\.xml$", rootDirectory = os.path.join("hamen.io", "artifacts", "docs", "xml")):
             hdoc = self._handleHDOC(file.fullFilePath)
 
             manifestFolder = os.path.join(file.filePath, "manifest")
             os.mkdir(manifestFolder)
 
-            articlePathname = file.fullFilePath.split("xml")[-1].replace("\\", "/")[:-4] + "html"
+            articlePathname = file.fullFilePath.split("artifacts/docs/xml", 1)[-1].replace("\\", "/")[:-4] + ".html"
 
             with open(os.path.join(manifestFolder, "manifest.json"), "x", encoding="utf-8") as manifestJson:
                 manifest = {
@@ -108,26 +108,34 @@ class BuildDoc(Hook):
                         case "entry": element = Elements.Entry(key = child.attrib.get("key"), value = child.attrib.get("value"))
                         case "uititle": element = Elements.UI.Title()
                         case "uiheader": element = Elements.UI.Section()
-                        case "uih1": element = Elements.UI.H1()
-                        case "uih2": element = Elements.UI.H2()
+                        case "uiheading":
+                            if child.attrib.get("level") in ["H1", None]:
+                                element = Elements.UI.H1()
+                            elif child.attrib.get("level") == "H2":
+                                element = Elements.UI.H2()
+                            elif child.attrib.get("level") == "H3":
+                                element = Elements.UI.H3()
+                            else:
+                                raise SyntaxError(f"Unknown 'level' : '{child.attrib.get('level')}' in file '{hdoc}'")
                         case "uisection": element = Elements.UI.Section()
                         case "uitext": element = Elements.UI.Text()
                         case "uilist": element = Elements.UI.List()
                         case "uicode": element = Elements.UI.Code()
                         case "uibreadcrumbs": element = Elements.UI.Breadcrumbs()
-                        case "uiitem": element = Elements.UI.Item()
+                        case "item": element = Elements.UI.Item()
                         case "uibreak": element = Elements.UI.Break()
                         case "uihrule": element = Elements.UI.HRule()
                         case "uipanel": element = Elements.UI.Panel()
                         case "i": element = Elements.Format.i()
-                        case "a": element = Elements.Format.a()
+                        case "link": element = Elements.Format.link()
                         case "em": element = Elements.Format.em()
+                        case "strong": element = Elements.Format.strong()
                         case "b": element = Elements.Format.b()
                         case "u": element = Elements.Format.u()
                         case "mark": element = Elements.Format.mark()
                         case "code": element = Elements.Format.code()
-                        case "define": element = Elements.Format.define()
-                        case _: raise SyntaxError(f"Unknown tag: '{tag}'")
+                        case "def": element = Elements.Format.define()
+                        case _: raise SyntaxError(f"Unknown tag: '{tag}' in '{hdoc}'")
 
                     element = attachChildren(child, element)
                     element.preText = child.text
@@ -149,6 +157,74 @@ class BuildDoc(Hook):
 
             with open(articleFilePath, "x", encoding="utf-8") as articleFile:
                 template = Templates.getTemplates()["article"]
+                guideAsideHTML = ""
+                guideTitle = ""
+
+                if doc_root.attributes.get("doctype") == "LESSON":
+                    targetGuide = doc_root.attributes.get("targetguide")
+                    assert targetGuide, "Target guide not specified"
+                    template = Templates.getTemplates()["guide"]
+                    guideDirectory = os.path.join(self.buildDirectory, "hamen.io", "artifacts", "guides", "xml", targetGuide, "index.xml")
+                    assert os.path.exists(guideDirectory), f"Guide not found: '{targetGuide}' ; searched in '{guideDirectory}'"
+                    with open(guideDirectory, "r") as guideFile:
+                        guideAsideHTML = []
+                        guideRoot = ET.fromstring(guideFile.read())
+                        guideTitle = guideRoot.find("Properties").find("Title").get("value")
+                        assert guideTitle
+                        guideModules = guideRoot.find("Content")
+                        assert guideModules
+                        guideModules = guideModules.findall("Module")
+                        for module in guideModules:
+                            moduleName = module.get("name")
+                            moduleNumber = module.get("module")
+                            assert all((moduleName, moduleNumber))
+                            guideAsideHTML.append([])
+                            for i,lesson in enumerate(module):
+                                if lesson.tag == "Lesson":
+                                    lessonHref = lesson.get("href")
+                                    lessonID = lesson.get("id")
+                                    lessonTitle = lesson.text
+                                    assert all((lessonHref, lessonID, lessonTitle))
+                                    guideAsideHTML[-1].append(""" <li><a href="%s" class="module-lesson%s">%s</a></li> """ % (lessonHref, " active" if lessonID.lower().strip() == article.propertyEntries.get("titleID").lower().strip() else "", lessonTitle))
+                                elif lesson.tag == "LessonGroup":
+                                    lessonGroup = []
+                                    lessonGroupName = lesson.get("name")
+                                    assert lessonGroupName
+                                    for j,_lesson in enumerate(lesson):
+                                        lessonHref = _lesson.get("href")
+                                        lessonID = _lesson.get("id")
+                                        lessonTitle = _lesson.text
+                                        assert all((lessonHref, lessonID, lessonTitle))
+                                        lessonGroup.append(""" <li><a href="%s" class="module-lesson%s">%s</a></li> """ % (lessonHref, " active" if lessonID.lower().strip() == article.propertyEntries.get("titleID").lower().strip() else "", lessonTitle))
+                                    lessonGroup = """
+<li>
+    <div class="module-lesson-group">
+        <p class="module-lesson-group-title">%s</p>
+        <div class="module-lesson-group-content">
+            <ul>
+            %s
+            </ul>
+        </div>
+    </div>
+</li>
+""" % (lessonGroupName, "".join(lessonGroup))
+                                    guideAsideHTML[-1].append(lessonGroup)
+                                else:
+                                    raise SyntaxError("Unknown tag ; expected 'Lesson' or 'LessonGroup' but got : '%s'" % lesson.tag)
+                            
+                            guideAsideHTML[-1] = """
+<section class="doc-module">
+<p class="module-title"><i><b>Module %s</b> : %s ;</i></p>
+<ul>
+%s
+</ul>
+</section>
+""" % (moduleNumber, moduleName, "".join(guideAsideHTML[-1]))
+
+                        guideAsideHTML = f"""
+<h3 class="guide-title">{guideTitle}</h3>
+{"".join("".join([x for x in guideAsideHTML]))}
+"""
 
                 # 
                 encoding = article.propertyEntries.get("encoding")
@@ -224,6 +300,7 @@ _NEWLINE_.join([
                         articleBody = article.documentBody,
                         articleTitle = title,
                         articleAside = "",
+                        guideContent = guideAsideHTML,
                         headMetadata = headMetadata,
                         importStyles = f"\n{_HTML_TAB_ * 2}".join([re.sub(r"\{\{\s*STATIC_FOLDER\s*\}\}", staticRelativePathPrefix, x) for x in self.buildSite.getImports("STYLESHEET")]),
                         importJavaScript = f"\n{_HTML_TAB_ * 2}".join([re.sub(r"\{\{\s*STATIC_FOLDER\s*\}\}", staticRelativePathPrefix, x) for x in self.buildSite.getImports("JAVASCRIPT")]),

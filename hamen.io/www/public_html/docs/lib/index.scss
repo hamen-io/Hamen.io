@@ -2,7 +2,8 @@ body>main {
     >.content {
         flex-grow: 1;
         max-width: 1100px;
-        padding: 24px 16px;
+        padding: var(--hmn-header-paddingY) var(--hmn-header-paddingX);
+        gap: 1em;
 
         >.header {
             gap: 1em;
@@ -32,7 +33,7 @@ body>main {
         }
 
         >div {
-            padding: 24px
+            padding: 0;
         }
     }
 }
@@ -85,8 +86,6 @@ ul.expanded-items>li.selected {
 
     >article.result {
         font-size: calc(1em - 1px);
-        
-        // width: calc(100% / 4);
         flex-grow: 1;
         height: 18em;
         border-radius: 10px;

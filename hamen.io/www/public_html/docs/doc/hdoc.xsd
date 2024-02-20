@@ -2,6 +2,7 @@
     <xs:simpleType name="DocType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="BLOG" />
+            <xs:enumeration value="LESSON" />
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="entryKeyType">
@@ -48,6 +49,8 @@
         </xs:complexType>
     </xs:element>
     <xs:element name="u" type="FormattedText"></xs:element>
+    <xs:element name="mark" type="FormattedText"></xs:element>
+    <xs:element name="strong" type="FormattedText"></xs:element>
     <xs:element name="i" type="FormattedText"></xs:element>
     <xs:element name="del" type="FormattedText"></xs:element>
     <xs:element name="code" type="xs:string"></xs:element>
@@ -56,8 +59,10 @@
             <xs:choice minOccurs="0" maxOccurs="0">
                 <xs:element ref="b" minOccurs="0" maxOccurs="unbounded" />
                 <xs:element ref="def" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="strong" minOccurs="0" maxOccurs="unbounded" />
                 <xs:element ref="u" minOccurs="0" maxOccurs="unbounded" />
                 <xs:element ref="i" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="mark" minOccurs="0" maxOccurs="unbounded" />
                 <xs:element ref="del" minOccurs="0" maxOccurs="unbounded" />
                 <xs:element ref="code" minOccurs="0" maxOccurs="unbounded" />
             </xs:choice>
@@ -69,6 +74,8 @@
     <xs:complexType name="FormattedText" mixed="true">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="link" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element ref="mark" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element ref="strong" minOccurs="0" maxOccurs="unbounded" />
             <xs:element ref="b" minOccurs="0" maxOccurs="unbounded" />
             <xs:element ref="u" minOccurs="0" maxOccurs="unbounded" />
             <xs:element ref="i" minOccurs="0" maxOccurs="unbounded" />
@@ -135,11 +142,13 @@
                     <xs:complexType mixed="true">
                         <xs:choice minOccurs="0" maxOccurs="unbounded">
                             <xs:element ref="link" minOccurs="0" maxOccurs="unbounded" />
+                            <xs:element ref="strong" minOccurs="0" maxOccurs="unbounded" />
                             <xs:element ref="b" minOccurs="0" maxOccurs="unbounded" />
                             <xs:element ref="u" minOccurs="0" maxOccurs="unbounded" />
                             <xs:element ref="i" minOccurs="0" maxOccurs="unbounded" />
                             <xs:element ref="del" minOccurs="0" maxOccurs="unbounded" />
                             <xs:element ref="def" minOccurs="0" maxOccurs="unbounded" />
+                            <xs:element ref="mark" minOccurs="0" maxOccurs="unbounded" />
                             <xs:element ref="code" minOccurs="0" maxOccurs="unbounded" />
                             <xs:element ref="UIList" minOccurs="0" maxOccurs="unbounded" />
                         </xs:choice>
@@ -171,6 +180,8 @@
                             <xs:element ref="def" minOccurs="0" maxOccurs="unbounded" />
                             <xs:element ref="u" minOccurs="0" maxOccurs="unbounded" />
                             <xs:element ref="i" minOccurs="0" maxOccurs="unbounded" />
+                            <xs:element ref="mark" minOccurs="0" maxOccurs="unbounded" />
+                            <xs:element ref="strong" minOccurs="0" maxOccurs="unbounded" />
                             <xs:element ref="del" minOccurs="0" maxOccurs="unbounded" />
                             <xs:element ref="code" minOccurs="0" maxOccurs="unbounded" />
                         </xs:choice>
@@ -228,6 +239,7 @@
             </xs:element>
             </xs:sequence>
             <xs:attribute name="docType" use="required" type="DocType" />
+            <xs:attribute name="targetGuide" use="optional" type="xs:string" />
         </xs:complexType>
     </xs:element>
 </xs:schema>

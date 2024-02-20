@@ -31,7 +31,7 @@ class File:
         """  """
 
         self.filePath = str = os.path.split(path)[0]
-        """  """
+        """ Entire directory path """
 
         self.fullFilePath: str = path
         """  """

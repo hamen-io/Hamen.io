@@ -124,12 +124,20 @@ class UI:
     class H1(Element):
         def __init__(self):
             super().__init__(tagName = "UI:H1", renderAs="h2")
+            self.appendAttribute("level", ["H1"])
             self.classList.add("ui:h1")
 
     class H2(Element):
         def __init__(self):
             super().__init__(tagName = "UI:H2", renderAs="h3")
+            self.appendAttribute("level", ["H2"])
             self.classList.add("ui:h2")
+
+    class H3(Element):
+        def __init__(self):
+            super().__init__(tagName = "UI:H3", renderAs="h4")
+            self.appendAttribute("level", ["H3"])
+            self.classList.add("ui:h3")
 
     class Section(Element):
         def __init__(self):
@@ -161,7 +169,7 @@ class UI:
             tag = self.tagName.lower()
             if renderTags and self._renderAs:
                 tag = self._renderAs.lower()
-            text = self.preText + self.postText
+            text = (self.preText or "") + (self.postText or "")
             children = "".join([x.__str__(renderTags) for x in self.children])
 
             tabSize = self.getAttribute("tabsize") or "4"
@@ -245,17 +253,22 @@ class Format:
             super().__init__(tagName = "u", renderAs="u")
             self.classList.add("ui:inline-underline")
 
-    class a(Element):
+    class link(Element):
         def __init__(self):
-            super().__init__(tagName = "a", renderAs="a")
+            super().__init__(tagName = "link", renderAs="a")
             self.classList.add("ui:inline-anchor")
             self.appendAttribute("href", str)
-            self.appendAttribute("target", ["CURRENT_TAB", "NEW_TAB"])
+            self.appendAttribute("target", ["_blank", "_self"])
 
     class i(Element):
         def __init__(self):
             super().__init__(tagName = "i", renderAs="i")
             self.classList.add("ui:inline-italic")
+
+    class strong(Element):
+        def __init__(self):
+            super().__init__(tagName = "strong", renderAs="strong")
+            self.classList.add("ui:inline-strong")
 
     class em(Element):
         def __init__(self):
@@ -292,7 +305,8 @@ class Format:
 class Doc(Element):
     def __init__(self):
         super().__init__(tagName = "Doc")
-        self.appendAttribute("docType", ["BLOG", "GUIDE"])
+        self.appendAttribute("docType", ["BLOG", "LESSON"])
+        self.appendAttribute("targetGuide", str)
         self.classList.add("article:doc")
 
 class Properties(Element):

@@ -10,12 +10,13 @@ Styles for the UI namespace in Docs
 
 .ui\:engine .ui\:breadcrumbs {
     flex-direction: row;
-    padding: 2em 3em;
+    padding: var(--hmn-header-paddingY) var(--hmn-header-paddingX);
     background: var(--hmn-backgroundColor-white-default);
     position: fixed;
     top: var(--hmn-headerSize);
     gap: .5em;
-    transform: translateX(-2em);
+    text-wrap: nowrap;
+    transform: translateX(calc(-1 * var(--hmn-header-paddingX)));
     border-bottom: 1px solid var(--hmn-backgroundColor-box-primary);
     z-index: 999
 }

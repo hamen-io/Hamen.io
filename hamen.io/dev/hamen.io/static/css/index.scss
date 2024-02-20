@@ -51,14 +51,14 @@ body {
         border-bottom: 1px solid var(--hmn-borderColor-black-default);
         position: fixed;
         top: 0;
-        z-index: 1000;
+        z-index: 1001;
         padding: var(--hmn-header-paddingY) var(--hmn-header-paddingX);
         background-color: var(--hmn-backgroundColor-white-primary);
     }
 
     >footer {
         border-top: 1px solid var(--hmn-borderColor-black-default);
-        padding: 14px;
+        padding: 2em;
         text-align: center;
         background-color: var(--hmn-backgroundColor-white-secondary);
     }

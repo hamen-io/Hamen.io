@@ -68,3 +68,10 @@
     --hmn-header-paddingX: 48px;
     --hmn-header-paddingY: 24px;
 }
+
+@media screen and (max-width:600px) {
+    :root {
+        --hmn-header-paddingX: 24px;
+        --hmn-header-paddingY: 24px;
+    }
+}

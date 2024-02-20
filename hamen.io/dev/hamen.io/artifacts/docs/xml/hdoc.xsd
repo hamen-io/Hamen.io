@@ -1,9 +1,13 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- Document type -->
     <xs:simpleType name="DocType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="BLOG" />
+            <xs:enumeration value="LESSON" />
         </xs:restriction>
     </xs:simpleType>
+
+    <!-- `<Entry>` tag keys -->
     <xs:simpleType name="entryKeyType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="encoding" />
@@ -23,11 +27,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="valueType">
-        <xs:restriction base="xs:string">
-        </xs:restriction>
-    </xs:simpleType>
-
+    <!-- `<Link target="...">` [target] attribute values -->
     <xs:simpleType name="AnchorTarget">
         <xs:restriction base="xs:string">
             <xs:enumeration value="_self" />
@@ -35,46 +35,39 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:element name="b" type="FormattedText"></xs:element>
-    <xs:element name="def">
-        <xs:complexType>
-            <xs:simpleContent>
-                <xs:extension base="xs:string">
-                    <xs:attribute name="word" type="xs:string" />
-                    <xs:attribute name="pos" type="xs:string" />
-                    <xs:attribute name="content" type="xs:string" />
-                </xs:extension>
-            </xs:simpleContent>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="u" type="FormattedText"></xs:element>
-    <xs:element name="i" type="FormattedText"></xs:element>
-    <xs:element name="del" type="FormattedText"></xs:element>
-    <xs:element name="code" type="xs:string"></xs:element>
-    <xs:element name="link">
-        <xs:complexType mixed="true">
-            <xs:choice minOccurs="0" maxOccurs="0">
-                <xs:element ref="b" minOccurs="0" maxOccurs="unbounded" />
-                <xs:element ref="def" minOccurs="0" maxOccurs="unbounded" />
-                <xs:element ref="u" minOccurs="0" maxOccurs="unbounded" />
-                <xs:element ref="i" minOccurs="0" maxOccurs="unbounded" />
-                <xs:element ref="del" minOccurs="0" maxOccurs="unbounded" />
-                <xs:element ref="code" minOccurs="0" maxOccurs="unbounded" />
-            </xs:choice>
-            <xs:attribute name="href" type="xs:anyURI" />
-            <xs:attribute name="target" type="AnchorTarget" default="_blank" />
-        </xs:complexType>
-    </xs:element>
+    <!-- Attributes in `<def word="..." pos="..." content="..."> ... </def>` -->
+    <xs:complexType name="DefinitionTagAttributes">
+        <xs:complexContent>
+            <xs:extension base="FormattedText">
+                <xs:attribute name="word" type="xs:string" />
+                <xs:attribute name="pos" type="xs:string" />
+                <xs:attribute name="content" type="xs:string" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Link ( `<Link target="..." href="..."></Link>` ) content -->
+    <xs:complexType mixed="true" name="LinkContent">
+        <xs:complexContent>
+            <xs:extension base="FormattedText">
+                <xs:attribute name="href"   use="required" type="xs:anyURI"    />
+                <xs:attribute name="target" use="required" type="AnchorTarget" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
     <xs:complexType name="FormattedText" mixed="true">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:element ref="link" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element ref="b" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element ref="u" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element ref="i" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element ref="del" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element ref="def" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element ref="code" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="b"      type="FormattedText"           />
+            <xs:element name="def"    type="DefinitionTagAttributes" />
+            <xs:element name="u"      type="FormattedText"           />
+            <xs:element name="mark"   type="FormattedText"           />
+            <xs:element name="strong" type="FormattedText"           />
+            <xs:element name="em"     type="FormattedText"           />
+            <xs:element name="i"      type="FormattedText"           />
+            <xs:element name="del"    type="FormattedText"           />
+            <xs:element name="code"   type="xs:string"               />
+            <xs:element name="link"   type="LinkContent"             />
         </xs:choice>
     </xs:complexType>
 
@@ -103,10 +96,28 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="UICodeStyles">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="LEFT" />
+            <xs:enumeration value="CENTER" />
+            <xs:enumeration value="RIGHT" />
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:element name="UICode">
         <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:element name="property">
+                    <xs:complexType mixed="true">
+                        <xs:attribute name="id" type="xs:string" />
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:attribute name="style" use="optional" type="UICodeStyles" />
             <xs:attribute name="language" use="required" type="UICodeLanguages" />
             <xs:attribute name="tabSize" use="required" type="xs:int" />
+            <xs:attribute name="id" use="optional" type="xs:string" />
+            <xs:attribute name="documentation" use="optional" type="xs:boolean" />
         </xs:complexType>
     </xs:element>
 
@@ -132,17 +143,12 @@
         <xs:complexType>
             <xs:choice minOccurs="0" maxOccurs="unbounded">
                 <xs:element name="Item" minOccurs="1" maxOccurs="unbounded">
-                    <xs:complexType mixed="true">
-                        <xs:choice minOccurs="0" maxOccurs="unbounded">
-                            <xs:element ref="link" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="b" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="u" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="i" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="del" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="def" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="code" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="UIList" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:choice>
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="FormattedText">
+                                <xs:attribute name="for" type="xs:string" use="optional" />
+                            </xs:extension>
+                        </xs:complexContent>
                     </xs:complexType>
                 </xs:element>
             </xs:choice>
@@ -159,28 +165,24 @@
             <xs:enumeration value="H3" />
         </xs:restriction>
     </xs:simpleType>
+    <xs:element name="UIHeading">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="FormattedText">
+                    <xs:attribute name="level" type="HeadingLevel" />
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="UISection">
         <xs:complexType>
             <xs:choice minOccurs="0" maxOccurs="unbounded">
-                <xs:element name="UIHeading" minOccurs="0" maxOccurs="unbounded">
-                    <xs:complexType mixed="true">
-                        <xs:choice minOccurs="0">
-                            <xs:element ref="link" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="b" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="def" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="u" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="i" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="del" minOccurs="0" maxOccurs="unbounded" />
-                            <xs:element ref="code" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:choice>
-                        <xs:attribute name="level" type="HeadingLevel" />
-                    </xs:complexType>
-                </xs:element>
-                <xs:element ref="UIText" minOccurs="0" maxOccurs="unbounded" />
-                <xs:element ref="UIList" minOccurs="0" maxOccurs="unbounded" />
-                <xs:element ref="UIPanel" minOccurs="0" maxOccurs="unbounded" />
-                <xs:element ref="UICode" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="UIHeading" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="UIText"    minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="UIList"    minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="UIPanel"   minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="UICode"    minOccurs="0" maxOccurs="unbounded" />
             </xs:choice>
             <xs:attribute name="id" type="xs:string" />
         </xs:complexType>
@@ -210,7 +212,7 @@
                         <xs:element name="Entry" maxOccurs="unbounded">
                             <xs:complexType>
                                 <xs:attribute name="key" type="entryKeyType" />
-                                <xs:attribute name="value" type="valueType" />
+                                <xs:attribute name="value" type="xs:string" />
                             </xs:complexType>
                         </xs:element>
                     </xs:sequence>
@@ -228,6 +230,7 @@
             </xs:element>
             </xs:sequence>
             <xs:attribute name="docType" use="required" type="DocType" />
+            <xs:attribute name="targetGuide" use="optional" type="xs:string" />
         </xs:complexType>
     </xs:element>
 </xs:schema>

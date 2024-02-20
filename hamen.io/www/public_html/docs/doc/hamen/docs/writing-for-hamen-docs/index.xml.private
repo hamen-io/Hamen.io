@@ -1,8 +1,5 @@
-
-<!DOCTYPE Doc [
-    <!ENTITY mdash "—">
-]>
-<Doc docType="BLOG" xmlns:UI="https://hamen.io/artifacts/xml/namespaces/ui" >
+<?xml-model href="../../../hdoc.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<Doc docType="BLOG" >
     <Properties>
         <Entry key="encoding" value="utf-8" />
         <Entry key="lang" value="en" />
@@ -21,44 +18,44 @@
         <Entry key="showInFeed" value="false" />
     </Properties>
     <Document>
-        <UI:Breadcrumbs crumbs="Docs, Hamen Docs, Writing for HDocs" />
-        <UI:Section id="title-content">
-            <UI:Title>Writing Articles for Hamen Docs</UI:Title>
-            <UI:Text>
-                Written by <a href="https://www.hamen.io/docs?author=danielhamen">Daniel Hamen</a>
-            </UI:Text>
-        </UI:Section>
-        <UI:HRule />
-        <UI:Section id="introduction" >
-            <UI:H1>
+        <UIBreadcrumbs crumbs="Docs, Hamen Docs, Writing for HDocs" />
+        <UIHeader id="title-content">
+            <UITitle>Writing Articles for Hamen Docs</UITitle>
+            <UIText>
+                Written by <link href="https://www.hamen.io/docs?author=danielhamen">Daniel Hamen</link>
+            </UIText>
+        </UIHeader>
+        <UIHRule />
+        <UISection id="introduction" >
+            <UIHeading level="H1">
                 Introduction
-            </UI:H1>
-            <UI:Text >
+            </UIHeading>
+            <UIText >
                 Thank you for showing interest in writing for Hamen Docs! In this article, we'll dive into how you can get started with writing for Hamen Docs.
-            </UI:Text>
-        </UI:Section>
-        <UI:Section id="setting-up-writing-environment">
-            <UI:H1>
+            </UIText>
+        </UISection>
+        <UISection id="setting-up-writing-environment">
+            <UIHeading level="H1">
                 Steps to setup your writing environment
-            </UI:H1>
-            <UI:Text>
+            </UIHeading>
+            <UIText>
                 Once 
-            </UI:Text>
-        </UI:Section>
-        <UI:Section id="the-hamen-style-guide">
-            <UI:H1>
+            </UIText>
+        </UISection>
+        <UISection id="the-hamen-style-guide">
+            <UIHeading level="H1">
                 Style Guide
-            </UI:H1>
-            <UI:Text>
+            </UIHeading>
+            <UIText>
                 Once 
-            </UI:Text>
-        </UI:Section>
-        <UI:Section id="supported-components">
-            <UI:H1>
-            </UI:H1>
-            <UI:Text>
+            </UIText>
+        </UISection>
+        <UISection id="supported-components">
+            <UIHeading level="H1">
+            </UIHeading>
+            <UIText>
                 Once 
-            </UI:Text>
-        </UI:Section>
+            </UIText>
+        </UISection>
     </Document>
 </Doc>

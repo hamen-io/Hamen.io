@@ -4,6 +4,7 @@ import shutil
 from typing import Literal,Type
 import re
 from lxml import etree
+import errno
 import os
 import ftplib
 
@@ -21,6 +22,34 @@ import lib.Templates as Templates
 import lib.Configuration as Configuration
 import lib.FileSystem as FileSystem
 import lib.Minify as Minify
+import lib.Console as Console
+
+class BuildProcess:
+    def __init__(self, buildSite: 'BuildSite'):
+        self._buildSite: BuildSite = buildSite
+        self._stackTrace = []
+
+    @property
+    def isComplete(self) -> bool:
+        return self._isComplete
+
+    @isComplete.setter
+    def isComplete(self, value: bool) -> None:
+        raise AttributeError(f"Cannot assign property, 'isComplete', of class: 'BuildProcess' as it is ReadOnly.")
+
+    def throwError(self, errorType: str, errorMessage: str):
+        self._buildSite.console.error(errorMessage, errorType)
+
+    def assertError(self, condition: bool, errorType: str, errorMessage: str):
+        if not condition:
+            self.throwError(errorType, errorMessage)
+
+    def throwWarning(self, warningType: str, warningMessage: str):
+        self._buildSite.console.warn(warningMessage, warningType)
+
+    def assertWarning(self, condition: bool, warningType: str, warningMessage: str):
+        if not condition:
+            self.throwWarning(warningType, warningMessage)
 
 class BuildSite:
     def __init__(self):
@@ -29,6 +58,11 @@ class BuildSite:
 
         Read documentation before using
         """
+
+        self.console = Console.Console()
+        """ Provides an interface to standard output console """
+
+        self.buildProcess = BuildProcess(self)
 
         self._siteBuilt: bool = False
         """ Site has been built """
@@ -59,7 +93,7 @@ class BuildSite:
             case "STYLESHEET":
                 self._cssImports.add(f"""<link rel="stylesheet" href="{prefix}{src}" /> """)
             case _:
-                assert False, f"Invalid importType: '{importType}'"
+                self.console.error(f"An error occurred within `BuildSite.createImport( ... )` ; invalid `importType` property value: '{importType}'", "ImportError")
 
     def getImports(self, importType: Literal["JAVASCRIPT", "STYLESHEET"]) -> list[str]:
         assert importType in ["JAVASCRIPT", "STYLESHEET"]
@@ -105,7 +139,24 @@ class BuildSite:
         shutil.rmtree(self.releaseDirectory)
 
         # Step 2: Copy dev directory
-        shutil.copytree(self.devDirectory, self.releaseDirectory)
+        os.makedirs(self.releaseDirectory)
+        for root, dirs, files in os.walk(self.devDirectory):
+            # Compute the destination directory for this root
+            dst_root = os.path.join(self.releaseDirectory, os.path.relpath(root, self.devDirectory))
+
+            # Create the destination directory for this root
+            try:
+                os.makedirs(dst_root)
+            except OSError as e:
+                if e.errno != errno.EEXIST:
+                    raise
+
+            # Copy files
+            for file in files:
+                src_file = os.path.join(root, file)
+                dst_file = os.path.join(dst_root, file)
+                with open(src_file, "rb") as f_src, open(dst_file, "wb") as f_dst:
+                    f_dst.write(f_src.read())
 
         self._siteBuilt = True
 

@@ -1,5 +1,5 @@
 import os
-from HamenAPI import BuildSite
+from HamenAPI import (BuildSite,BuildProcess)
 
 if __name__ == "__main__":
     os.system("clear")

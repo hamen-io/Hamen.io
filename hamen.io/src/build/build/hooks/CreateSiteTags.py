@@ -16,7 +16,7 @@ class CreateSiteTags(Hook):
             with open(file.fullFilePath, "r") as f:
                 data = BeautifulSoup(f.read(), "lxml")
                 h1 = data.find("h1")
-                if h1:
+                if h1 and "/private/" not in file.fullFilePath and ".buildignore" not in os.listdir(file.filePath):
                     page_tags = "".join([x.text for x in h1.contents if x != "None"])
                     url = file.fullFilePath.split("public_html", 1)[-1]
                     url: str

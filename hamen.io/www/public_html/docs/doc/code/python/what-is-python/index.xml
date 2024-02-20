@@ -1,0 +1,104 @@
+<?xml-model href="../../../hdoc.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<Doc docType="LESSON" targetGuide="python-course" >
+    <Properties>
+        <Entry key="encoding" value="utf-8" />
+        <Entry key="lang" value="en" />
+
+        <Entry key="title" value="What is Python" />
+        <Entry key="titleID" value="what-is-python" />
+        <Entry key="description" value="..." />
+
+        <Entry key="category" value="Code" />
+        <Entry key="subcategory" value="Python" />
+        <Entry key="tags" value="..." />
+
+        <Entry key="author" value="Daniel Hamen" />
+        <Entry key="authorID" value="danielhamen" />
+
+        <Entry key="date:published" value="2024-02-18" />
+        <Entry key="date:modified" value="2024-02-18" />
+
+        <Entry key="breadcrumbs" value="Docs, Code, Python, Python Course, Module 1, What is Python" />
+    </Properties>
+    <Document>
+        <UIBreadcrumbs crumbs="Docs, Code, Python, Python Course, Module 1, What is Python" />
+        <UIHeader>
+            <UITitle>What is Python</UITitle>
+            <UIText>
+                Written by <link href="https://www.hamen.io/docs?author=danielhamen">Daniel Hamen</link>
+            </UIText>
+        </UIHeader>
+        <UIHRule></UIHRule>
+        <UISection id="introduction">
+            <UIHeading level="H1">Introduction</UIHeading>
+            <UIText>
+                Are you curious about programming but intimidated by complex languages? Look no further than Python, a powerful and versatile language beloved by beginners and experts alike. This article will unveil what Python is and why you should consider learning it.
+            </UIText>
+        </UISection>
+        <UISection id="readable-syntax">
+            <UIHeading level="H1">Readable Syntax</UIHeading>
+            <UIText>One of the most significant advantages of Python is its syntax, the set of rules that define how you write code. Unlike some languages that utilize cryptic symbols and complex structures, Python emphasizes code that reads almost like plain English. Imagine writing code that resembles a recipe or a story — that's the magic of Python!</UIText>
+            <UIText>This focus on readability offers several benefits for beginners:</UIText>
+            <UIList>
+                <Item>
+                    <mark>Faster Learning</mark> : Grasp concepts quicker by understanding what the code is actually saying, making the learning process smoother and more enjoyable ;
+                </Item>
+                <Item>
+                    <mark>Fewer Errors</mark> : Write cleaner code with fewer syntax-related mistakes, reducing frustration and wasted time debugging ;
+                </Item>
+                <Item>
+                    <mark>Easier Maintenance</mark> : Read and understand your own code (or someone else's) months or even years later, saving time and effort when revisiting projects.
+                </Item>
+            </UIList>
+            <UIText>For example, the following code outputs the text "Hello, world!" to the console output:</UIText>
+            <UICode language="PYTHON" tabSize="3">
+                print("Hello, world!")
+            </UICode>
+            <UIText>
+                Run it and voila! You've just written your first Python program and displayed the classic "Hello, world!" message. Pretty simple, right?
+            </UIText>
+        </UISection>
+        <UISection id="pythons-endless-possibilities">
+            <UIHeading level="H1">Python's Endless Possibilites</UIHeading>
+            <UIText>While its readability makes it beginner-friendly, Python's true power lies in its <strong>versatility</strong>. Unlike languages designed for specific tasks, Python excels in diverse fields:</UIText>
+            <UIList>
+                <Item>
+                    <mark>Web Development</mark>: Build dynamic websites and interactive web applications using popular frameworks like Django or Flask. Imagine creating your own online store or portfolio!
+                </Item>
+                <Item>
+                    <mark>Data Science</mark>: Analyze and manipulate vast amounts of data to extract insights with libraries like NumPy and Pandas. Uncover hidden patterns and trends in information.
+                </Item>
+                <Item>
+                    <mark>Machine Learning</mark>: Create intelligent systems that learn and adapt using powerful libraries like TensorFlow and PyTorch. Develop applications that can recognize objects, translate languages, or even write creative content!
+                </Item>
+                <Item>
+                    <mark>Automation</mark>: Simplify repetitive tasks and boost your productivity with tools like Selenium. Automate data entry, social media posting, or website scraping.
+                </Item>
+                <Item>
+                    <mark>Game Development</mark>: Bring your game ideas to life with libraries like Pygame. Design your own 2D games and unleash your creativity.
+                </Item>
+            </UIList>
+            <UIText>No matter your interests or career aspirations, Python likely has something to offer. It's a language that can grow with you and adapt to your evolving needs.</UIText>
+        </UISection>
+        <UISection id="leverage-powerful-libraries">
+            <UIHeading level="H1">Leverage Powerful Libraries</UIHeading>
+            <UIText>
+                One of the secrets to Python's success is its rich ecosystem of <b>libraries and frameworks</b>. These pre-built tools provide extensive functionalities, saving you time and effort and allowing you to focus on the unique aspects of your project. Think of them as building blocks for your creations:
+            </UIText>
+            <UIList>
+                <Item>
+                    <mark>NumPy</mark>: Master data manipulation and analysis with powerful array operations and mathematical functions. Analyze large datasets with ease;
+                </Item>
+                <Item>
+                    <mark>Django</mark>: Build robust and scalable web applications efficiently, handling everything from user authentication to database interactions. Focus on your website's functionality without reinventing the wheel;
+                </Item>
+                <Item>
+                    <mark>TensorFlow</mark>: Dive into the world of machine learning, creating intelligent systems that can learn from data and make predictions. Develop AI applications without needing a Ph.D. in mathematics.
+                </Item>
+            </UIList>
+            <UIText>
+                These are just a few examples, and countless other libraries and frameworks cater to specific needs. With this vast ecosystem at your disposal, you can achieve more with less code, standing on the shoulders of giants who have already solved common problems.
+            </UIText>
+        </UISection>
+    </Document>
+</Doc>

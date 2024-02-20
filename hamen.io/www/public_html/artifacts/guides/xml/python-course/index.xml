@@ -1,0 +1,27 @@
+<?xml-model href="../../guide.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<Guide>
+    <Properties>
+        <Title   value="Python Course" />
+        <TitleID value="python-course" />
+        <Description></Description>
+        <Category value="Code" />
+        <Subcategory value="Python" />
+        <Tags value="Python,Lambda functions,Serverless,AWS Lambda,Function as a Service,Event-driven programming,Cloud computing,Microservices,Serverless architecture,Event processing,Serverless computing,AWS,Python programming,AWS services,Serverless development,Event-driven architecture,Serverless Python,Event handlers,Function deployment,Scalable applications,Serverless deployment,Serverless frameworks,Serverless best practices,AWS cloud,AWS Lambda triggers,AWS Lambda functions,Python scripting,AWS Lambda event sources,Event-driven design,Serverless patterns,Serverless security,AWS serverless architecture,AWS serverless development,Serverless advantages,Serverless challenges,AWS Lambda use cases,AWS Lambda tutorial,Serverless cost optimization,AWS Lambda scalability,AWS Lambda performance,AWS Lambda benefits,AWS Lambda setup,AWS Lambda ecosystem,AWS Lambda automation,AWS Lambda integration,AWS Lambda examples" />
+        <Author value="Daniel Hamen" />
+        <AuthorID value="danielhamen" />
+        <Date published="2024-02-18" updated="2024-02-18" />
+    </Properties>
+    <Content>
+        <Module id="introduction-to-python" name="Introduction to Python" module="1">
+            <Lesson id="what-is-python" href="https://www.hamen.io/docs/doc/code/python/what-is-python/">What is Python?</Lesson>
+            <Lesson id="setting-up-your-development-environment" href="https://www.hamen.io">Setting up your development environment</Lesson>
+        </Module>
+        <Module id="control-flow" name="Control Flow" module="2">
+            <Lesson id="conditional-statements" href="https://www.hamen.io">Conditional statements</Lesson>
+            <LessonGroup id="loops" name="Loops">
+                <Lesson href="https://www.hamen.io" id="while-loops">While Loops</Lesson>
+                <Lesson href="https://www.hamen.io" id="for-loops">For Loops</Lesson>
+            </LessonGroup>
+        </Module>
+    </Content>
+</Guide>

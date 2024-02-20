@@ -101,7 +101,8 @@ window.Hamen.onLoad.subscribe(() => {
             const updateBreadcrumbsProportions = () => {
                 let breadcrumbs = document.querySelector(".ui\\:breadcrumbs");
                 let width = document.querySelector("#doc article.article\\:document").getBoundingClientRect().width + document.querySelector("#doc aside#doc-aside").getBoundingClientRect().width;
-                width = `calc(${width}px - 2px)`
+                width = `calc(${width}px - 2px)`;
+                document.querySelector(":root").style.setProperty("--doc-ui-breadcrumbs-height", `${breadcrumbs.getBoundingClientRect().height}px`);
                 breadcrumbs.style.width = width;
                 breadcrumbs.style.minWidth = width;
                 breadcrumbs.style.maxWidth = width;
