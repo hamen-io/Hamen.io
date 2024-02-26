@@ -118,48 +118,50 @@ class Element:
 class UI:
     class Title(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:Title", renderAs="h1")
+            super().__init__(tagName = "UITitle", renderAs="h1")
             self.classList.add("ui:title")
 
     class H1(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:H1", renderAs="h2")
+            super().__init__(tagName = "UIH1", renderAs="h2")
             self.appendAttribute("level", ["H1"])
             self.classList.add("ui:h1")
 
     class H2(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:H2", renderAs="h3")
+            super().__init__(tagName = "UIH2", renderAs="h3")
             self.appendAttribute("level", ["H2"])
             self.classList.add("ui:h2")
 
     class H3(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:H3", renderAs="h4")
+            super().__init__(tagName = "UIH3", renderAs="h4")
             self.appendAttribute("level", ["H3"])
             self.classList.add("ui:h3")
 
     class Section(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:Section", renderAs="section")
+            super().__init__(tagName = "UISection", renderAs="section")
             self.classList.add("ui:section")
 
     class Text(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:Text", renderAs="p")
+            super().__init__(tagName = "UIText", renderAs="p")
             self.classList.add("ui:text")
 
     class Panel(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:Panel", renderAs="div")
+            super().__init__(tagName = "UIPanel", renderAs="div")
             self.appendAttribute("type", ["TIP", "NOTE", "ALERT"])
             self.classList.add("ui:panel")
 
     class Code(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:Code", renderAs="div", selfClosing=False)
+            super().__init__(tagName = "UICode", renderAs="div", selfClosing=False)
             self.appendAttribute("language", list(supportedLanguages) + [x.upper() for x in list(supportedLanguages)])
             self.appendAttribute("tabsize", str)
+            self.appendAttribute("documentation", ["true", "false"])
+            self.appendAttribute("style", ["LEFT", "CENTER", "RIGHT"])
             self.classList.add("ui:code")
 
         def __str__(self, renderTags: bool = False) -> str:
@@ -193,16 +195,16 @@ class UI:
             # if code.startswith("<br>"): code = code.rstrip()
             # if code.endswith("<br>"): code = code.lstrip()
             code = code.strip()
-            text = f"""<pre><code class="language-{self.getAttribute("language") or ""}">{code}</code></pre>"""
+            text = f"""<pre><code class="language-{self.getAttribute("language") or ""}">{code}{children.strip()}</code></pre>"""
 
             if self.selfClosing:
                 return f"<{tag}{attrs} />"
 
-            return f"<{tag}{attrs}>{text}{children}</{tag}>"
+            return f"<{tag}{attrs}>{text}</{tag}>"
 
     class Breadcrumbs(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:Breadcrumbs", renderAs="div", selfClosing=True)
+            super().__init__(tagName = "UIBreadcrumbs", renderAs="div", selfClosing=True)
             self.classList.add("ui:breadcrumbs")
             self.appendAttribute("crumbs", str)
         
@@ -220,17 +222,17 @@ class UI:
 
     class Break(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:Break", renderAs="br", selfClosing=True)
+            super().__init__(tagName = "UIBreak", renderAs="br", selfClosing=True)
             self.classList.add("ui:break")
 
     class HRule(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:HRule", renderAs="hr", selfClosing=True)
+            super().__init__(tagName = "UIHRule", renderAs="hr", selfClosing=True)
             self.classList.add("ui:hr")
 
     class List(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:List", renderAs="ul")
+            super().__init__(tagName = "UIList", renderAs="ul")
             self.appendAttribute("type", ["UNORDERED", "ORDERED"])
             if self.getAttribute("type") == "ORDERED":
                 self._renderAs = "ol"
@@ -239,8 +241,14 @@ class UI:
 
     class Item(Element):
         def __init__(self):
-            super().__init__(tagName = "UI:Item", renderAs="li")
+            super().__init__(tagName = "UIItem", renderAs="li")
+            self.appendAttribute("for", str)
             self.classList.add("ui:list-item")
+
+    class property(Element):
+        def __init__(self):
+            super().__init__(tagName = "property", renderAs="span")
+            self.classList.add("ui:code-property", "highlight")
 
 class Format:
     class b(Element):

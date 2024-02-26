@@ -1,0 +1,3 @@
+CONST INT >> "MyVar" >> "13";
+LET STR >> "MyVar2" >> "Hey!";
+LET BOOL >> "IsTr;ue" >> "false";

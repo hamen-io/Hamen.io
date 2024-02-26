@@ -123,6 +123,7 @@ class BuildDoc(Hook):
                         case "uicode": element = Elements.UI.Code()
                         case "uibreadcrumbs": element = Elements.UI.Breadcrumbs()
                         case "item": element = Elements.UI.Item()
+                        case "property": element = Elements.UI.property()
                         case "uibreak": element = Elements.UI.Break()
                         case "uihrule": element = Elements.UI.HRule()
                         case "uipanel": element = Elements.UI.Panel()

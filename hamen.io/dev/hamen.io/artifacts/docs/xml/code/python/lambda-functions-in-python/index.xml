@@ -47,7 +47,7 @@
             </UIHeading>
             <UIText>The basic syntax of a lambda function is as follows:</UIText>
             <UICode language="PYTHON" tabSize="4" documentation="true" id="LAMBDA_SYNTAX" style="CENTER">
-                <property id="LAMBDA_SYNTAX.LKWD">lambda</property> : <property id="LAMBDA_SYNTAX.ARGS">arguments</property> <property id="LAMBDA_SYNTAX.EXPR">expression</property>
+                <property id="LAMBDA_SYNTAX.LKWD">lambda</property> <property id="LAMBDA_SYNTAX.ARGS">arguments</property> : <property id="LAMBDA_SYNTAX.EXPR">expression</property>
             </UICode>
             <UIText>Lambda functions consist of three main components:</UIText>
             <UIList>

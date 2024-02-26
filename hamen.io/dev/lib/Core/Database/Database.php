@@ -1,13 +1,13 @@
 <?php
 
-namespace Hamen\Core\Firebase;
+namespace Hamen\Core\Database;
 
-require_once __DIR__ . "/src/Firebase.php";
+require_once __DIR__ . "/src/Database.php";
 
-use Hamen\Core\Firebase\Internal\Firebase;
+use Hamen\Core\Database\Internal\Database;
 
-function instantiateFirebase(): Firebase {
-    return new Firebase(
+function instantiateFirebase(): Database {
+    return new Databse(
         $_ENV["FIREBASE_API_KEY"],
         $_ENV["FIREBASE_AUTH_DOMAIN"],
         $_ENV["FIREBASE_DATABASE_URL"],

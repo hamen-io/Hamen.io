@@ -12,16 +12,9 @@
         <Date published="2024-02-18" updated="2024-02-18" />
     </Properties>
     <Content>
-        <Module id="introduction-to-python" name="Introduction to Python" module="1">
-            <Lesson id="what-is-python" href="https://www.hamen.io/docs/doc/code/python/what-is-python/">What is Python?</Lesson>
-            <Lesson id="setting-up-your-development-environment" href="https://www.hamen.io">Setting up your development environment</Lesson>
-        </Module>
-        <Module id="control-flow" name="Control Flow" module="2">
-            <Lesson id="conditional-statements" href="https://www.hamen.io">Conditional statements</Lesson>
-            <LessonGroup id="loops" name="Loops">
-                <Lesson href="https://www.hamen.io" id="while-loops">While Loops</Lesson>
-                <Lesson href="https://www.hamen.io" id="for-loops">For Loops</Lesson>
-            </LessonGroup>
+        <Module id="introduction-to-python-programming" name="Introduction to Python Programming" module="1">
+            <Lesson id="what-is-python" href="#">Python language introduction</Lesson>
+            <Lesson id="setting-up-your-development-environment" href="#">Setting up your development environment</Lesson>
         </Module>
     </Content>
 </Guide>

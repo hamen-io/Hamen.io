@@ -36,4 +36,4 @@ class JS(Minify):
 
 class HTML(Minify):
     def _minify(self) -> str:
-        return minifyHTML(self.code, True, False, False, True, True)
+        return minifyHTML(self.code, True, False, False, True, True, False)

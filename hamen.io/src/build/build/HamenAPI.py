@@ -1,7 +1,7 @@
 import sass
 import json
 import shutil
-from typing import Literal,Type
+from typing import (Literal,Type,Iterable)
 import re
 from lxml import etree
 import errno
@@ -23,6 +23,34 @@ import lib.Configuration as Configuration
 import lib.FileSystem as FileSystem
 import lib.Minify as Minify
 import lib.Console as Console
+
+def flattenList(arr: list) -> list:
+    arr = arr.copy()
+    flatList = []
+    for x in arr:
+        if isinstance(x, (list, tuple, set)):
+            flatList.extend(flattenList(x))
+        else:
+            flatList.append(x)
+
+    return flatList
+
+class ConfigFile:
+    def __init__(self, file: str):
+        self.file = file
+        assert os.path.exists(file) and os.path.isfile(file) and file.lower().endswith(".config.build")
+        self.config = dict()
+        with open(self.file, "r") as fileStream:
+            rawConfig = [x for x in fileStream.read().split(";") if x]
+            self.config = {k.strip().upper(): (v[0] if len(v) == 1 else v) for k,v in {x.split("=", 1)[0]: x.split("=", 1)[1:] for x in rawConfig}.items()}
+            for k,v in self.config.items():
+                m = re.match(r"^(((?<!\\)(?:\\\\)*\"(?:[^\"\\]|\\.)*?\"|true|false|\d)\s*,{0,1}\s*)+$", v)
+                if not m:
+                    raise ValueError("Invalid value : '%s'" % v)
+
+                m = [x[1:-1] if type(x) is str and x.startswith("\"") and x.endswith("\"") else x for x in m.groups()]
+
+                self.config[k] = m
 
 class BuildProcess:
     def __init__(self, buildSite: 'BuildSite'):
@@ -152,7 +180,18 @@ class BuildSite:
                     raise
 
             # Copy files
+            ignoreFiles = [".config.build"]
+            if ".config.build" in [x.lower() for x in os.listdir(root)]:
+                configFile = os.path.join(root, ".config.build")
+                file = ConfigFile(configFile)
+                ignoreFiles.append(file.config.get("IGNORE_FILES") or [])
+                ignoreFiles = flattenList([ignoreFiles])
+                ignoreFiles = [x.lower().strip() for x in ignoreFiles]
+
             for file in files:
+                if file.lower() in ignoreFiles:
+                    continue
+
                 src_file = os.path.join(root, file)
                 dst_file = os.path.join(dst_root, file)
                 with open(src_file, "rb") as f_src, open(dst_file, "wb") as f_dst:

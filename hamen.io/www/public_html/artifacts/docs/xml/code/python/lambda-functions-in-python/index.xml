@@ -21,7 +21,7 @@
         <UIHeader id="title-content">
             <UITitle>Lambda Functions in Python</UITitle>
             <UIText>
-                Written by <link href="https://www.hamen.io/docs?author=danielhamen">Daniel Hamen</link>
+                Written by <link target="_blank" href="https://www.hamen.io/docs?author=danielhamen">Daniel Hamen</link>
             </UIText>
         </UIHeader>
         <UIHRule />
@@ -46,14 +46,14 @@
                 Syntax of Lambda Functions
             </UIHeading>
             <UIText>The basic syntax of a lambda function is as follows:</UIText>
-            <UICode language="PYTHON" tabSize="4">
-                lambda arguments: expression
+            <UICode language="PYTHON" tabSize="4" documentation="true" id="LAMBDA_SYNTAX" style="CENTER">
+                <property id="LAMBDA_SYNTAX.LKWD">lambda</property> <property id="LAMBDA_SYNTAX.ARGS">arguments</property> : <property id="LAMBDA_SYNTAX.EXPR">expression</property>
             </UICode>
             <UIText>Lambda functions consist of three main components:</UIText>
             <UIList>
-                <Item>The <code>lambda</code> keyword</Item>
-                <Item>A list of arguments (similar to a function's parameter list)</Item>
-                <Item>A single expression that gets executed when the lambda function is called</Item>
+                <Item for="LAMBDA_SYNTAX.LKWD">The <code>lambda</code> keyword</Item>
+                <Item for="LAMBDA_SYNTAX.ARGS">A list of arguments (similar to a function's parameter list)</Item>
+                <Item for="LAMBDA_SYNTAX.EXPR">A single expression that gets executed when the lambda function is called</Item>
             </UIList>
         </UISection>
         <UISection id="using-lambda-functions">
@@ -65,7 +65,7 @@
                 
                 print(square(5))  # Output: 25
             </UICode>
-            <UIText>This example is the exact same as doing the following; just in a condensed, and shorter—lambda— notation:</UIText>
+            <UIText>This example is the exact same as doing the following; just in a condensed, and shorter—<em>lambda</em>— notation:</UIText>
             <UICode language="PYTHON" tabSize="4">
                 def square(x):
                     return x ** 2
@@ -73,7 +73,7 @@
                 print(square(5)) # Output: 25
             </UICode>
             <UIPanel type="NOTE">
-                <UIText>Lambda-functions do not <def word="natively" pos="adv." content="inherent or built-in support without additional modifications">natively</def> support <link href="">type-annotations</link>; however, there is a workaround</UIText>
+                <UIText>Lambda-functions do not <def word="natively" pos="adv." content="inherent or built-in support without additional modifications">natively</def> support <link target="_blank" href="">type-annotations</link>; however, there is a workaround</UIText>
             </UIPanel>
         </UISection>
         <UISection id="lambda-functions-with-built-in-functions">
